@@ -1,11 +1,12 @@
 package com.ledgerflow.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Lancamento {
 
     int id;
-    Date data;
+    LocalDate data;
     String descricao;
     double valor;
     TipoLancamento tipo;
@@ -16,7 +17,7 @@ public class Lancamento {
 
     public Lancamento(
             int id,
-            Date data,
+            LocalDate data,
             String descricao,
             double valor,
             TipoLancamento tipo,
@@ -44,11 +45,11 @@ public class Lancamento {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

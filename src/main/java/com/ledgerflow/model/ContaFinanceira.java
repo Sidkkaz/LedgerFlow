@@ -4,7 +4,6 @@ public class ContaFinanceira {
 
     int id;
     String nome;
-    String banco;
     int agencia;
     int numero;
     ContaTipo tipo;
@@ -12,9 +11,7 @@ public class ContaFinanceira {
     boolean ativo;
 
     public ContaFinanceira(
-            int id,
             String nome,
-            String banco,
             int agencia,
             int numero,
             ContaTipo tipo,
@@ -22,9 +19,7 @@ public class ContaFinanceira {
             boolean ativo
     ){
 
-        this.id = id;
         this.nome = nome;
-        this.banco = banco;
         this.agencia = agencia;
         this.numero = numero;
         this.tipo =  tipo;
@@ -33,6 +28,12 @@ public class ContaFinanceira {
     }
 
 
+    public static ContaFinanceira create(int id){
+        return new ContaFinanceira("",0,0,ContaTipo.corrente,1,true);
+    }
+
+
+    //getter e setter
     public int getId() {
         return id;
     }
@@ -47,14 +48,6 @@ public class ContaFinanceira {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getBanco() {
-        return banco;
-    }
-
-    public void setBanco(String banco) {
-        this.banco = banco;
     }
 
     public int getAgencia() {

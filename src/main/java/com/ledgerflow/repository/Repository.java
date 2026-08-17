@@ -1,8 +1,10 @@
 package com.ledgerflow.repository;
 
+import java.util.List;
+
 public interface Repository<T> {
-    T add(T t);
-    T update(T t);
-    T delete(T t);
-    T list(T t);
+    void add(T t);
+    void update(T t);
+    void delete(T t);
+    List<T> list(T t);
 }

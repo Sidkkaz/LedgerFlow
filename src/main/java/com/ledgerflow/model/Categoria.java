@@ -11,6 +11,10 @@ public class Categoria {
         this.tipo = tipo;
     }
 
+    public static Categoria Select(int id) {
+        return new Categoria("", TipoLancamento.Select(id));
+    }
+
     public TipoLancamento getTipo() {
         return tipo;
     }

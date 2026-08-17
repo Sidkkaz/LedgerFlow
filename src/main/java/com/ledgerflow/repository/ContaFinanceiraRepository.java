@@ -1,11 +1,13 @@
 package com.ledgerflow.repository;
 
 import com.ledgerflow.model.ContaFinanceira;
+import com.ledgerflow.model.ContaTipo;
+import com.ledgerflow.model.Perfil;
+import com.ledgerflow.model.Usuario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
@@ -19,7 +21,13 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
             String CriarTabela = """
                     CREATE TABLE IF NOT EXISTS ContaFinanceira (
-                    
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT NOT NULL,
+                    agencia INTEGER NOT NULL,
+                    numero INTEGER NOT NULL,
+                    conta_tipo TEXT NOT NULL,
+                    saldo DOUBLE NOT NULL,
+                    ativo BOOLEAN NOT NULL,
                     )""";
 
             Statement stmt = conn.createStatement();
@@ -31,21 +39,82 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
     }
 
     @Override
-    public ContaFinanceira add(ContaFinanceira contaFinanceira) {
-        return null;
+    public void add(ContaFinanceira c) {
+        String sql = """
+                INSERT INTO ContaFinanceira (nome, agencia, numero, conta_tipo, saldo, ativo) VALUES (?, ?, ?, ?, ?, ?)""";
+
+        try(Connection conn = DriverManager.getConnection(db);
+            PreparedStatement stmt = conn.prepareStatement(sql)
+        ){
+
+            stmt.setString(1, c.getNome());
+            stmt.setInt(2, c.getAgencia());
+            stmt.setInt(3, c.getNumero());
+            stmt.setInt(4, ContaTipo.WhoIs(c.getTipo()));
+            stmt.setDouble(5, c.getSaldo());
+            stmt.setBoolean(6, c.isAtivo());
+
+
+            stmt.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public ContaFinanceira update(ContaFinanceira contaFinanceira) {
-        return null;
+    public void update(ContaFinanceira c) {
+        String sql = """
+                    UPDATE ContaFinanceira SET (saldo, ativo) WHERE id = ?
+            """;
+
+        try (Connection conn = DriverManager.getConnection(db);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, c.getSaldo());
+            stmt.setBoolean(1, c.isAtivo());
+            stmt.setInt(1, c.getId());
+
+            stmt.executeUpdate();
+
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
-    public ContaFinanceira delete(ContaFinanceira contaFinanceira) {
-        return null;
+    public void delete(ContaFinanceira c) {
+        return;
     }
     @Override
-    public ContaFinanceira list(ContaFinanceira contaFinanceira) {
-        return null;
+    public List<ContaFinanceira> list(ContaFinanceira c) {
+        String sql = "SELECT * FROM ContaFinanceira";
+
+        List<ContaFinanceira> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(db);
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(sql)
+        ){
+            while(result.next()){
+                var id = result.getInt("id");
+                var nome = result.getString("nome");
+                var agencia = result.getInt("agencia");
+                var numero = result.getInt("numero");
+                var contaTipo = result.getInt("conta_tipo");
+                var saldo = result.getDouble("saldo");
+                var ativo = result.getBoolean("ativo");
+
+                ContaFinanceira u = new ContaFinanceira(nome, agencia, numero, ContaTipo.Select(contaTipo), saldo, ativo);
+                u.setId(id);
+
+                lista.add(u);
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }

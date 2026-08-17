@@ -10,7 +10,7 @@ public class Usuario {
     Perfil perfil;
     boolean ativo;
 
-    public Usuario(int id, String nome, String email, String senha, Perfil perfil) {
+    public Usuario(String nome, String email, String senha, Perfil perfil, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
