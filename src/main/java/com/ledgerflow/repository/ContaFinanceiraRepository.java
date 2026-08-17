@@ -44,7 +44,6 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
     public ContaFinanceira delete(ContaFinanceira contaFinanceira) {
         return null;
     }
-
     @Override
     public ContaFinanceira list(ContaFinanceira contaFinanceira) {
         return null;
