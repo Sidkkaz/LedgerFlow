@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.ledgerflow.controller.MainController">
+
+    <left>
+        <VBox prefHeight="392.0" prefWidth="128.0" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" text="MENU" onAction="#AbrirMenu" />
+            <Button mnemonicParsing="false" text="CONTAS" onAction="#AbrirConta" />
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="content"/>
+    </center>
+
+</BorderPane>

@@ -10,16 +10,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(
-                Main.class.getResource("/view/Login.fxml")
-        );
+
+        var View = Main.class.getResource("/view/Login.fxml");
+
+        FXMLLoader loader = new FXMLLoader(View);
+
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Login");
         stage.show();
     }
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 
 }

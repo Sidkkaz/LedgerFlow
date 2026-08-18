@@ -1,4 +1,5 @@
 package com.ledgerflow.controller;
 
-public class menuController {
+public class MenuController {
+
 }
