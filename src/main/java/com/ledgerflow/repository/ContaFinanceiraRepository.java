@@ -25,7 +25,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
                     nome TEXT NOT NULL,
                     agencia INTEGER NOT NULL,
                     numero INTEGER NOT NULL,
-                    conta_tipo TEXT NOT NULL,
+                    conta_tipo INTEGER NOT NULL,
                     saldo DOUBLE NOT NULL,
                     ativo BOOLEAN NOT NULL,
                     )""";

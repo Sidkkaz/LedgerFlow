@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LoginController">
+      <Label layoutX="273.0" layoutY="82.0" prefHeight="36.0" prefWidth="41.0" text="Olá">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <TextField layoutX="222.0" layoutY="162.0" prefHeight="26.0" prefWidth="150.0" promptText="Email" />
+      <Button layoutX="221.0" layoutY="237.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Entrar" />
+      <PasswordField layoutX="222.0" layoutY="199.0" promptText="Senha" />
+      <Label layoutX="141.0" layoutY="106.0" prefHeight="56.0" prefWidth="313.0" text="coloque suas credenciais para entrar no aplicativo" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+</AnchorPane>
