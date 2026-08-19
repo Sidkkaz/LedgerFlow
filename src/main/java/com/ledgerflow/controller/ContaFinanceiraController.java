@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.Optional;
+
 public class ContaFinanceiraController {
 
     @FXML
@@ -26,13 +28,12 @@ public class ContaFinanceiraController {
     @FXML
     private TableView<ContaFinanceira> tabelaConta;
     @FXML
-    private TableColumn<ContaFinanceira, ContaFinanceira> colunaConta;
+    private TableColumn<ContaFinanceira, String> colunaConta;
     @FXML
     private TableColumn<ContaFinanceira, Boolean> colunaAtiva;
 
-    private static final ObservableList<ContaTipo> listaTabela = FXCollections.observableArrayList();
+    private static final ObservableList<ContaFinanceira> listaTabela = FXCollections.observableArrayList();
     private ContaFinanceira contaSelecionado;
-
 
 
     @FXML
@@ -54,11 +55,12 @@ public class ContaFinanceiraController {
         });
 
         colunaConta.setCellValueFactory(
-                new PropertyValueFactory<>("Conta")
+                new PropertyValueFactory<>("nome")
         );
         colunaAtiva.setCellValueFactory(
-                new PropertyValueFactory<>("Ativa?")
+                new PropertyValueFactory<>("ativo")
         );
+
         listaTabela.setAll(ContaFinanceiraService.ListarContas());
 
         tabelaConta.setItems(listaTabela);
@@ -75,13 +77,93 @@ public class ContaFinanceiraController {
                         valorInicial.setText(String.valueOf(contaSelecionado.getSaldo()));
                         tipoConta.setValue(contaSelecionado.getTipo());
                         checkBoxAtiva.setSelected(contaSelecionado.isAtivo());
+
+                        nomeBanco.setDisable(false);
+                        agenciaBanco.setDisable(false);
+                        numeroBanco.setDisable(false);
+                        valorInicial.setDisable(false);
+                        tipoConta.setDisable(false);
                     }
                 });
-
 
     }
 
     public void Salvar(){
 
+        if (contaSelecionado != null && checkBoxAtiva.isSelected()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+            alert.setTitle("Confirmar Alteração");
+            alert.setHeaderText("Alterar Status");
+            alert.setContentText("DVocê deseja alterar o status do conta?");
+
+            ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
+            ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == buttonTypeOk){
+                ContaFinanceiraService.AtivarConta(contaSelecionado.getId());
+            }
+
+
+
+        }else if (contaSelecionado != null && checkBoxAtiva.isDisable()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+            alert.setTitle("Confirmar Alteração");
+            alert.setHeaderText("Alterar Status");
+            alert.setContentText("DVocê deseja alterar o status do conta?");
+
+            ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
+            ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == buttonTypeOk){
+                ContaFinanceiraService.DesativarConta(contaSelecionado.getId());
+            }
+
+        }else{
+            String nome = nomeBanco.getText();
+            String agencia = agenciaBanco.getText();
+            String numero = numeroBanco.getText();
+            String valor = valorInicial.getText();
+
+            ContaTipo tipo = tipoConta.getValue();
+            boolean ativo = checkBoxAtiva.isSelected();
+
+            if (nome.isBlank() ||
+                    agencia.isBlank() ||
+                    numero.isBlank() ||
+                    valor.isBlank() ||
+                    tipo == null) {
+
+                return;
+            }
+
+            int agenciaConvertida = Integer.parseInt(agencia);
+            int numeroConvertido = Integer.parseInt(numero);
+            double valorConvertido = Double.parseDouble(valor);
+
+            ContaFinanceiraService.CriarConta(nome, agenciaConvertida, numeroConvertido, tipo, valorConvertido, ativo);
+        }
+
+        limparCampos();
+    }
+
+    public void limparCampos() {
+        nomeBanco.clear();
+        agenciaBanco.clear();
+        numeroBanco.clear();
+        valorInicial.clear();
+        checkBoxAtiva.setSelected(false);
+
+        contaSelecionado = null;
+
+        tabelaConta.getSelectionModel().clearSelection();
+        listaTabela.setAll(ContaFinanceiraService.ListarContas());
     }
 }

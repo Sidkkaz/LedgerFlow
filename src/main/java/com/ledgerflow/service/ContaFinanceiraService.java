@@ -11,12 +11,19 @@ import java.util.List;
 public class ContaFinanceiraService {
 
     private static final Repository<ContaFinanceira> repo = new ContaFinanceiraRepository();
+    static List<ContaFinanceira> contas =  new ArrayList<>();
 
-    static List<ContaFinanceira> ListarContas(){
-        return repo.list();
+    public static List<ContaFinanceira> ListarContas(){
+        List<ContaFinanceira> seras = repo.list();
+
+        for (ContaFinanceira conta : seras) {
+           contas = seras.stream().filter(x -> !x.equals(conta)).toList();
+        }
+
+        return contas;
     }
 
-    static ContaFinanceira BuscarConta(int id){
+    public static ContaFinanceira BuscarConta(int id){
         List<ContaFinanceira> list = repo.list();
 
         for(ContaFinanceira conta : list){
@@ -27,11 +34,19 @@ public class ContaFinanceiraService {
         return null;
     }
 
-    static void CriarConta(String n, int a, int num, ContaTipo tipo, double saldo, boolean bool){
+    public static void CriarConta(String n, int a, int num, ContaTipo tipo, double saldo, boolean bool){
+
+        for(ContaFinanceira conta : contas){
+            if(conta.getNome().equals(n)){
+                return;
+            }
+        }
+
         repo.add(new ContaFinanceira(n, a , num, tipo, saldo, bool));
+        contas.add(new ContaFinanceira(n, a, num, tipo, saldo, bool));
     }
 
-    static void DesativarConta(int id){
+    public static void DesativarConta(int id){
         List<ContaFinanceira> list = repo.list();
 
         for(ContaFinanceira conta : list){
@@ -42,7 +57,7 @@ public class ContaFinanceiraService {
         }
     }
 
-    static void AtivarConta(int id){
+    public static void AtivarConta(int id){
         List<ContaFinanceira> list = repo.list();
 
         for(ContaFinanceira conta : list){
@@ -53,7 +68,7 @@ public class ContaFinanceiraService {
         }
     }
 
-    static void AtualizarSaldo(double valor, int id){
+    public static void AtualizarSaldo(double valor, int id){
         List<ContaFinanceira> list = repo.list();
 
         if(list.isEmpty()) return;
