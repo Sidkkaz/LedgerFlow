@@ -8,17 +8,17 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: radial-gradient(    center 35% 30%,    radius 100%,    #A33600 0%,    #752700 35%,    #471800 70%,    #1A0800 100%); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LoginController">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: radial-gradient(    center 35% 30%,    radius 100%,    #A33600 0%,    #752700 35%,    #471800 70%,    #1A0800 100%); -fx-background-radius: 15; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LoginController">
    <clip>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" height="400.0" width="600.0" />
+      <Rectangle arcHeight="30.0" arcWidth="30.0" height="400.0" width="600.0" />
    </clip>
    <ImageView blendMode="OVERLAY" fitHeight="408.0" fitWidth="625.0" layoutX="17.0" opacity="0.61" pickOnBounds="true" preserveRatio="true" scaleX="1.2">
-      <image>
-         <Image url="@../../java/com/ledgerflow/assents/WalpaperLogin.jpg" />
-      </image>
       <effect>
          <GaussianBlur />
       </effect>
+      <image>
+         <Image url="@../../resources/assents/WalpaperLogin.jpg" />
+      </image>
    </ImageView>
    <AnchorPane layoutX="257.0" layoutY="131.0" opacity="0.45" prefHeight="217.0" prefWidth="282.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-background-color: white;">
       <effect>
@@ -77,7 +77,7 @@
    </Label>
    <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="31.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../../java/com/ledgerflow/assents/LedgerLogo.png" />
+         <Image url="@../../resources/assents/LedgerLogo.png" />
       </image>
    </ImageView>
 </AnchorPane>

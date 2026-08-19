@@ -18,9 +18,12 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(View);
 
         Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.initStyle(StageStyle.UNDECORATED);
+        Scene scene = new Scene(root, 600, 400);
+
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
         scene.setFill(Color.TRANSPARENT);
+
         stage.setScene(scene);
         stage.show();
     }
