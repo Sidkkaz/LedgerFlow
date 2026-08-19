@@ -18,10 +18,10 @@
       <TextField fx:id="valorInicial" layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="112.0" />
       <Button layoutX="224.0" layoutY="275.0" mnemonicParsing="false" onAction="#Salvar" prefHeight="26.0" prefWidth="70.0" text="Salvar" />
       <Button layoutX="148.0" layoutY="274.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="26.0" prefWidth="70.0" text="Limpar" />
-      <TableView layoutX="357.0" layoutY="32.0" prefHeight="342.0" prefWidth="204.0" style="-fx-border-radius: 15; -fx-background-radius: 15;">
+      <TableView fx:id="tabelaConta" layoutX="357.0" layoutY="32.0" prefHeight="342.0" prefWidth="204.0" style="-fx-border-radius: 15; -fx-background-radius: 15;">
          <columns>
-          <TableColumn prefWidth="115.5999755859375" text="Conta" />
-          <TableColumn prefWidth="88.40005493164062" text="Ativa?" />
+          <TableColumn fx:id="colunaConta" prefWidth="115.5999755859375" text="Conta" />
+          <TableColumn fx:id="colunaAtiva" prefWidth="88.40005493164062" text="Ativa?" />
         </columns>
       </TableView>
       <CheckBox fx:id="checkBoxAtiva" layoutX="164.0" layoutY="227.0" mnemonicParsing="false" text="Ativa?" />

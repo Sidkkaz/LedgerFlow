@@ -167,3 +167,4 @@ public class ContaFinanceiraController {
         listaTabela.setAll(ContaFinanceiraService.ListarContas());
     }
 }
+//Aonde eu tava com a cabeça para começar essa palhaçada?

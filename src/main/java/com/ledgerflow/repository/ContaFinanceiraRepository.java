@@ -25,7 +25,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
                     numero INTEGER NOT NULL,
                     conta_tipo INTEGER NOT NULL,
                     saldo DOUBLE NOT NULL,
-                    ativo BOOLEAN NOT NULL,
+                    ativo BOOLEAN NOT NULL
                     )""";
 
             Statement stmt = conn.createStatement();
