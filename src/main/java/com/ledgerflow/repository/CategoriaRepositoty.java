@@ -89,7 +89,7 @@ public class CategoriaRepositoty implements Repository<Categoria> {
     }
 
     @Override
-    public List<Categoria> list(Categoria categoria) {
+    public List<Categoria> list() {
         String Selecionar = "SELECT * FROM Categoria";
 
         List<Categoria> lista = new ArrayList<>();

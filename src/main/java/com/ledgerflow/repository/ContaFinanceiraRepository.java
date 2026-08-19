@@ -2,8 +2,6 @@ package com.ledgerflow.repository;
 
 import com.ledgerflow.model.ContaFinanceira;
 import com.ledgerflow.model.ContaTipo;
-import com.ledgerflow.model.Perfil;
-import com.ledgerflow.model.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -86,8 +84,9 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
     public void delete(ContaFinanceira c) {
         return;
     }
+
     @Override
-    public List<ContaFinanceira> list(ContaFinanceira c) {
+    public List<ContaFinanceira> list() {
         String sql = "SELECT * FROM ContaFinanceira";
 
         List<ContaFinanceira> lista = new ArrayList<>();

@@ -98,7 +98,7 @@ public class UsuarioRepository implements Repository<Usuario> {
     }
 
     @Override
-    public List<Usuario> list(Usuario usuario) {
+    public List<Usuario> list() {
         String sql = "SELECT * FROM Usuario";
 
         List<Usuario> lista = new ArrayList<>();

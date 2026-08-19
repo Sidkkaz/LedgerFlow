@@ -75,6 +75,14 @@
          <Font name="Segoe UI" size="10.0" />
       </font>
    </Label>
+   <ImageView blendMode="MULTIPLY" fitHeight="79.0" fitWidth="82.0" layoutX="33.0" layoutY="27.0" opacity="0.17" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@/assents/LedgerLogo.png" />
+      </image>
+      <effect>
+         <GaussianBlur />
+      </effect>
+   </ImageView>
    <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="31.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@/assents/LedgerLogo.png" />

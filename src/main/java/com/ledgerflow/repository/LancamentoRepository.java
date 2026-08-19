@@ -107,7 +107,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
     }
 
     @Override
-    public List<Lancamento> list(Lancamento lancamento) {
+    public List<Lancamento> list() {
         String sql = "SELECT * FROM Lancamento";
 
         List<Lancamento> lista = new ArrayList<>();
