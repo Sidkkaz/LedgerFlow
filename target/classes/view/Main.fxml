@@ -45,7 +45,10 @@
                 </Label>
 
                 <VBox alignment="TOP_CENTER" layoutY="40.0" prefHeight="360.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
-                    <Button layoutX="200.0" mnemonicParsing="false" onAction="#AbrirMenu" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="MENU" textAlignment="CENTER" />
+                    <Button layoutX="200.0" mnemonicParsing="false" onAction="#AbrirMenu" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="MENU" textAlignment="CENTER">
+                  <font>
+                     <Font name="Poppins Regular" size="12.0" />
+                  </font></Button>
                     <Button mnemonicParsing="false" onAction="#AbrirConta" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="CONTAS" />
                <padding>
                   <Insets top="20.0" />

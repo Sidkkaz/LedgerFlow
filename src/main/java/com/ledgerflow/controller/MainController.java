@@ -1,5 +1,6 @@
 package com.ledgerflow.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -29,5 +30,24 @@ public class MainController {
     public void AbrirConta(){
         nav = new Navegador(content);
         nav.AlterarView("ContaFinanceiraView");
+    }
+
+    public void AbrirLancamento(){
+        nav = new Navegador(content);
+        nav.AlterarView("Lancamento");
+    }
+
+    public void AbrirRelatorio(){
+        nav = new Navegador(content);
+        nav.AlterarView("Relatorio");
+    }
+
+    public void AbrirConfiguracoes(){
+        nav = new Navegador(content);
+        nav.AlterarView("Configuracoes");
+    }
+
+    public void Sair(){
+        Platform.exit();
     }
 }
