@@ -30,5 +30,6 @@ bin/
 .DS_Store
 
 ## DataBase ##
+*.db
+app.db
 .db
-
