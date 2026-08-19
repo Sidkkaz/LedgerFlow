@@ -4,21 +4,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.ContaFinanceiraController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.ContaFinanceiraController">
    <children>
       <Label layoutX="27.0" layoutY="30.0" prefHeight="35.0" prefWidth="272.0" text="Contas Financeiras">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
       <Label layoutX="28.0" layoutY="65.0" prefHeight="18.0" prefWidth="312.0" text="Configure suas Contas Financeiras para utilizar o software" />
-      <TextField fx:id="nomeBanco" layoutX="31.0" layoutY="108.0" prefHeight="26.0" prefWidth="264.0" />
-      <TextField fx:id="agenciaBanco" layoutX="31.0" layoutY="148.0" prefHeight="26.0" prefWidth="142.0" />
-      <TextField fx:id="numeroBanco" layoutX="183.0" layoutY="148.0" prefHeight="26.0" prefWidth="112.0" />
-      <ComboBox fx:id="tipoConta" layoutX="31.0" layoutY="186.0" prefHeight="26.0" prefWidth="264.0" promptText="Tipo de Conta" />
-      <TextField fx:id="valorInicial" layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="112.0" />
-      <Button layoutX="224.0" layoutY="275.0" mnemonicParsing="false" onAction="#Salvar" prefHeight="26.0" prefWidth="70.0" text="Salvar" />
-      <Button layoutX="148.0" layoutY="274.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="26.0" prefWidth="70.0" text="Limpar" />
-      <TableView fx:id="tabelaConta" layoutX="357.0" layoutY="32.0" prefHeight="342.0" prefWidth="204.0" style="-fx-border-radius: 15; -fx-background-radius: 15;">
+      <TextField fx:id="nomeBanco" layoutX="31.0" layoutY="108.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+      <TextField fx:id="agenciaBanco" layoutX="31.0" layoutY="148.0" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+      <TextField fx:id="numeroBanco" layoutX="183.0" layoutY="148.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+      <ComboBox fx:id="tipoConta" layoutX="31.0" layoutY="186.0" prefHeight="26.0" prefWidth="264.0" promptText="Tipo de Conta" style="-fx-background-color: #FF702E;" />
+      <TextField fx:id="valorInicial" layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+      <Button layoutX="224.0" layoutY="275.0" mnemonicParsing="false" onAction="#Salvar" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
+      <Button layoutX="148.0" layoutY="274.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Limpar" textFill="WHITE" />
+      <TableView fx:id="tabelaConta" layoutX="357.0" layoutY="32.0" prefHeight="342.0" prefWidth="204.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: #FF702E;">
          <columns>
           <TableColumn fx:id="colunaConta" prefWidth="115.5999755859375" text="Conta" />
           <TableColumn fx:id="colunaAtiva" prefWidth="88.40005493164062" text="Ativa?" />
