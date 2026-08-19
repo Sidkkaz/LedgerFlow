@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: radial-gradient(    center 35% 30%,    radius 100%,    #A33600 0%,    #752700 35%,    #471800 70%,    #1A0800 100%); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LoginController">
+   <clip>
+      <Rectangle arcHeight="15.0" arcWidth="15.0" height="400.0" width="600.0" />
+   </clip>
+   <ImageView blendMode="OVERLAY" fitHeight="408.0" fitWidth="625.0" layoutX="17.0" opacity="0.61" pickOnBounds="true" preserveRatio="true" scaleX="1.2">
+      <image>
+         <Image url="@../../java/com/ledgerflow/assents/WalpaperLogin.jpg" />
+      </image>
+      <effect>
+         <GaussianBlur />
+      </effect>
+   </ImageView>
+   <AnchorPane layoutX="257.0" layoutY="131.0" opacity="0.45" prefHeight="217.0" prefWidth="282.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-background-color: white;">
+      <effect>
+         <Shadow blurType="GAUSSIAN" height="93.52" radius="36.9025" width="56.09" />
+      </effect>
+   </AnchorPane>
+   <CubicCurve controlX1="-279.3497619628906" controlX2="12.93450927734375" controlY1="59.3662109375" controlY2="-281.27703857421875" endX="122.60000610351562" endY="191.26834106445312" layoutX="291.0" layoutY="250.0" opacity="0.45" smooth="false" startX="-279.3497619628906" startY="-295.361328125" stroke="#3b2415">
+      <fill>
+         <RadialGradient centerX="0.5" centerY="0.5" cycleMethod="REFLECT" radius="0.5">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.4421052634716034" green="0.24534113705158234" blue="0.10479532182216644" />
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="1.0" green="0.9355555772781372" blue="0.8925926089286804" />
+                  </color>
+               </Stop>
+            </stops>
+         </RadialGradient>
+      </fill>
+      <effect>
+         <GaussianBlur radius="11.77" />
+      </effect></CubicCurve>
+   <AnchorPane layoutX="256.0" layoutY="128.0" prefHeight="217.0" prefWidth="282.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-background-color: white;">
+      <children>
+            <TextField fx:id="email" layoutX="19.0" layoutY="36.0" prefHeight="26.0" prefWidth="243.0" promptText="Email" />
+            <PasswordField fx:id="password" layoutX="19.0" layoutY="81.0" prefHeight="26.0" prefWidth="243.0" promptText="Senha" />
+            <Button fx:id="login" layoutX="141.0" layoutY="170.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="125.0" style="-fx-background-color: #542F21;" text="Entrar" textFill="WHITE">
+            <font>
+               <Font name="Poppins Regular" size="12.0" />
+            </font></Button>
+         <CheckBox layoutX="19.0" layoutY="122.0" mnemonicParsing="false" text="Lembre-se de mim" />
+      </children></AnchorPane>
+      <Label layoutX="103.0" layoutY="38.0" prefHeight="48.0" prefWidth="209.0" text="LEDGERFLOW" textFill="WHITE">
+         <font>
+            <Font name="Poppins Medium" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="143.0" prefHeight="42.0" prefWidth="81.0" text="Entre na" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Oswald Regular" size="26.0" />
+         </font>
+      </Label>
+   <Label layoutX="51.0" layoutY="164.0" prefHeight="42.0" prefWidth="101.0" text="sua conta" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font name="Oswald Regular" size="26.0" />
+      </font>
+   </Label>
+   <Label layoutX="51.0" layoutY="193.0" prefHeight="26.0" prefWidth="126.0" text="Vamos fazer o ledger maior" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font name="Segoe UI" size="10.0" />
+      </font>
+   </Label>
+   <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="31.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../java/com/ledgerflow/assents/LedgerLogo.png" />
+      </image>
+   </ImageView>
+</AnchorPane>

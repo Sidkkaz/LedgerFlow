@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.ContaFinanceiraController">
+   <children>
+      <Label layoutX="27.0" layoutY="30.0" prefHeight="35.0" prefWidth="272.0" text="Contas Financeiras">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="28.0" layoutY="65.0" prefHeight="18.0" prefWidth="312.0" text="Configure suas Contas Financeiras para utilizar o software" />
+      <TextField fx:id="nomeBanco" layoutX="31.0" layoutY="108.0" prefHeight="26.0" prefWidth="264.0" />
+      <TextField fx:id="agenciaBanco" layoutX="31.0" layoutY="148.0" prefHeight="26.0" prefWidth="142.0" />
+      <TextField fx:id="numeroBanco" layoutX="183.0" layoutY="148.0" prefHeight="26.0" prefWidth="112.0" />
+      <ComboBox fx:id="tipoConta" layoutX="31.0" layoutY="186.0" prefHeight="26.0" prefWidth="264.0" promptText="Tipo de Conta" />
+      <TextField fx:id="valorInicial" layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="112.0" />
+      <ComboBox  layoutX="153.0" layoutY="223.0" prefHeight="26.0" prefWidth="142.0" promptText="Ativa?" />
+      <Button layoutX="224.0" layoutY="275.0" mnemonicParsing="false" text="Concluido" />
+      <Button layoutX="148.0" layoutY="274.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Limpar" />
+      <TableView layoutX="357.0" layoutY="32.0" prefHeight="342.0" prefWidth="204.0">
+        <columns>
+          <TableColumn prefWidth="115.5999755859375" text="Conta" />
+          <TableColumn prefWidth="88.40005493164062" text="Ativa?" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

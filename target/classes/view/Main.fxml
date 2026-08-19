@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.MainController">
+
+    <left>
+        <AnchorPane prefHeight="400.0" prefWidth="144.0" style="-fx-background-color: #2F305C; -fx-background-color: ;">
+            <children>
+                <Label layoutX="35.0" layoutY="15.0" text="LEDGERFLOW">
+                    <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color red="0.17738790810108185" green="0.4899285137653351" blue="0.6842105388641357" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="0.65294349193573" green="0.7422612309455872" blue="0.8315789699554443" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </LinearGradient>
+                    </textFill>
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font>
+                </Label>
+
+                <VBox alignment="TOP_CENTER" layoutY="40.0" prefHeight="360.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
+                    <Button layoutX="200.0" mnemonicParsing="false" onAction="#AbrirMenu" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="MENU" textAlignment="CENTER" textFill="WHITE" />
+                    <Button mnemonicParsing="false" onAction="#AbrirConta" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="CONTAS" textFill="WHITE" />
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+                </VBox>
+            </children></AnchorPane>
+    </left>
+
+    <center>
+        <StackPane fx:id="content" />
+    </center>
+
+</BorderPane>
