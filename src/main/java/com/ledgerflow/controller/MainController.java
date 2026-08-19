@@ -13,18 +13,21 @@ public class MainController {
     @FXML
     private StackPane content;
 
-    private final Navegador nav = new Navegador(content);
+    private Navegador nav;
 
     @FXML
     public void initialize(){
+        nav = new Navegador(content);
         nav.AlterarView("Menu");
     }
 
     public void AbrirMenu(){
+        nav = new Navegador(content);
         nav.AlterarView("Menu");
     }
 
     public void AbrirConta(){
+        nav = new Navegador(content);
         nav.AlterarView("ContaFinanceiraView");
     }
 }

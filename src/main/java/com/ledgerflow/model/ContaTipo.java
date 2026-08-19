@@ -1,8 +1,8 @@
 package com.ledgerflow.model;
 
 public enum ContaTipo{
-    corrente(1),
-    poupanca(2);
+    Corrente(1),
+    Poupanca(2);
 
     private final int valor;
     ContaTipo(int valor) {
@@ -14,19 +14,19 @@ public enum ContaTipo{
 
     public static ContaTipo Select(int valor) {
         if (valor == 1){
-            return ContaTipo.corrente;
+            return ContaTipo.Corrente;
         }else if (valor == 2){
-            return ContaTipo.poupanca;
+            return ContaTipo.Poupanca;
         }else {
             return null;
         }
     }
 
     public static int WhoIs(ContaTipo t){
-        if (t == ContaTipo.corrente){
+        if (t == ContaTipo.Corrente){
             return 1;
         }
-        else if (t == ContaTipo.poupanca){
+        else if (t == ContaTipo.Poupanca){
             return 2;
         }else return 0;
     }

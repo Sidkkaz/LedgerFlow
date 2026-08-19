@@ -47,4 +47,9 @@ public class LoginController {
         stage.setTitle("Ledgerflow");
         stage.show();
     }
+
+    public void initialize(){
+        email.setOnAction(event -> password.requestFocus());
+        password.setOnAction(event -> login.requestFocus());
+    }
 }

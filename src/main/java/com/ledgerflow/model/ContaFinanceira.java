@@ -29,7 +29,7 @@ public class ContaFinanceira {
 
 
     public static ContaFinanceira create(int id){
-        return new ContaFinanceira("",0,0,ContaTipo.corrente,1,true);
+        return new ContaFinanceira("",0,0,ContaTipo.Corrente,1,true);
     }
 
 
