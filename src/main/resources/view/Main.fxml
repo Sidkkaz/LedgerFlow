@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
@@ -9,33 +10,46 @@
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.MainController">
 
     <left>
-        <AnchorPane prefHeight="400.0" prefWidth="144.0" style="-fx-background-color: #2F305C; -fx-background-color: ;">
+        <AnchorPane maxHeight="400.0" maxWidth="144.0" minHeight="400.0" minWidth="144.0" prefHeight="400.0" prefWidth="144.0" style="-fx-background-color: #0001;">
             <children>
-                <Label layoutX="35.0" layoutY="15.0" text="LEDGERFLOW">
+            <Separator layoutX="143.0" orientation="VERTICAL" prefHeight="400.0" />
+
+
+                <Label layoutX="4.0" layoutY="8.0" text="LEDGERFLOW">
                     <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                             <stops>
                                 <Stop>
                                     <color>
-                                        <Color red="0.17738790810108185" green="0.4899285137653351" blue="0.6842105388641357" />
+                                        <Color red="0.6800000071525574" green="0.44777604937553406" blue="0.17679999768733978" />
                                     </color>
                                 </Stop>
                                 <Stop offset="1.0">
                                     <color>
-                                        <Color red="0.65294349193573" green="0.7422612309455872" blue="0.8315789699554443" />
+                                        <Color red="0.4000000059604645" green="0.25337931513786316" blue="0.1599999964237213" />
                                     </color>
                                 </Stop>
                             </stops>
                         </LinearGradient>
                     </textFill>
                     <font>
-                        <Font name="System Bold Italic" size="12.0" />
+                        <Font name="Poppins Medium" size="12.0" />
                     </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" translateX="10.0">
+                     <image>
+                        <Image url="@../assents/LedgerLogo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Label>
 
                 <VBox alignment="TOP_CENTER" layoutY="40.0" prefHeight="360.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
-                    <Button layoutX="200.0" mnemonicParsing="false" onAction="#AbrirMenu" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="MENU" textAlignment="CENTER" textFill="WHITE" />
-                    <Button mnemonicParsing="false" onAction="#AbrirConta" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="CONTAS" textFill="WHITE" />
+                    <Button layoutX="200.0" mnemonicParsing="false" onAction="#AbrirMenu" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="MENU" textAlignment="CENTER">
+                  <font>
+                     <Font name="Poppins Regular" size="12.0" />
+                  </font></Button>
+                    <Button mnemonicParsing="false" onAction="#AbrirConta" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="CONTAS" />
                <padding>
                   <Insets top="20.0" />
                </padding>
