@@ -1,29 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.shape.Rectangle?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="110.0" prefWidth="124.0" style="-fx-background-color: #FF6A00; -fx-background-radius: 15; -fx-border-radius: 15;" fx:controller="com.ledgerflow.controller.CardContaController">
+<AnchorPane prefHeight="140.0" prefWidth="230.0" style="                 -fx-background-color: #FF6A00;                 -fx-background-radius: 18;                 -fx-padding: 16;             " xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.CardContaController">
 
-        <clip>
-            <Rectangle arcHeight="30.0" arcWidth="30.0" height="110.0" width="124.0" />
-        </clip>
+    <children>
 
-        <children>
-            <Label fx:id="nomeConta" layoutX="13.0" layoutY="12.0" text="NomeContaEx1" textFill="#e1e1e1" />
-            <Label fx:id="saldoConta" layoutX="14.0" layoutY="37.0" text="ValorContaEx1" textFill="WHITE">
+        <VBox spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+            <!-- Cabeçalho -->
+            <HBox alignment="CENTER_LEFT">
+
+                <Label fx:id="nomeConta" maxWidth="180.0" text="Nubank" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+
+            </HBox>
+
+
+            <!-- Saldo -->
+            <Label fx:id="saldoConta" text="R$ 1.250,40" textFill="WHITE">
+
                 <font>
-                    <Font size="14.0" />
+                    <Font name="System Bold" size="23.0" />
                 </font>
+
             </Label>
-            <Label fx:id="despesasConta" layoutX="14.0" layoutY="62.0" text="DespesaContaEx1" textFill="#860000" />
-            <Label fx:id="receitasConta" layoutX="14.0" layoutY="80.0" text="ReceitaContaEx1" textFill="#116b1a" />
-        </children>
+
+
+            <!-- Espaço -->
+            <VBox VBox.vgrow="ALWAYS" />
+
+
+            <!-- Movimentações -->
+            <HBox spacing="22.0">
+
+                <VBox spacing="2.0">
+
+                    <Label text="DESPESAS" textFill="#9a0000">
+                        <font>
+                            <Font name="System Bold" size="9.0" />
+                        </font>
+                    </Label>
+
+                    <Label fx:id="despesasConta" text="R$ 320,00" textFill="#FFE0D5">
+
+                        <font>
+                            <Font size="11.0" />
+                        </font>
+
+                    </Label>
+
+                </VBox>
+
+
+                <VBox spacing="2.0">
+
+                    <Label text="RECEITAS" textFill="#99ff6a">
+                        <font>
+                            <Font name="System Bold" size="9.0" />
+                        </font>
+                    </Label>
+
+                    <Label fx:id="receitasConta" text="R$ 850,00" textFill="#E5FFD9">
+
+                        <font>
+                            <Font size="11.0" />
+                        </font>
+
+                    </Label>
+
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
 
 </AnchorPane>
-

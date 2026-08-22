@@ -1,5 +1,6 @@
 package com.ledgerflow.controller;
 
+import com.ledgerflow.formatador.MoedaFormatador;
 import com.ledgerflow.model.ContaFinanceira;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,6 +18,8 @@ public class CardContaController {
 
     public void setConta(ContaFinanceira c){
         nomeConta.setText(c.getNome());
-        saldoConta.setText(String.valueOf(c.getSaldo()));
+        saldoConta.setText(MoedaFormatador.Moeda(c.getSaldo()));
+        despesasConta.setText(MoedaFormatador.Moeda(0));
+        receitasConta.setText(MoedaFormatador.Moeda(0));
     }
 }

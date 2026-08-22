@@ -133,10 +133,10 @@ public class ContaFinanceiraController {
             }
 
         }else{
-            String nome = nomeBanco.getText();
+            String nome = nomeBanco.getText().toUpperCase();
             String agencia = agenciaBanco.getText();
             String numero = numeroBanco.getText();
-            String valor = valorInicial.getText();
+            String valor = valorInicial.getText().replaceAll(",",".");
 
             ContaTipo tipo = tipoConta.getValue();
             boolean ativo = checkBoxAtiva.isSelected();

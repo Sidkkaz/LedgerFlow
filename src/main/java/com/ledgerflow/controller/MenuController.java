@@ -41,7 +41,7 @@ public class MenuController {
         }
     }
 
-    private void initialize() throws IOException {
+    public void initialize() throws IOException {
         ContasConteiner(ContaFinanceiraService.ListarContas());
     }
 
