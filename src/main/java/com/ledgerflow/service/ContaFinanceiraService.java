@@ -49,7 +49,6 @@ public class ContaFinanceiraService {
         ContaFinanceira c = new ContaFinanceira(n, a , num, tipo, saldo, bool);
 
         repo.add(c);
-        contas.add(c);
     }
 
     public static void DesativarConta(int id){
