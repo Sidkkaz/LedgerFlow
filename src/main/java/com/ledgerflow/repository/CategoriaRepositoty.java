@@ -11,8 +11,6 @@ public class CategoriaRepositoty implements Repository<Categoria> {
 
     String db ="JDBC:sqlite:app.db";
 
-    public CategoriaRepositoty() {}
-
     @Override
     public void add(Categoria categoria) {
         String add = """

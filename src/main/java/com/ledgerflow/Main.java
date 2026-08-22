@@ -32,8 +32,6 @@ public class Main extends Application {
     }
     public static void main(String[] args) throws Exception {
         InitDataBase db = new InitDataBase();
-        MenuController menu =  new MenuController();
-        menu.ContasConteiner(ContaFinanceiraService.ListarContas());
         launch();
     }
 

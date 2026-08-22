@@ -1,9 +1,11 @@
 package com.ledgerflow.controller;
 
 import com.ledgerflow.model.ContaFinanceira;
+import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -37,6 +39,10 @@ public class MenuController {
             contaContainer.getChildren().add(card);
 
         }
+    }
+
+    private void initialize() throws IOException {
+        ContasConteiner(ContaFinanceiraService.ListarContas());
     }
 
     public void Close() {

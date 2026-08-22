@@ -11,19 +11,6 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
     String db ="JDBC:sqlite:app.db";
 
-    public ContaFinanceiraRepository(){
-        try (Connection conn = DriverManager.getConnection(db)){
-            if(conn != null){
-                System.out.println("Banco conectado com sucesso!");
-            }
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void add(ContaFinanceira c) {
         String sql = """

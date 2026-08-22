@@ -10,19 +10,6 @@ public class LancamentoRepository implements Repository<Lancamento> {
 
     String db ="JDBC:sqlite:app.db";
 
-    public LancamentoRepository() {
-        try (Connection conn = DriverManager.getConnection(db)){
-            if(conn != null){
-                System.out.println("Banco conectado com sucesso!");
-            }
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void add(Lancamento lancamento) {
         String sql = """

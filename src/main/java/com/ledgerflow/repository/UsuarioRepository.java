@@ -11,19 +11,6 @@ public class UsuarioRepository implements Repository<Usuario> {
 
     String db ="JDBC:sqlite:app.db";
 
-    public UsuarioRepository() {
-        try (Connection conn = DriverManager.getConnection(db)){
-            if(conn != null){
-                System.out.println("Banco conectado com sucesso!");
-            }
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void add(Usuario u) {
         String sql = """
