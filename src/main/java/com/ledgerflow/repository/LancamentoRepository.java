@@ -16,21 +16,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
                 System.out.println("Banco conectado com sucesso!");
             }
 
-            String CriarTabela = """
-                    CREATE TABLE IF NOT EXISTS Lancamento (
-                    id UNIQUE PRIMARY KEY AUTOINCREMENT,
-                    dia DATE DEFAULT CURRENT_TIMESTAMP,
-                    descricao TEXT NOT NULL,
-                    valor DOUBLE NOT NULL,
-                    tipo INTEGER NOT NULL,
-                    categoria_id INTEGER NOT NULL,
-                    conta_id INTEGER NOT NULL,
-                    status_id INTEGER NOT NULL,
-                    observacao TEXT NOT NULL,
-                    )""";
 
-            Statement stmt = conn.createStatement();
-            stmt.execute(CriarTabela);
 
         } catch (SQLException e) {
             e.printStackTrace();

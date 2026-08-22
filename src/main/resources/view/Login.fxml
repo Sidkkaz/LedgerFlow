@@ -47,13 +47,13 @@
       </effect></CubicCurve>
    <AnchorPane layoutX="256.0" layoutY="128.0" prefHeight="217.0" prefWidth="282.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-background-color: white;">
       <children>
-            <TextField fx:id="email" layoutX="19.0" layoutY="36.0" prefHeight="26.0" prefWidth="243.0" promptText="Email" />
-            <PasswordField fx:id="password" layoutX="19.0" layoutY="81.0" prefHeight="26.0" prefWidth="243.0" promptText="Senha" />
+            <TextField fx:id="emailField" layoutX="19.0" layoutY="36.0" prefHeight="26.0" prefWidth="243.0" promptText="Email" />
+            <PasswordField fx:id="passwordField" layoutX="19.0" layoutY="81.0" prefHeight="26.0" prefWidth="243.0" promptText="Senha" />
             <Button fx:id="login" layoutX="141.0" layoutY="170.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="125.0" style="-fx-background-color: #542F21;" text="Entrar" textFill="WHITE">
             <font>
                <Font name="Poppins Regular" size="12.0" />
             </font></Button>
-         <CheckBox layoutX="19.0" layoutY="122.0" mnemonicParsing="false" text="Lembre-se de mim" />
+         <CheckBox fx:id="checkBox" layoutX="19.0" layoutY="122.0" mnemonicParsing="false" text="Lembre-se de mim" />
       </children></AnchorPane>
       <Label layoutX="103.0" layoutY="38.0" prefHeight="48.0" prefWidth="209.0" text="LEDGERFLOW" textFill="WHITE">
          <font>
@@ -88,4 +88,18 @@
          <Image url="@/assents/LedgerLogo.png" />
       </image>
    </ImageView>
+   <HBox layoutX="515.0" layoutY="13.0" prefHeight="31.0" prefWidth="69.0">
+      <children>
+         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖" textFill="WHITE">
+            <font>
+               <Font name="Poppins Medium" size="14.0" />
+            </font>
+         </Button>
+         <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌" textFill="WHITE">
+            <font>
+               <Font name="Poppins Medium" size="14.0" />
+            </font>
+         </Button>
+      </children>
+   </HBox>
 </AnchorPane>

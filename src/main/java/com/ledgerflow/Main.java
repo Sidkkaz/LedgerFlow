@@ -1,5 +1,8 @@
 package com.ledgerflow;
 
+import com.ledgerflow.controller.MenuController;
+import com.ledgerflow.repository.InitDataBase;
+import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +30,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        InitDataBase db = new InitDataBase();
+        MenuController menu =  new MenuController();
+        menu.ContasConteiner(ContaFinanceiraService.ListarContas());
         launch();
     }
 

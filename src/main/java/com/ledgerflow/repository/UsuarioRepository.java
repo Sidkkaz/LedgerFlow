@@ -17,18 +17,7 @@ public class UsuarioRepository implements Repository<Usuario> {
                 System.out.println("Banco conectado com sucesso!");
             }
 
-            String CriarTabela = """
-                    CREATE TABLE IF NOT EXISTS Usuario (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nome TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    senha TEXT NOT NULL,
-                    perfil_id INTEGER NOT NULL,
-                    ativo BOOLEAN NOT NULL
-                    )""";
 
-            Statement stmt = conn.createStatement();
-            stmt.execute(CriarTabela);
 
         } catch (SQLException e) {
             e.printStackTrace();

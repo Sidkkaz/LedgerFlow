@@ -3,11 +3,13 @@ package com.ledgerflow.controller;
 import com.ledgerflow.model.ContaFinanceira;
 import com.ledgerflow.model.ContaTipo;
 import com.ledgerflow.service.ContaFinanceiraService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
@@ -25,6 +27,10 @@ public class ContaFinanceiraController {
     private ComboBox<ContaTipo> tipoConta;
     @FXML
     private CheckBox checkBoxAtiva;
+    @FXML
+    private Button minimize;
+    @FXML
+    private Button maximize;
     @FXML
     private TableView<ContaFinanceira> tabelaConta;
     @FXML
@@ -165,6 +171,20 @@ public class ContaFinanceiraController {
 
         tabelaConta.getSelectionModel().clearSelection();
         listaTabela.setAll(ContaFinanceiraService.ListarContas());
+    }
+
+    public void Close(){
+        Platform.exit();
+    }
+
+    public void Minimize(){
+        Stage stage = (Stage) minimize.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void Maximize(){
+        Stage stage = (Stage) maximize.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
     }
 }
 //Aonde eu tava com a cabeça para começar essa palhaçada?

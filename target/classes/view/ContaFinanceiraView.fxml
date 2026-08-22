@@ -25,5 +25,24 @@
         </columns>
       </TableView>
       <CheckBox fx:id="checkBoxAtiva" layoutX="164.0" layoutY="227.0" mnemonicParsing="false" text="Ativa?" />
+      <HBox layoutX="504.0" layoutY="-2.0" prefHeight="31.0" prefWidth="96.0">
+         <children>
+            <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
+               <font>
+                  <Font name="Poppins Medium" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
+               <font>
+                  <Font name="Poppins Medium" size="8.0" />
+               </font>
+            </Button>
+            <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
+               <font>
+                  <Font name="Poppins Medium" size="8.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

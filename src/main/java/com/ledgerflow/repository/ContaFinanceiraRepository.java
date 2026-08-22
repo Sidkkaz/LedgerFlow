@@ -17,19 +17,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
                 System.out.println("Banco conectado com sucesso!");
             }
 
-            String CriarTabela = """
-                    CREATE TABLE IF NOT EXISTS ContaFinanceira (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nome TEXT NOT NULL,
-                    agencia INTEGER NOT NULL,
-                    numero INTEGER NOT NULL,
-                    conta_tipo INTEGER NOT NULL,
-                    saldo DOUBLE NOT NULL,
-                    ativo BOOLEAN NOT NULL
-                    )""";
 
-            Statement stmt = conn.createStatement();
-            stmt.execute(CriarTabela);
 
         } catch (SQLException e) {
             e.printStackTrace();

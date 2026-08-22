@@ -33,3 +33,6 @@ bin/
 *.db
 app.db
 .dba
+
+##PersistenciaFiles##
+remember.txt

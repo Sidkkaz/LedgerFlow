@@ -6,17 +6,26 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.MenuController">
    <children>
-      <Label layoutX="12.0" layoutY="14.0" text="Olá, pessoa macaco aranha" />
-      <AnchorPane layoutX="14.0" layoutY="45.0" prefHeight="104.0" prefWidth="154.0">
+      <HBox layoutX="497.0" layoutY="10.0" prefHeight="31.0" prefWidth="96.0">
          <children>
-            <Label layoutX="13.0" layoutY="12.0" text="NomeContaEx1" />
-            <Label layoutX="15.0" layoutY="37.0" text="ValorContaEx1">
+            <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Poppins Medium" size="8.0" />
                </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="62.0" text="DespesaContaEx1" />
-            <Label layoutX="14.0" layoutY="80.0" text="ReceitaContaEx1" />
-         </children></AnchorPane>
+            </Button>
+            <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
+               <font>
+                  <Font name="Poppins Medium" size="8.0" />
+               </font>
+            </Button>
+            <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
+               <font>
+                  <Font name="Poppins Medium" size="8.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="11.0" layoutY="33.0" text="Olá, pessoa macaco aranha" />
+      <HBox fx:id="contaContainer" layoutX="14.0" layoutY="65.0" prefHeight="100.0" prefWidth="570.0" />
    </children>
 </AnchorPane>

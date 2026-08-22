@@ -16,9 +16,13 @@ public class ContaFinanceiraService {
     public static List<ContaFinanceira> ListarContas(){
         List<ContaFinanceira> seras = repo.list();
 
-        for (ContaFinanceira conta : seras) {
-           contas = seras.stream().filter(x -> !x.equals(conta)).toList();
-        }
+
+        contas.addAll(
+                seras.stream()
+                        .filter(x -> contas.stream()
+                                .noneMatch(c -> c.getId()== x.getId()))
+                        .toList()
+        );
 
         return contas;
     }

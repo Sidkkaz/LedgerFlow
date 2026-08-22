@@ -4,7 +4,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import main.Navegador;
 
 import java.io.IOException;
@@ -50,4 +52,6 @@ public class MainController {
     public void Sair(){
         Platform.exit();
     }
+
+
 }

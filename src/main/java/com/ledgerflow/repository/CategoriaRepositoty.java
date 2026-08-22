@@ -11,26 +11,7 @@ public class CategoriaRepositoty implements Repository<Categoria> {
 
     String db ="JDBC:sqlite:app.db";
 
-    public CategoriaRepositoty() {
-        try (Connection conn = DriverManager.getConnection(db)){
-            if(conn != null){
-                System.out.println("Banco conectado com sucesso!");
-            }
-
-            String CriarTabela = """
-                        CREATE TABLE IF NOT EXISTS Categoria (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        nome TEXT NOT NULL,
-                        tipo_id INTEGER,
-                        )""";
-
-            Statement stmt = conn.createStatement();
-            stmt.execute(CriarTabela);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    public CategoriaRepositoty() {}
 
     @Override
     public void add(Categoria categoria) {
