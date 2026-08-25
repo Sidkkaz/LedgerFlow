@@ -31,6 +31,7 @@ public class MenuController {
         for (ContaFinanceira conta : contas){
              FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ContaCard.fxml"));
 
+            if(!conta.isAtivo()) break;
             AnchorPane card = loader.load();
 
             CardContaController controller = loader.getController();

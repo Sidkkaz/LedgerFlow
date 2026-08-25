@@ -38,15 +38,15 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
     @Override
     public void update(ContaFinanceira c) {
         String sql = """
-                    UPDATE ContaFinanceira SET (saldo, ativo) WHERE id = ?
+                    UPDATE ContaFinanceira SET saldo = ?, ativo = ? WHERE id = ?
             """;
 
         try (Connection conn = DriverManager.getConnection(db);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, c.getSaldo());
-            stmt.setBoolean(1, c.isAtivo());
-            stmt.setInt(1, c.getId());
+            stmt.setBoolean(2, c.isAtivo());
+            stmt.setInt(3, c.getId());
 
             stmt.executeUpdate();
 

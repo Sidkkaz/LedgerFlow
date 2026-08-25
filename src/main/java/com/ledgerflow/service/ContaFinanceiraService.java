@@ -11,24 +11,13 @@ import java.util.List;
 public class ContaFinanceiraService {
 
     private static final Repository<ContaFinanceira> repo = new ContaFinanceiraRepository();
-    static List<ContaFinanceira> contas =  new ArrayList<>();
 
     public static List<ContaFinanceira> ListarContas(){
-        List<ContaFinanceira> seras = repo.list();
-
-
-        contas.addAll(
-                seras.stream()
-                        .filter(x -> contas.stream()
-                                .noneMatch(c -> c.getId()== x.getId()))
-                        .toList()
-        );
-
-        return contas;
+        return repo.list();
     }
 
     public static ContaFinanceira BuscarConta(int id){
-        List<ContaFinanceira> list = repo.list();
+        List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
             if(conta.getId() == id){
@@ -39,8 +28,9 @@ public class ContaFinanceiraService {
     }
 
     public static void CriarConta(String n, int a, int num, ContaTipo tipo, double saldo, boolean bool){
+        List<ContaFinanceira> list = ListarContas();
 
-        for(ContaFinanceira conta : contas){
+        for(ContaFinanceira conta : list){
             if(conta.getNome().equals(n)){
                 return;
             }
@@ -52,7 +42,7 @@ public class ContaFinanceiraService {
     }
 
     public static void DesativarConta(int id){
-        List<ContaFinanceira> list = repo.list();
+        List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
             if(conta.getId() == id){
@@ -63,7 +53,7 @@ public class ContaFinanceiraService {
     }
 
     public static void AtivarConta(int id){
-        List<ContaFinanceira> list = repo.list();
+        List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
             if(conta.getId() == id){
@@ -74,7 +64,7 @@ public class ContaFinanceiraService {
     }
 
     public static void AtualizarSaldo(double valor, int id){
-        List<ContaFinanceira> list = repo.list();
+        List<ContaFinanceira> list = ListarContas();
 
         if(list.isEmpty()) return;
 

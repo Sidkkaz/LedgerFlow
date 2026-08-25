@@ -38,7 +38,7 @@ public class ContaFinanceiraController {
     @FXML
     private TableColumn<ContaFinanceira, Boolean> colunaAtiva;
 
-    private static final ObservableList<ContaFinanceira> listaTabela = FXCollections.observableArrayList();
+    private final ObservableList<ContaFinanceira> listaTabela = FXCollections.observableArrayList();
     private ContaFinanceira contaSelecionado;
 
 
@@ -84,11 +84,11 @@ public class ContaFinanceiraController {
                         tipoConta.setValue(contaSelecionado.getTipo());
                         checkBoxAtiva.setSelected(contaSelecionado.isAtivo());
 
-                        nomeBanco.setDisable(false);
-                        agenciaBanco.setDisable(false);
-                        numeroBanco.setDisable(false);
-                        valorInicial.setDisable(false);
-                        tipoConta.setDisable(false);
+                        nomeBanco.setDisable(true);
+                        agenciaBanco.setDisable(true);
+                        numeroBanco.setDisable(true);
+                        valorInicial.setDisable(true);
+                        tipoConta.setDisable(true);
                     }
                 });
 
@@ -97,67 +97,26 @@ public class ContaFinanceiraController {
     public void Salvar(){
 
         if (contaSelecionado != null && checkBoxAtiva.isSelected()){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-            alert.setTitle("Confirmar Alteração");
-            alert.setHeaderText("Alterar Status");
-            alert.setContentText("DVocê deseja alterar o status do conta?");
-
-            ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
-            ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.isPresent() && result.get() == buttonTypeOk){
+            if(PopupStatusConta()) {
                 ContaFinanceiraService.AtivarConta(contaSelecionado.getId());
+                tabelaConta.getSelectionModel().clearSelection();
+                listaTabela.setAll(ContaFinanceiraService.ListarContas());
             }
 
+        }else if (contaSelecionado != null && !checkBoxAtiva.isSelected()) {
 
-
-        }else if (contaSelecionado != null && checkBoxAtiva.isDisable()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
-            alert.setTitle("Confirmar Alteração");
-            alert.setHeaderText("Alterar Status");
-            alert.setContentText("DVocê deseja alterar o status do conta?");
-
-            ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
-            ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.isPresent() && result.get() == buttonTypeOk){
+            if(PopupStatusConta()) {
                 ContaFinanceiraService.DesativarConta(contaSelecionado.getId());
+                tabelaConta.getSelectionModel().clearSelection();
+                listaTabela.setAll(ContaFinanceiraService.ListarContas());
             }
 
         }else{
-            String nome = nomeBanco.getText().toUpperCase();
-            String agencia = agenciaBanco.getText();
-            String numero = numeroBanco.getText();
-            String valor = valorInicial.getText().replaceAll(",",".");
-
-            ContaTipo tipo = tipoConta.getValue();
-            boolean ativo = checkBoxAtiva.isSelected();
-
-            if (nome.isBlank() ||
-                    agencia.isBlank() ||
-                    numero.isBlank() ||
-                    valor.isBlank() ||
-                    tipo == null) {
-
-                return;
-            }
-
-            int agenciaConvertida = Integer.parseInt(agencia);
-            int numeroConvertido = Integer.parseInt(numero);
-            double valorConvertido = Double.parseDouble(valor);
-
-            ContaFinanceiraService.CriarConta(nome, agenciaConvertida, numeroConvertido, tipo, valorConvertido, ativo);
+            CriarConta();
+            limparCampos();
         }
 
-        limparCampos();
     }
 
     public void limparCampos() {
@@ -165,12 +124,60 @@ public class ContaFinanceiraController {
         agenciaBanco.clear();
         numeroBanco.clear();
         valorInicial.clear();
+
         checkBoxAtiva.setSelected(false);
+        nomeBanco.setDisable(false);
+        agenciaBanco.setDisable(false);
+        numeroBanco.setDisable(false);
+        valorInicial.setDisable(false);
+        tipoConta.setDisable(false);
 
         contaSelecionado = null;
 
         tabelaConta.getSelectionModel().clearSelection();
         listaTabela.setAll(ContaFinanceiraService.ListarContas());
+    }
+
+    public void CriarConta(){
+        String nome = nomeBanco.getText().toUpperCase();
+        String agencia = agenciaBanco.getText();
+        String numero = numeroBanco.getText();
+        String valor = valorInicial.getText().replaceAll(",",".");
+
+        ContaTipo tipo = tipoConta.getValue();
+        boolean ativo = checkBoxAtiva.isSelected();
+
+        if (nome.isBlank() ||
+                agencia.isBlank() ||
+                numero.isBlank() ||
+                valor.isBlank() ||
+                tipo == null) {
+
+            return;
+        }
+
+        int agenciaConvertida = Integer.parseInt(agencia);
+        int numeroConvertido = Integer.parseInt(numero);
+        double valorConvertido = Double.parseDouble(valor);
+
+        ContaFinanceiraService.CriarConta(nome, agenciaConvertida, numeroConvertido, tipo, valorConvertido, ativo);
+    }
+
+    public boolean PopupStatusConta(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("Confirmar Alteração");
+        alert.setHeaderText("Alterar Status");
+        alert.setContentText("Você deseja alterar o status da conta?");
+
+        ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == buttonTypeOk;
+
     }
 
     public void Close(){
