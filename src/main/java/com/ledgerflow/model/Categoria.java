@@ -4,7 +4,7 @@ public class Categoria {
 
     private Long id;
     private String nome;
-    private final TipoLancamento tipo;
+    private TipoLancamento tipo;
 
     public Categoria(String nome, TipoLancamento tipo) {
         this.nome = nome;
@@ -18,9 +18,10 @@ public class Categoria {
     public TipoLancamento getTipo() {
         return tipo;
     }
-    public TipoLancamento setTipo(TipoLancamento tipo) {
-        return tipo;
+    public void setTipo(TipoLancamento tipo) {
+        this.tipo = tipo;
     }
+
     public Long getId() {
         return id;
     }

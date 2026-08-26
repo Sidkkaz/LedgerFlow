@@ -32,12 +32,12 @@ public class CategoriaRepositoty implements Repository<Categoria> {
 
     @Override
     public void update(Categoria categoria) {
-        String alterarProduto = """
-                    UPDATE produto SET (nome, tipo) WHERE id = ?
+        String sql = """
+                    UPDATE Categoria SET nome = ?, tipo_id = ? WHERE id = ?
             """;
 
         try (Connection conn = DriverManager.getConnection(db);
-             PreparedStatement stmt = conn.prepareStatement(alterarProduto)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, categoria.getNome());
             stmt.setInt(2, TipoLancamento.WhoIs(categoria.getTipo()));

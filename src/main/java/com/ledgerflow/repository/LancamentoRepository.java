@@ -39,7 +39,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
     @Override
     public void update(Lancamento lancamento) {
         String sql = """
-                    UPDATE Lancamento SET (dia, descricao, valor, tipo, categoria_id, conta_id, status_id, observacao) WHERE id = ?
+                    UPDATE Lancamento SET dia = ?, descricao = ?, valor = ?, tipo = ?, categoria_id = ?, conta_id = ?, status_id = ?, observacao = ? WHERE id = ?
             """;
 
         try (Connection conn = DriverManager.getConnection(db);

@@ -34,6 +34,11 @@ public class MainController {
         nav.AlterarView("ContaFinanceiraView");
     }
 
+    public void AbrirCategoria(){
+        nav = new Navegador(content);
+        nav.AlterarView("CategoriaView");
+    }
+
     public void AbrirLancamento(){
         nav = new Navegador(content);
         nav.AlterarView("Lancamento");

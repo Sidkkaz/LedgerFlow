@@ -5,6 +5,7 @@ public enum TipoLancamento {
     Despesa(2);
 
     private final int valor;
+
     TipoLancamento(int valor) {
         this.valor = valor;
     }

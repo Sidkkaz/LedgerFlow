@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="580.0" style="-fx-background-color: white; -fx-border-color: transparent; -fx-background-radius: 15; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.CategoriaController">
+    <clip>
+        <Rectangle arcHeight="30.0" arcWidth="30.0" height="400.0" width="600.0" />
+    </clip>
+    <Label layoutX="27.0" layoutY="30.0" prefHeight="35.0" prefWidth="272.0" text="Categorias">
+        <font>
+            <Font name="System Bold" size="24.0" />
+        </font></Label>
+    <Label layoutX="28.0" layoutY="66.0" prefHeight="18.0" prefWidth="312.0" text="Configure as categorias que serão usadas no sistema" />
+   <AnchorPane layoutX="14.0" layoutY="95.0" prefHeight="290.0" prefWidth="570.0" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+      <children>
+         <TableView fx:id="tabelaCategoria" layoutX="18.0" layoutY="52.0" prefHeight="219.0" prefWidth="537.0" style="-fx-background-color: transparent; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #FF702E;">
+           <columns>
+             <TableColumn fx:id="colunaNome" prefWidth="374.6000003814697" text="Nome" />
+             <TableColumn fx:id="colunaTipo" minWidth="0.0" prefWidth="180.60000610351562" text="Tipo" />
+           </columns>
+         </TableView>
+         <TextField fx:id="nomeCategoria" layoutX="22.0" layoutY="16.0" prefHeight="26.0" prefWidth="296.0" promptText="Nome" style="-fx-border-color: #FF702E; -fx-background-color: transparent; -fx-border-radius: 5;" />
+         <ComboBox fx:id="tipoCategoria" layoutX="329.0" layoutY="16.0" prefHeight="26.0" prefWidth="142.0" promptText="Tipo " style="-fx-background-color: #FF702E;" />
+         <Button layoutX="482.0" layoutY="16.0" mnemonicParsing="false" onAction="#salvar" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
+      </children>
+   </AnchorPane>
+    <HBox layoutX="504.0" layoutY="-2.0" prefHeight="31.0" prefWidth="96.0">
+        <children>
+            <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
+                <font>
+                    <Font name="Poppins Medium" size="8.0" />
+                </font>
+            </Button>
+            <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
+                <font>
+                    <Font name="Poppins Medium" size="8.0" />
+                </font>
+            </Button>
+            <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
+                <font>
+                    <Font name="Poppins Medium" size="8.0" />
+                </font>
+            </Button>
+        </children>
+    </HBox>
+
+
+</AnchorPane>
