@@ -91,7 +91,7 @@ public class UsuarioRepository implements Repository<Usuario> {
                 var perfil = result.getInt("perfil_id");
                 var ativo = result.getBoolean("ativo");
 
-                Usuario u = new Usuario(nome, email, senha, Perfil.EnviarPerfil(perfil), ativo);
+                Usuario u = new Usuario(nome, email, senha, ativo);
                 u.setId(id);
 
                 lista.add(u);
@@ -121,7 +121,7 @@ public class UsuarioRepository implements Repository<Usuario> {
                     var perfil = result.getInt("perfil_id");
                     var ativo = result.getBoolean("ativo");
 
-                    Usuario u = new Usuario(nome, email, senha, Perfil.EnviarPerfil(perfil), ativo);
+                    Usuario u = new Usuario(nome, email, senha, ativo);
                     u.setId(id);
                     return u;
                 }

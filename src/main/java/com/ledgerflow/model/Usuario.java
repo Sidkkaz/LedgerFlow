@@ -7,15 +7,13 @@ public class Usuario {
     String nome;
     String email;
     String senha;
-    Perfil perfil;
     boolean ativo;
 
-    public Usuario(String nome, String email, String senha, Perfil perfil, boolean ativo) {
+    public Usuario(String nome, String email, String senha, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.perfil = perfil;
         this.ativo = true;
     }
 

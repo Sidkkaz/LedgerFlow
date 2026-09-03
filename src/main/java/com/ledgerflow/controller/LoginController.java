@@ -39,7 +39,7 @@ public class LoginController {
             return;
         }
 
-        if(auth.Login(email, password)){
+        if(auth.login(email, password)){
             AbrirSistema(event);
         }else {
             PopupWarning.warning("Login Incorreto", "Email ou Senha incorreto");
