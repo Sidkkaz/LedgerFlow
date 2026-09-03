@@ -1,14 +1,14 @@
 package com.ledgerflow.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Lancamento {
 
     int id;
     LocalDate data;
     String descricao;
-    double valor;
+    BigDecimal valor;
     TipoLancamento tipo;
     Categoria categoria;
     ContaFinanceira conta;
@@ -16,25 +16,23 @@ public class Lancamento {
     String observacao;
 
     public Lancamento(
-            int id,
             LocalDate data,
             String descricao,
-            double valor,
+            BigDecimal valor,
             TipoLancamento tipo,
             Categoria categoria,
             ContaFinanceira conta,
             StatusLancamento status,
             String observacao
     ){
-      this.id = id;
-      this.data = data;
-      this.descricao = descricao;
-      this.valor = valor;
-      this.tipo = tipo;
-      this.categoria = categoria;
-      this.conta = conta;
-      this.status = status;
-      this.observacao = observacao;
+            this.data = data;
+            this.descricao = descricao;
+            this.valor = valor;
+            this.tipo = tipo;
+            this.categoria = categoria;
+            this.conta = conta;
+            this.status = status;
+            this.observacao = observacao;
     }
 
     public int getId() {
@@ -61,11 +59,11 @@ public class Lancamento {
         this.descricao = descricao;
     }
 
-    public double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

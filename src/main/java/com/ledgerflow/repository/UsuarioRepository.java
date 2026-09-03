@@ -37,17 +37,17 @@ public class UsuarioRepository implements Repository<Usuario> {
     @Override
     public void update(Usuario usuario) {
         String sql = """
-                    UPDATE Usuario SET (nome, email, senha, ativo) WHERE id = ?
+                    UPDATE Usuario SET nome = ?, email = ?, senha = ?, ativo = ? WHERE id = ?
             """;
 
         try (Connection conn = DriverManager.getConnection(db);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, usuario.getNome());
-            stmt.setString(1, usuario.getNome());
-            stmt.setString(1, usuario.getNome());
-            stmt.setBoolean(1, usuario.isAtivo());
-            stmt.setInt(1, usuario.getId());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setBoolean(4, usuario.isAtivo());
+            stmt.setInt(5, usuario.getId());
 
             stmt.executeUpdate();
 

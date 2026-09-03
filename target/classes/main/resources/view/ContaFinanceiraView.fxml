@@ -14,7 +14,7 @@
       <TextField fx:id="nomeBanco" layoutX="31.0" layoutY="108.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
       <TextField fx:id="agenciaBanco" layoutX="31.0" layoutY="148.0" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
       <TextField fx:id="numeroBanco" layoutX="183.0" layoutY="148.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
-      <ComboBox fx:id="tipoConta" layoutX="31.0" layoutY="186.0" prefHeight="26.0" prefWidth="264.0" promptText="Tipo de Conta" style="-fx-background-color: #FF702E;" />
+      <ComboBox fx:id="tipoConta" layoutX="31.0" layoutY="186.0" prefHeight="26.0" prefWidth="264.0" promptText="Tipo de Conta" style="-fx-background-color: #FF702E; -fx-mark-color: white;" stylesheets="@style.css" />
       <TextField fx:id="valorInicial" layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
       <Button layoutX="224.0" layoutY="275.0" mnemonicParsing="false" onAction="#Salvar" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
       <Button layoutX="148.0" layoutY="274.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Limpar" textFill="WHITE" />
@@ -46,5 +46,3 @@
       </HBox>
    </children>
 </AnchorPane>
-
-

@@ -23,7 +23,7 @@
            </columns>
          </TableView>
          <TextField fx:id="nomeCategoria" layoutX="22.0" layoutY="16.0" prefHeight="26.0" prefWidth="296.0" promptText="Nome" style="-fx-border-color: #FF702E; -fx-background-color: transparent; -fx-border-radius: 5;" />
-         <ComboBox fx:id="tipoCategoria" layoutX="329.0" layoutY="16.0" prefHeight="26.0" prefWidth="142.0" promptText="Tipo " style="-fx-background-color: #FF702E;" />
+         <ComboBox fx:id="tipoCategoria" layoutX="329.0" layoutY="16.0" prefHeight="26.0" prefWidth="142.0" promptText="Tipo " style="-fx-background-color: #FF702E; -fx-mark-color: white;" stylesheets="@style.css" />
          <Button layoutX="482.0" layoutY="16.0" mnemonicParsing="false" onAction="#salvar" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
       </children>
    </AnchorPane>
