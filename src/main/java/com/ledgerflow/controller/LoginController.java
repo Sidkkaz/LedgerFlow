@@ -1,6 +1,9 @@
 package com.ledgerflow.controller;
 
-import com.ledgerflow.service.LoginService;
+import com.ledgerflow.model.PopupWarning;
+import com.ledgerflow.model.Sessao;
+import com.ledgerflow.service.AuthService;
+import com.ledgerflow.service.UsuarioService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,11 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 
 public class LoginController {
 
@@ -25,11 +28,11 @@ public class LoginController {
     @FXML
     private Button login;
     @FXML
-    private Button Close;
-    @FXML
     private CheckBox checkBox;
 
     private String remember;
+
+    private final AuthService auth = new AuthService(new UsuarioService());
 
 
     public void Login(ActionEvent event) throws Exception {
@@ -37,10 +40,17 @@ public class LoginController {
         String email = this.emailField.getText();
         String password = this.passwordField.getText();
 
-        if(LoginService.ConferirLogin(email,password)){
+        if (email.isEmpty() || password.isEmpty()) {
+            PopupWarning.warning("Dados Faltantes","Campo(s) vazio(os), preencha-os corretamente.");
+            return;
+        }
+
+        if(auth.Login(email, password)){
+            var session = new Sessao(auth.getUserAtual());
             AbrirSistema(event);
         }else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            PopupWarning.warning("Login Incorreto", "Email ou Senha incorreto");
+            return;
         }
 
         if(checkBox.isSelected()){
@@ -92,12 +102,8 @@ public class LoginController {
     public void Remember() throws IOException {
         Path path = Paths.get("./remember.txt");
 
-        try{
-
+        if(Files.exists(path)) {
             remember = Files.readString(path);
-
-        }catch (FileNotFoundException e){
-            System.out.println("Não foi possivel fazer a leitura");
         }
     }
 
@@ -110,8 +116,4 @@ public class LoginController {
         stage.setIconified(true);
     }
 
-    public void Maximize(){
-        Stage stage = (Stage) login.getScene().getWindow();
-        stage.setMaximized(true);
-    }
 }

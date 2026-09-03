@@ -9,16 +9,16 @@ import java.util.List;
 
 public class UsuarioRepository implements Repository<Usuario> {
 
-    String db ="JDBC:sqlite:app.db";
+    String db = "JDBC:sqlite:app.db";
 
     @Override
     public void add(Usuario u) {
         String sql = """
                 INSERT INTO Usuario (nome, email, senha, perfil_id, ativo) VALUES (?, ?, ?, ?, ?)""";
 
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
+        try (Connection conn = DriverManager.getConnection(db);
+             PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
 
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
@@ -29,7 +29,7 @@ public class UsuarioRepository implements Repository<Usuario> {
 
             stmt.executeUpdate();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -51,7 +51,7 @@ public class UsuarioRepository implements Repository<Usuario> {
 
             stmt.executeUpdate();
 
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -61,14 +61,14 @@ public class UsuarioRepository implements Repository<Usuario> {
         String sql = """
                 DELETE FROM Usuario WHERE id = ?;""";
 
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
+        try (Connection conn = DriverManager.getConnection(db);
+             PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
 
             stmt.setInt(1, usuario.getId());
             stmt.executeUpdate();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -79,11 +79,11 @@ public class UsuarioRepository implements Repository<Usuario> {
 
         List<Usuario> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(db);
-            Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(sql)
-        ){
-            while(result.next()){
+        try (Connection conn = DriverManager.getConnection(db);
+             Statement stmt = conn.createStatement();
+             ResultSet result = stmt.executeQuery(sql)
+        ) {
+            while (result.next()) {
                 var id = result.getInt("id");
                 var nome = result.getString("nome");
                 var email = result.getString("email");
@@ -97,10 +97,40 @@ public class UsuarioRepository implements Repository<Usuario> {
                 lista.add(u);
             }
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return lista;
     }
+
+    public Usuario findByEmail(String email) throws SQLException {
+
+        String sql = "SELECT * FROM Usuario WHERE email = ?";
+
+        try (Connection conn = DriverManager.getConnection(db);
+             PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setString(1, email);
+
+            try (ResultSet result = stmt.executeQuery(sql)) {
+                if (result.next()) {
+                    var id = result.getInt("id");
+                    var nome = result.getString("nome");
+                    var senha = result.getString("senha");
+                    var perfil = result.getInt("perfil_id");
+                    var ativo = result.getBoolean("ativo");
+
+                    Usuario u = new Usuario(nome, email, senha, Perfil.EnviarPerfil(perfil), ativo);
+                    u.setId(id);
+                    return u;
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
+    }
+
 }

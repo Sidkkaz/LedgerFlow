@@ -2,22 +2,69 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1080.0" maxWidth="1920.0" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LancamentoController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LancamentoController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="156.0" text="LANÇAMENTOS" />
-      <Label layoutX="14.0" layoutY="51.0" prefHeight="18.0" prefWidth="192.0" text="registre seus lançamentos aqui" />
-      <HBox layoutX="3.0" layoutY="109.0" maxHeight="1080.0" maxWidth="1920.0" prefHeight="100.0" prefWidth="800.0" spacing="5.0">
-         <children>
-            <DatePicker prefHeight="26.0" prefWidth="98.0" />
-            <TextField promptText="descrição" />
-            <TextField prefHeight="26.0" prefWidth="76.0" promptText="valor" />
-            <ComboBox prefHeight="26.0" prefWidth="85.0" promptText="Tipo" />
-            <ComboBox prefHeight="26.0" prefWidth="85.0" promptText="Categoria" />
-            <ComboBox prefHeight="26.0" prefWidth="85.0" promptText="Conta" />
-            <ComboBox layoutX="505.0" layoutY="10.0" prefHeight="26.0" prefWidth="85.0" promptText="Status" />
-            <TextField layoutX="102.0" layoutY="10.0" promptText="observação (opcional)" />
-         </children>
-      </HBox>
+      <Label layoutX="9.0" layoutY="3.0" prefHeight="45.0" prefWidth="156.0" text="LANÇAMENTOS">
+         <font>
+            <Font name="Poppins Regular" size="19.0" />
+         </font></Label>
+      <Label layoutX="9.0" layoutY="38.0" prefHeight="18.0" prefWidth="192.0" text="registre seus lançamentos aqui">
+         <font>
+            <Font name="Poppins Regular" size="10.0" />
+         </font></Label>
+       <HBox layoutX="507.0" prefHeight="31.0" prefWidth="96.0">
+           <children>
+               <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
+                   <font>
+                       <Font name="Poppins Medium" size="8.0" />
+                   </font>
+               </Button>
+               <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
+                   <font>
+                       <Font name="Poppins Medium" size="8.0" />
+                   </font>
+               </Button>
+               <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
+                   <font>
+                       <Font name="Poppins Medium" size="8.0" />
+                   </font>
+               </Button>
+           </children>
+       </HBox>
+      <TabPane layoutY="69.0" prefHeight="330.0" prefWidth="603.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab style="-fx-background-color: white;" text="Criar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <DatePicker layoutX="24.0" layoutY="42.0" prefHeight="26.0" prefWidth="156.0" />
+                        <TextField layoutX="186.0" layoutY="42.0" prefHeight="26.0" prefWidth="260.0" promptText="descrição" />
+                        <TextField layoutX="463.0" layoutY="42.0" prefHeight="26.0" prefWidth="120.0" promptText="valor" />
+                        <ComboBox layoutX="24.0" layoutY="82.0" prefHeight="26.0" prefWidth="128.0" promptText="Tipo" />
+                        <ComboBox layoutX="303.0" layoutY="82.0" prefHeight="26.0" prefWidth="127.0" promptText="Categoria" />
+                        <ComboBox layoutX="162.0" layoutY="82.0" prefHeight="26.0" prefWidth="132.0" promptText="Conta" />
+                        <ComboBox layoutX="438.0" layoutY="82.0" prefHeight="26.0" prefWidth="146.0" promptText="Status" />
+                        <TextField layoutX="21.0" layoutY="123.0" prefHeight="95.0" prefWidth="564.0" promptText="observação (opcional)" />
+                        <Button layoutX="496.0" layoutY="256.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="89.0" text="Salvar" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab style="-fx-background-color: white;" text="Extrato">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutY="1.0" prefHeight="302.0" prefWidth="603.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

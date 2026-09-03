@@ -2,7 +2,9 @@ package com.ledgerflow;
 
 import com.ledgerflow.controller.MenuController;
 import com.ledgerflow.repository.InitDataBase;
+import com.ledgerflow.service.AuthService;
 import com.ledgerflow.service.ContaFinanceiraService;
+import com.ledgerflow.service.UsuarioService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
