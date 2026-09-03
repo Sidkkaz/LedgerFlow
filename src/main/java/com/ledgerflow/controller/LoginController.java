@@ -1,8 +1,8 @@
 package com.ledgerflow.controller;
 
 import com.ledgerflow.model.PopupWarning;
-import com.ledgerflow.model.Sessao;
 import com.ledgerflow.service.AuthService;
+import com.ledgerflow.service.RememberService;
 import com.ledgerflow.service.UsuarioService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,12 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 
 public class LoginController {
 
@@ -31,7 +26,6 @@ public class LoginController {
     private CheckBox checkBox;
 
     private String remember;
-
     private final AuthService auth = new AuthService(new UsuarioService());
 
 
@@ -46,7 +40,6 @@ public class LoginController {
         }
 
         if(auth.Login(email, password)){
-            var session = new Sessao(auth.getUserAtual());
             AbrirSistema(event);
         }else {
             PopupWarning.warning("Login Incorreto", "Email ou Senha incorreto");
@@ -55,7 +48,7 @@ public class LoginController {
 
         if(checkBox.isSelected()){
             remember = email;
-            CreateRemember();
+            RememberService.CreateRemember();
         }
     }
 
@@ -74,7 +67,8 @@ public class LoginController {
 
     public void initialize() throws IOException {
 
-        Remember();
+        remember = RememberService.Remember();
+
         if(remember != null && !remember.isBlank()){
             emailField.setText(remember);
         }
@@ -82,29 +76,6 @@ public class LoginController {
         emailField.setOnAction(event -> passwordField.requestFocus());
         passwordField.setOnAction(event -> login.requestFocus());
 
-        if(!emailField.getText().isEmpty()){
-            passwordField.requestFocus();
-        }
-
-    }
-
-    public void CreateRemember() throws IOException {
-        Path path = Paths.get("./remember.txt");
-
-        if(Files.notExists(path)){
-            Files.createFile(path);
-        }
-
-        Files.write(path, remember.getBytes());
-
-    }
-
-    public void Remember() throws IOException {
-        Path path = Paths.get("./remember.txt");
-
-        if(Files.exists(path)) {
-            remember = Files.readString(path);
-        }
     }
 
     public void Close(){
