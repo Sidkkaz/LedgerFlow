@@ -5,6 +5,8 @@ import com.ledgerflow.model.ContaFinanceira;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.math.BigDecimal;
+
 public class CardContaController {
 
     @FXML
@@ -19,7 +21,7 @@ public class CardContaController {
     public void setConta(ContaFinanceira c){
         nomeConta.setText(c.getNome());
         saldoConta.setText(MoedaFormatador.Moeda(c.getSaldo()));
-        despesasConta.setText(MoedaFormatador.Moeda(0));
-        receitasConta.setText(MoedaFormatador.Moeda(0));
+        despesasConta.setText(MoedaFormatador.Moeda(new BigDecimal(0)));
+        receitasConta.setText(MoedaFormatador.Moeda(new BigDecimal(0)));
     }
 }

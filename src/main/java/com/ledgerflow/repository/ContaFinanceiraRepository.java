@@ -1,7 +1,7 @@
 package com.ledgerflow.repository;
 
 import com.ledgerflow.model.ContaFinanceira;
-import com.ledgerflow.model.ContaTipo;
+import com.ledgerflow.model.enums.ContaTipo;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
     @Override
     public void add(ContaFinanceira c) {
         String sql = """
-                INSERT INTO ContaFinanceira (nome, agencia, numero, conta_tipo, saldo, ativo) VALUES (?, ?, ?, ?, ?, ?)""";
+                INSERT INTO ContaFinanceira (nome, agencia, numero, conta_tipo, saldoInicial, ativo) VALUES (?, ?, ?, ?, ?, ?)""";
 
         try(Connection conn = DriverManager.getConnection(db);
             PreparedStatement stmt = conn.prepareStatement(sql)
@@ -24,7 +24,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
             stmt.setInt(2, c.getAgencia());
             stmt.setInt(3, c.getNumero());
             stmt.setInt(4, ContaTipo.WhoIs(c.getTipo()));
-            stmt.setDouble(5, c.getSaldo());
+            stmt.setBigDecimal(5, c.getSaldo());
             stmt.setBoolean(6, c.isAtivo());
 
 
@@ -38,13 +38,13 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
     @Override
     public void update(ContaFinanceira c) {
         String sql = """
-                    UPDATE ContaFinanceira SET saldo = ?, ativo = ? WHERE id = ?
+                    UPDATE ContaFinanceira SET saldoInicial = ?, ativo = ? WHERE id = ?
             """;
 
         try (Connection conn = DriverManager.getConnection(db);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setDouble(1, c.getSaldo());
+            stmt.setBigDecimal(1, c.getSaldo());
             stmt.setBoolean(2, c.isAtivo());
             stmt.setInt(3, c.getId());
 
@@ -76,10 +76,10 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
                 var agencia = result.getInt("agencia");
                 var numero = result.getInt("numero");
                 var contaTipo = result.getInt("conta_tipo");
-                var saldo = result.getDouble("saldo");
+                var saldoInicial = result.getBigDecimal("saldoInicial");
                 var ativo = result.getBoolean("ativo");
 
-                ContaFinanceira u = new ContaFinanceira(nome, agencia, numero, ContaTipo.Select(contaTipo), saldo, ativo);
+                ContaFinanceira u = new ContaFinanceira(nome, ContaTipo.Select(contaTipo), saldoInicial, saldo);
                 u.setId(id);
 
                 lista.add(u);

@@ -1,7 +1,8 @@
 package com.ledgerflow.model;
 
+import com.ledgerflow.model.enums.TipoLancamento;
+
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class MovimentoFinanceiro {
 

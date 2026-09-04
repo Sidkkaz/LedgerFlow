@@ -1,7 +1,7 @@
 package com.ledgerflow.repository;
 
 import com.ledgerflow.model.Categoria;
-import com.ledgerflow.model.TipoLancamento;
+import com.ledgerflow.model.enums.TipoLancamento;
 
 import java.sql.*;
 import java.util.ArrayList;

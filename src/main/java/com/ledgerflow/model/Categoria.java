@@ -1,8 +1,10 @@
 package com.ledgerflow.model;
 
+import com.ledgerflow.model.enums.TipoLancamento;
+
 public class Categoria {
 
-    private Long id;
+    private long id;
     private String nome;
     private TipoLancamento tipo;
 

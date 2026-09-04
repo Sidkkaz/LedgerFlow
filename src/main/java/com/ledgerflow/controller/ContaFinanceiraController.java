@@ -1,7 +1,7 @@
 package com.ledgerflow.controller;
 
 import com.ledgerflow.model.ContaFinanceira;
-import com.ledgerflow.model.ContaTipo;
+import com.ledgerflow.model.enums.ContaTipo;
 import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -158,9 +158,9 @@ public class ContaFinanceiraController {
 
         int agenciaConvertida = Integer.parseInt(agencia);
         int numeroConvertido = Integer.parseInt(numero);
-        double valorConvertido = Double.parseDouble(valor);
+        //BigDecimal valorConvertido = (BigDecimal) valor;
 
-        ContaFinanceiraService.CriarConta(nome, agenciaConvertida, numeroConvertido, tipo, valorConvertido, ativo);
+        //ContaFinanceiraService.CriarConta(nome, agenciaConvertida, numeroConvertido, tipo, valorConvertido, ativo);
     }
 
     public boolean PopupStatusConta(){

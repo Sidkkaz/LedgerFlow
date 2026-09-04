@@ -1,11 +1,11 @@
 package com.ledgerflow.service;
 
 import com.ledgerflow.model.ContaFinanceira;
-import com.ledgerflow.model.ContaTipo;
+import com.ledgerflow.model.enums.ContaTipo;
 import com.ledgerflow.repository.ContaFinanceiraRepository;
 import com.ledgerflow.repository.Repository;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ContaFinanceiraService {
@@ -27,7 +27,7 @@ public class ContaFinanceiraService {
         return null;
     }
 
-    public static void CriarConta(String n, int a, int num, ContaTipo tipo, double saldo, boolean bool){
+    public static void CriarConta(String n, int a, int num, ContaTipo tipo, BigDecimal saldo, boolean bool){
         List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
@@ -36,7 +36,7 @@ public class ContaFinanceiraService {
             }
         }
 
-        ContaFinanceira c = new ContaFinanceira(n, a , num, tipo, saldo, bool);
+        ContaFinanceira c = new ContaFinanceira(n, tipo, saldo);
 
         repo.add(c);
     }

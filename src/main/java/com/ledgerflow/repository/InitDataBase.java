@@ -10,10 +10,12 @@ public class InitDataBase {
 
     public InitDataBase() throws SQLException {
         Connection conn = DriverManager.getConnection(db);
+        conn.createStatement().execute("PRAGMA foreign_keys = ON");
 
         if(conn != null){
             System.out.println("Banco conectado com sucesso!");
         }
+
 
         String CriarTabelaCategoria = """
                         CREATE TABLE IF NOT EXISTS Categoria (
@@ -32,7 +34,7 @@ public class InitDataBase {
                     agencia INTEGER NOT NULL,
                     numero INTEGER NOT NULL,
                     conta_tipo INTEGER NOT NULL,
-                    saldo DOUBLE NOT NULL,
+                    saldoInicial DOUBLE NOT NULL,
                     ativo BOOLEAN NOT NULL
                     )""";
 
@@ -49,7 +51,10 @@ public class InitDataBase {
                     categoria_id INTEGER NOT NULL,
                     conta_id INTEGER NOT NULL,
                     status_id INTEGER NOT NULL,
-                    observacao TEXT NOT NULL
+                    observacao TEXT NOT NULL,
+                    
+                    FOREIGN KEY (categoria_id) REFERENCES Categoria(id),
+                    FOREIGN KEY (conta_id) REFERENCES ContaFinanceira(id)
                     )""";
 
         stmt = conn.createStatement();

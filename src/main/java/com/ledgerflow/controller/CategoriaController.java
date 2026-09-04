@@ -1,10 +1,8 @@
 package com.ledgerflow.controller;
 
 import com.ledgerflow.model.Categoria;
-import com.ledgerflow.model.ContaTipo;
-import com.ledgerflow.model.TipoLancamento;
+import com.ledgerflow.model.enums.TipoLancamento;
 import com.ledgerflow.service.CategoriaService;
-import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class CategoriaController {

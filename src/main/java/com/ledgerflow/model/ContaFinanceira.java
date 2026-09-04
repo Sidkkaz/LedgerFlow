@@ -1,53 +1,60 @@
 package com.ledgerflow.model;
 
+import com.ledgerflow.model.enums.ContaTipo;
+
+import java.math.BigDecimal;
+
 public class ContaFinanceira {
 
-    int id;
-    String nome;
-    int agencia;
-    int numero;
-    ContaTipo tipo;
-    double saldo;
+    private long id;
+    private final String nome;
+    private int agencia;
+    private int numero;
+    private final ContaTipo tipo;
+    private BigDecimal saldoInicial;
+    private BigDecimal saldo;
     boolean ativo;
 
     public ContaFinanceira(
+            Long id,
             String nome,
-            int agencia,
-            int numero,
             ContaTipo tipo,
-            double saldo,
-            boolean ativo
+            BigDecimal saldoInicial,
+            BigDecimal saldo
     ){
 
         this.nome = nome;
-        this.agencia = agencia;
-        this.numero = numero;
         this.tipo =  tipo;
-        this.saldo = saldo;
-        this.ativo = ativo;
+
+        if(saldoInicial == null || saldo == null) {
+            throw new IllegalArgumentException("Saldo não pode ser nulo.");
+        }
+
+        this.saldoInicial = saldoInicial;
+        this.saldo = saldoInicial;
+    }
+
+    public void Depositar(BigDecimal valor){
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) return;
+        this.saldo = this.saldo.add(valor);
+    }
+
+    public void Sacar(BigDecimal valor){
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) return;
+
+        if(saldo.compareTo(BigDecimal.ZERO) < 0) return ;
+
+        this.saldo = this.saldo.subtract(valor);
     }
 
 
-    public static ContaFinanceira create(int id){
-        return new ContaFinanceira("",0,0,ContaTipo.Corrente,1,true);
-    }
-
-
-    //getter e setter
-    public int getId() {
+//region Get/Set
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public int getAgencia() {
@@ -70,15 +77,19 @@ public class ContaFinanceira {
         return tipo;
     }
 
-    public void setTipo(ContaTipo tipo) {
-        this.tipo = tipo;
+    public BigDecimal getSaldoInicial() {
+        return saldoInicial;
     }
 
-    public double getSaldo() {
+    private void setSaldoInicial(BigDecimal saldoInicial) {
+        this.saldoInicial = saldoInicial;
+    }
+
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    private void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 
@@ -89,5 +100,7 @@ public class ContaFinanceira {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+//endregion
 }
 

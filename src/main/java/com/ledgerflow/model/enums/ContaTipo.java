@@ -1,4 +1,4 @@
-package com.ledgerflow.model;
+package com.ledgerflow.model.enums;
 
 public enum ContaTipo{
     Corrente(1),

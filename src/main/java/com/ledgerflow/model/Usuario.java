@@ -3,7 +3,7 @@ package com.ledgerflow.model;
 // Usuario, quem detem a licença e uso do software;
 public class Usuario {
 
-    int id;
+    long id;
     String nome;
     String email;
     String senha;

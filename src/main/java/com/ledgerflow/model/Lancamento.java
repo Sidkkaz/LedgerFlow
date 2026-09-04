@@ -1,11 +1,13 @@
 package com.ledgerflow.model;
 
+import com.ledgerflow.model.enums.TipoLancamento;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Lancamento {
 
-    int id;
+    Long id;
     LocalDate data;
     String descricao;
     BigDecimal valor;

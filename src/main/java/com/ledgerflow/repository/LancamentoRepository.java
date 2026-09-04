@@ -1,9 +1,9 @@
 package com.ledgerflow.repository;
 
 import com.ledgerflow.model.*;
+import com.ledgerflow.model.enums.TipoLancamento;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LancamentoRepository implements Repository<Lancamento> {
@@ -80,8 +80,8 @@ public class LancamentoRepository implements Repository<Lancamento> {
     }
 
     @Override
-    public List<Lancamento> list() {
-        String sql = "SELECT * FROM Lancamento";
+    public List<Lancamento> list() {return null;}
+    /*    String sql = "SELECT * FROM Lancamento";
 
         List<Lancamento> lista = new ArrayList<>();
 
@@ -215,5 +215,5 @@ public class LancamentoRepository implements Repository<Lancamento> {
 
         return lista;
     }
-
+*/
 }
