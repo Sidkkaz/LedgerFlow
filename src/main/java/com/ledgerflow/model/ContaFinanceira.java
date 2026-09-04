@@ -38,14 +38,17 @@ public class ContaFinanceira {
     }
 
     public void Depositar(BigDecimal valor){
-        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) return;
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("Valor deve ser maior que zero");
 
         this.saldo = this.saldo.add(valor);
     }
 
     public void Sacar(BigDecimal valor){
-        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) return;
-        if(saldo.compareTo(BigDecimal.ZERO) < 0) return ;
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
+            throw new IllegalArgumentException("Valor deve ser maior que zero.");
+        if(saldo.compareTo(valor) < 0)
+            throw new IllegalArgumentException("Saldo insuficiente.");
 
         this.saldo = this.saldo.subtract(valor);
     }
