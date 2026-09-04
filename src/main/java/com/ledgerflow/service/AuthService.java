@@ -44,7 +44,7 @@ public class AuthService {
 
         var senhaHash = sha256Hex(senha);
 
-        return userService.Adicionar(new Usuario(nome, email, senhaHash, true));
+        return userService.Adicionar(new Usuario(nome, email, senhaHash));
     }
 
     public Usuario getUserAtual() {

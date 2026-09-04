@@ -7,14 +7,13 @@ import java.time.LocalDate;
 
 public class Lancamento {
 
-    Long id;
+    long id;
     LocalDate data;
     String descricao;
     BigDecimal valor;
     TipoLancamento tipo;
     Categoria categoria;
     ContaFinanceira conta;
-    StatusLancamento status;
     String observacao;
 
     public Lancamento(
@@ -24,7 +23,6 @@ public class Lancamento {
             TipoLancamento tipo,
             Categoria categoria,
             ContaFinanceira conta,
-            StatusLancamento status,
             String observacao
     ){
             this.data = data;
@@ -33,15 +31,14 @@ public class Lancamento {
             this.tipo = tipo;
             this.categoria = categoria;
             this.conta = conta;
-            this.status = status;
             this.observacao = observacao;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -65,16 +62,8 @@ public class Lancamento {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
     public TipoLancamento getTipo() {
         return tipo;
-    }
-
-    public void setTipo(TipoLancamento tipo) {
-        this.tipo = tipo;
     }
 
     public Categoria getCategoria() {
@@ -87,18 +76,6 @@ public class Lancamento {
 
     public ContaFinanceira getConta() {
         return conta;
-    }
-
-    public void setConta(ContaFinanceira conta) {
-        this.conta = conta;
-    }
-
-    public StatusLancamento getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusLancamento status) {
-        this.status = status;
     }
 
     public String getObservacao() {

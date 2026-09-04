@@ -5,7 +5,7 @@ import com.ledgerflow.model.enums.TipoLancamento;
 public class Categoria {
 
     private long id;
-    private String nome;
+    private final String nome;
     private TipoLancamento tipo;
 
     public Categoria(String nome, TipoLancamento tipo) {
@@ -17,23 +17,21 @@ public class Categoria {
         return new Categoria("", TipoLancamento.Select(id));
     }
 
+    //region Get/Set
     public TipoLancamento getTipo() {
         return tipo;
     }
     public void setTipo(TipoLancamento tipo) {
         this.tipo = tipo;
     }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
     public String getNome() {
         return nome;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    //endregion
 }

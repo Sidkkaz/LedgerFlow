@@ -22,6 +22,9 @@ public class ContaFinanceira {
             BigDecimal saldoInicial,
             BigDecimal saldo
     ){
+        if (nome == null){
+            throw new RuntimeException("Nome vazio");
+        }
 
         this.nome = nome;
         this.tipo =  tipo;
@@ -36,21 +39,24 @@ public class ContaFinanceira {
 
     public void Depositar(BigDecimal valor){
         if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) return;
+
         this.saldo = this.saldo.add(valor);
     }
 
     public void Sacar(BigDecimal valor){
         if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) return;
-
         if(saldo.compareTo(BigDecimal.ZERO) < 0) return ;
 
         this.saldo = this.saldo.subtract(valor);
     }
 
-
-//region Get/Set
+    //region Get/Set
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNome() {

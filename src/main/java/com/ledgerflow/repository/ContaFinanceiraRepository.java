@@ -46,7 +46,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
             stmt.setBigDecimal(1, c.getSaldo());
             stmt.setBoolean(2, c.isAtivo());
-            stmt.setInt(3, c.getId());
+            stmt.setLong(3, c.getId());
 
             stmt.executeUpdate();
 
@@ -71,7 +71,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
             ResultSet result = stmt.executeQuery(sql)
         ){
             while(result.next()){
-                var id = result.getInt("id");
+                var id = result.getLong("id");
                 var nome = result.getString("nome");
                 var agencia = result.getInt("agencia");
                 var numero = result.getInt("numero");
