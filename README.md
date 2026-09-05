@@ -6,3 +6,4 @@ Uma das decisões de dominio que tive foi que:
 - Lançamento é um **Fato**;
 - Movimentação Financeira é uma **Consequência**;
 - Conta Financeira é o **Estado** que vai ser afetado;
+

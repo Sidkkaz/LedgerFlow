@@ -22,19 +22,17 @@ public class ContaFinanceira {
             BigDecimal saldoInicial,
             BigDecimal saldo
     ){
-        if (nome == null){
-            throw new RuntimeException("Nome vazio");
-        }
+        validarCriacao(
+             nome,
+             tipo,
+             saldoInicial,
+             saldo
+        );
 
         this.nome = nome;
         this.tipo =  tipo;
-
-        if(saldoInicial == null || saldo == null) {
-            throw new IllegalArgumentException("Saldo não pode ser nulo.");
-        }
-
         this.saldoInicial = saldoInicial;
-        this.saldo = saldoInicial;
+        this.saldo = saldoInicial.add(saldo);
     }
 
     public void Depositar(BigDecimal valor){
@@ -46,12 +44,44 @@ public class ContaFinanceira {
 
     public void Sacar(BigDecimal valor){
         if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
-            throw new IllegalArgumentException("Valor deve ser maior que zero.");
+            throw new IllegalArgumentException("Valor deve ser maior que zero");
         if(saldo.compareTo(valor) < 0)
-            throw new IllegalArgumentException("Saldo insuficiente.");
+            throw new IllegalArgumentException("Saldo insuficiente");
 
         this.saldo = this.saldo.subtract(valor);
     }
+
+    public void desativar(){
+        this.ativo = false;
+    }
+
+    public void ativar(){
+        this.ativo = true;
+    }
+
+    private void validarCriacao(
+            String nome,
+            ContaTipo tipo,
+            BigDecimal saldoInicial,
+            BigDecimal saldo
+    ){
+        if (nome == null || nome.isBlank()){
+            throw new RuntimeException("Nome vazio");
+        }
+
+        if (tipo == null){
+            throw new RuntimeException("Tipo vazio");
+        }
+
+        if(saldoInicial == null) {
+            throw new IllegalArgumentException("SaldoInicial não pode ser nulo");
+        }
+
+        if(saldo == null) {
+            throw new IllegalArgumentException("Saldo não pode ser nulo");
+        }
+    }
+
 
     //region Get/Set
     public long getId() {
@@ -106,7 +136,7 @@ public class ContaFinanceira {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    private void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 

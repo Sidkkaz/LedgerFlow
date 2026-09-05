@@ -8,21 +8,50 @@ public class Usuario {
     String email;
     String senha;
 
-    public Usuario(String nome, String email, String senha) {
-        if(nome.isBlank() || email.isBlank() || senha.isBlank()) throw new RuntimeException("Campo vazio");
+    public Usuario(
+            Long id,
+            String nome,
+            String email,
+            String senha
+    ) {
+        validarCriacao(
+             nome,
+             email,
+             senha
+        );
 
-        if(nome.length() < 3) throw new RuntimeException("Nome deve ter 3 caracteres");
+        this.id = id;
         this.nome = nome;
-
-        if(!email.contains("@") && email.length() <= 3) throw new RuntimeException("Email invalido");
         this.email = email;
-
-        if(senha.length() < 8) throw new RuntimeException("Minímo 8 caracteres");
         this.senha = senha;
     }
 
     public void AlterarSenha(String senha){
         this.senha = senha;
+    }
+
+    private void validarCriacao(
+            String nome,
+            String email,
+            String senha
+    ){
+        if(nome == null || nome.isBlank())
+            throw new RuntimeException("Nome vazio");
+
+        if(email == null || email.isBlank())
+            throw new RuntimeException("Email vazio");
+
+        if(senha == null || senha.isBlank())
+            throw new RuntimeException("Senha vazio");
+
+        if(nome.length() < 3)
+            throw new RuntimeException("Nome deve ter 3 caracteres");
+
+        if(!email.contains("@") && email.length() <= 3)
+            throw new RuntimeException("Email invalido");
+
+        if(senha.length() < 8)
+            throw new RuntimeException("Minímo 8 caracteres");
     }
 
     //region Get/Set
@@ -51,6 +80,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-//endregion
+    //endregion
 
 }

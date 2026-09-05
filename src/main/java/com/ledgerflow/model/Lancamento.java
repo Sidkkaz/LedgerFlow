@@ -17,29 +17,71 @@ public class Lancamento {
     String observacao;
 
     public Lancamento(
+            Long id,
             LocalDate data,
             String descricao,
             BigDecimal valor,
             TipoLancamento tipo,
             Categoria categoria,
-            ContaFinanceira conta,
-            String observacao
+            ContaFinanceira conta
     ){
+        validarCriacao(
+                 data,
+                 descricao,
+                 valor,
+                 tipo,
+                 conta
+        );
+            this.id = id;
             this.data = data;
             this.descricao = descricao;
             this.valor = valor;
             this.tipo = tipo;
-            this.categoria = categoria;
+            this.categoria = categoria == null ? Categoria.indefindo() : categoria;
             this.conta = conta;
-            this.observacao = observacao;
     }
 
+    private void validarCriacao(
+            LocalDate data,
+            String descricao,
+            BigDecimal valor,
+            TipoLancamento tipo,
+            ContaFinanceira conta
+    ) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data é obrigatória");
+        }
+
+        if (descricao == null || descricao.isBlank()) {
+            throw new IllegalArgumentException("Descrição é obrigatória");
+        }
+
+        if (valor == null) {
+            throw new IllegalArgumentException("Valor é obrigatório");
+        }
+
+        if (valor.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException(
+                    "Valor deve ser maior que zero"
+            );
+        }
+
+        if (tipo == null) {
+            throw new IllegalArgumentException("Tipo é obrigatório");
+        }
+
+        if (conta == null) {
+            throw new IllegalArgumentException(
+                    "Conta financeira é obrigatória"
+            );
+        }
+
+    }
+
+
+    //region Get/Set
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public LocalDate getData() {
@@ -85,6 +127,7 @@ public class Lancamento {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
+    //endregion
 
 }
 
