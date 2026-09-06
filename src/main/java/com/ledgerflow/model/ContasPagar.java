@@ -1,4 +1,4 @@
 package com.ledgerflow.model;
 
-public class ContaReceber {
+public class ContasPagar {
 }

@@ -35,14 +35,16 @@ public class ContaFinanceira {
         this.saldo = saldoInicial.add(saldo);
     }
 
-    public void Depositar(BigDecimal valor){
+
+    //region Metodos da Classe
+    public void depositar(BigDecimal valor){
         if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0)
             throw new IllegalArgumentException("Valor deve ser maior que zero");
 
         this.saldo = this.saldo.add(valor);
     }
 
-    public void Sacar(BigDecimal valor){
+    public void sacar(BigDecimal valor){
         if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
             throw new IllegalArgumentException("Valor deve ser maior que zero");
         if(saldo.compareTo(valor) < 0)
@@ -81,6 +83,8 @@ public class ContaFinanceira {
             throw new IllegalArgumentException("Saldo não pode ser nulo");
         }
     }
+
+    //endregion
 
 
     //region Get/Set
