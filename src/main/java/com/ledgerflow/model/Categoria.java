@@ -4,7 +4,7 @@ import com.ledgerflow.model.enums.TipoLancamento;
 
 public class Categoria {
 
-    private long id;
+    private final long id;
     private final String nome;
     private TipoLancamento tipo;
     private boolean ativo;

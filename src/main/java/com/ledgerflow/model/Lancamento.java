@@ -89,6 +89,9 @@ public class Lancamento {
     }
 
     public void setData(LocalDate data) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data é obrigatória");
+        }
         this.data = data;
     }
 
@@ -97,6 +100,9 @@ public class Lancamento {
     }
 
     public void setDescricao(String descricao) {
+        if (descricao == null || descricao.isBlank()) {
+            throw new IllegalArgumentException("Descrição é obrigatória");
+        }
         this.descricao = descricao;
     }
 
@@ -113,6 +119,9 @@ public class Lancamento {
     }
 
     public void setCategoria(Categoria categoria) {
+        if (categoria == null) {
+            throw new IllegalArgumentException("Categoria é obrigatório");
+        }
         this.categoria = categoria;
     }
 
@@ -125,6 +134,9 @@ public class Lancamento {
     }
 
     public void setObservacao(String observacao) {
+        if (observacao == null || observacao.isBlank()) {
+            throw new IllegalArgumentException("Descrição é obrigatória");
+        }
         this.observacao = observacao;
     }
     //endregion

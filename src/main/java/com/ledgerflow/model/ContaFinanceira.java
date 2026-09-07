@@ -32,7 +32,8 @@ public class ContaFinanceira {
         this.nome = nome;
         this.tipo =  tipo;
         this.saldoInicial = saldoInicial;
-        this.saldo = saldoInicial.add(saldo);
+        this.saldo = saldoInicial;
+        reconstruirSaldo(saldo);
     }
 
 
@@ -59,6 +60,10 @@ public class ContaFinanceira {
 
     public void ativar(){
         this.ativo = true;
+    }
+
+    private void reconstruirSaldo(BigDecimal valor){
+        this.saldo = this.saldo.add(valor);
     }
 
     private void validarCriacao(
