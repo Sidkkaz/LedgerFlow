@@ -29,6 +29,7 @@ public class ContaFinanceira {
              saldo
         );
 
+        this.id = id;
         this.nome = nome;
         this.tipo =  tipo;
         this.saldoInicial = saldoInicial;
@@ -145,7 +146,7 @@ public class ContaFinanceira {
         return ativo;
     }
 
-    private void setAtivo(boolean ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 

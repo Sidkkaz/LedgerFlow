@@ -5,29 +5,21 @@ public enum ContaTipo{
     Poupanca(2);
 
     private final int valor;
+
     ContaTipo(int valor) {
         this.valor = valor;
     }
-    public int getValue() {
+    public static int getValue() {
         return valor;
     }
 
-    public static ContaTipo Select(int valor) {
-        if (valor == 1){
-            return ContaTipo.Corrente;
-        }else if (valor == 2){
-            return ContaTipo.Poupanca;
-        }else {
-            return null;
+    public static ContaTipo fromValue(int valor) {
+        for (ContaTipo contaTipo : values()) {
+            if(contaTipo.getValue() == valor){
+                return contaTipo;
+            }
         }
+        throw new IllegalArgumentException("Tipo invalido: " + valor);
     }
 
-    public static int WhoIs(ContaTipo t){
-        if (t == ContaTipo.Corrente){
-            return 1;
-        }
-        else if (t == ContaTipo.Poupanca){
-            return 2;
-        }else return 0;
-    }
 }

@@ -35,6 +35,7 @@ public class InitDataBase {
                     numero INTEGER NOT NULL,
                     conta_tipo INTEGER NOT NULL,
                     saldoInicial DOUBLE NOT NULL,
+                    saldo DOUBLE NOT NULL,
                     ativo BOOLEAN NOT NULL
                     )""";
 

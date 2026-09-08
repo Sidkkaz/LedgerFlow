@@ -9,26 +9,17 @@ public enum TipoLancamento {
     TipoLancamento(int valor) {
         this.valor = valor;
     }
-    public int getValue() {
+    public static int getValue() {
         return valor;
     }
 
-    public static TipoLancamento Select(int valor) {
-        if (valor == 1){
-            return TipoLancamento.Receita;
-        }else if (valor == 2){
-            return TipoLancamento.Despesa;
-        }else {
-            return null;
+    public static TipoLancamento fromValue(int valor) {
+        for (TipoLancamento tipo : values()) {
+            if(tipo.getValue() == valor){
+                return tipo;
+            }
         }
+        throw new IllegalArgumentException("Tipo invalido: " + valor);
     }
 
-    public static int WhoIs(TipoLancamento t){
-        if (t == TipoLancamento.Receita){
-            return 1;
-        }
-        else if (t == TipoLancamento.Despesa){
-            return 2;
-        }else return 0;
-    }
 }

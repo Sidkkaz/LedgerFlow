@@ -36,7 +36,7 @@ public class ContaFinanceiraService {
             }
         }
 
-        ContaFinanceira c = new ContaFinanceira(n, tipo, saldo);
+        ContaFinanceira c = new ContaFinanceira(null, n, tipo,null, saldo);
 
         repo.add(c);
     }
@@ -63,14 +63,14 @@ public class ContaFinanceiraService {
         }
     }
 
-    public static void AtualizarSaldo(double valor, int id){
+    public static void AtualizarSaldo(BigDecimal valor, int id){
         List<ContaFinanceira> list = ListarContas();
 
         if(list.isEmpty()) return;
 
         for(ContaFinanceira conta : list){
             if(conta.getId() == id){
-                conta.setSaldo(valor);
+                conta.depositar(valor);
                 repo.update(conta);
             }
         }

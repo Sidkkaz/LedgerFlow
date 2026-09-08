@@ -1,219 +1,179 @@
 package com.ledgerflow.repository;
 
-import com.ledgerflow.model.*;
+import com.ledgerflow.model.Categoria;
+import com.ledgerflow.model.ContaFinanceira;
+import com.ledgerflow.model.Lancamento;
+import com.ledgerflow.model.enums.ContaTipo;
 import com.ledgerflow.model.enums.TipoLancamento;
 
+import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LancamentoRepository implements Repository<Lancamento> {
 
-    String db ="JDBC:sqlite:app.db";
+    String db = "JDBC:sqlite:app.db";
 
     @Override
     public void add(Lancamento lancamento) {
         String sql = """
-                INSERT INTO Lancamento (dia, descricao, valor, tipo, categoria_id, conta_id, status_id, observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""";
+                INSERT INTO Lancamento
+                (dia, descricao, valor, tipo, categoria_id, conta_id, observacao)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """;
 
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
+        try (Connection conn = DriverManager.getConnection(db);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDate(1, Date.valueOf(lancamento.getData()));
-            stmt.setString(2,lancamento.getDescricao());
+            stmt.setString(2, lancamento.getDescricao());
             stmt.setBigDecimal(3, lancamento.getValor());
-            stmt.setInt(4, TipoLancamento.WhoIs(lancamento.getTipo()));
+            stmt.setInt(4, TipoLancamento.getValue());
             stmt.setLong(5, lancamento.getCategoria().getId());
             stmt.setLong(6, lancamento.getConta().getId());
-            stmt.setInt(7, StatusLancamento.WhoIs(lancamento.getStatus()));
-            stmt.setString(8, lancamento.getObservacao());
-
+            stmt.setString(7, lancamento.getObservacao());
 
             stmt.executeUpdate();
 
-        }catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void update(Lancamento lancamento) {
         String sql = """
-                    UPDATE Lancamento SET dia = ?, descricao = ?, valor = ?, tipo = ?, categoria_id = ?, conta_id = ?, status_id = ?, observacao = ? WHERE id = ?
-            """;
+                UPDATE Lancamento
+                SET dia = ?,
+                    descricao = ?,
+                    valor = ?,
+                    tipo = ?,
+                    categoria_id = ?,
+                    conta_id = ?,
+                    observacao = ?
+                WHERE id = ?
+                """;
 
         try (Connection conn = DriverManager.getConnection(db);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDate(1, Date.valueOf(lancamento.getData()));
-            stmt.setString(2,lancamento.getDescricao());
+            stmt.setString(2, lancamento.getDescricao());
             stmt.setBigDecimal(3, lancamento.getValor());
-            stmt.setInt(4, TipoLancamento.WhoIs(lancamento.getTipo()));
+            stmt.setInt(4, TipoLancamento.getValue());
             stmt.setLong(5, lancamento.getCategoria().getId());
             stmt.setLong(6, lancamento.getConta().getId());
-            stmt.setInt(7, StatusLancamento.WhoIs(lancamento.getStatus()));
-            stmt.setString(8, lancamento.getObservacao());
-            stmt.setInt(9, lancamento.getId());
+            stmt.setString(7, lancamento.getObservacao());
+            stmt.setLong(8, lancamento.getId());
 
             stmt.executeUpdate();
 
-        }catch (SQLException ex) {
-            throw new RuntimeException(ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void delete(Lancamento lancamento) {
         String sql = """
-                DELETE FROM Lancamento WHERE id = ?;""";
+                DELETE FROM Lancamento
+                WHERE id = ?
+                """;
 
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
+        try (Connection conn = DriverManager.getConnection(db);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, lancamento.getId());
+            stmt.setLong(1, lancamento.getId());
+
             stmt.executeUpdate();
 
-        }catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    public List<Lancamento> list() {return null;}
-    /*    String sql = "SELECT * FROM Lancamento";
+    public List<Lancamento> list() {
+        String sql = """
+        SELECT
+            l.id AS lancamento_id,
+            l.data,
+            l.descricao,
+            l.valor,
+            l.tipo_id AS lancamento_tipo,
+            l.observacao,
+
+            c.id AS categoria_id,
+            c.nome AS categoria_nome,
+
+            cf.id AS conta_id,
+            cf.nome AS conta_nome,
+            cf.agencia,
+            cf.numero,
+            cf.conta_tipo,
+            cf.saldoInicial,
+            cf.saldo,
+            cf.ativo
+
+        FROM Lancamento l
+        JOIN Categoria c ON c.id = l.categoria_id
+        JOIN ContaFinanceira cf ON cf.id = l.conta_id
+        """;
 
         List<Lancamento> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(db);
-            Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(sql)
-        ){
-            while(result.next()){
-                var id = result.getInt("id");
-                var date = result.getDate("dia");
-                var descricao = result.getString("descricao");
-                var valor = result.getBigDecimal("valor");
-                var tipo = result.getInt("tipo");
-                var categoria = result.getInt("categoria_id");
-                var conta = result.getInt("conta_id");
-                var status = result.getInt("status_id");
-                var observacao = result.getString("observacao");
+        try (Connection conn = DriverManager.getConnection(db);
+             Statement stmt = conn.createStatement();
+             ResultSet result = stmt.executeQuery(sql)) {
 
-                Lancamento lanc = new Lancamento(date.toLocalDate(), descricao,valor, TipoLancamento.Select(tipo), Categoria.Select(categoria), ContaFinanceira.create(conta), StatusLancamento.Select(status), observacao);
-                lanc.setId(id);
+            while (result.next()) {
 
-                lista.add(lanc);
+                long id = result.getLong("lancamento_id");
+                LocalDate data = result.getDate("data").toLocalDate();
+                String descricao = result.getString("descricao");
+                BigDecimal valor = result.getBigDecimal("valor");
+                int tipo = result.getInt("lancamento_tipo");
+                String observacao = result.getString("observacao");
+
+                Categoria categoria = new Categoria(
+                        result.getLong("categoria_id"),
+                        result.getString("categoria_nome"),
+                        TipoLancamento.fromValue(tipo)
+                );
+
+                ContaFinanceira conta = new ContaFinanceira(
+                        result.getLong("conta_id"),
+                        result.getString("conta_nome"),
+                        ContaTipo.fromValue(result.getInt("conta_tipo")),
+                        result.getBigDecimal("saldoInicial"),
+                        result.getBigDecimal("saldo")
+                );
+
+                conta.setAgencia(result.getInt("agencia"));
+                conta.setNumero(result.getInt("numero"));
+                conta.setAtivo(result.getBoolean("ativo"));
+
+                Lancamento lancamentos = new Lancamento(
+                        id,
+                        data,
+                        descricao,
+                        valor,
+                        TipoLancamento.fromValue(tipo),
+                        categoria,
+                        conta
+                );
+
+                lancamentos.setObservacao(observacao);
+
+                lista.add(lancamentos);
             }
 
-        }catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return lista;
     }
-
-    public Lancamento findById(int id) {
-        String sql = "SELECT * FROM Lancamento WHERE id = ?";
-
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
-            stmt.setInt(1, id);
-
-            try (ResultSet result = stmt.executeQuery(sql)){
-                if(result.next()) {
-                    var date = result.getDate("dia");
-                    var descricao = result.getString("descricao");
-                    var valor = result.getBigDecimal("valor");
-                    var tipo = result.getInt("tipo");
-                    var categoria = result.getInt("categoria_id");
-                    var conta = result.getInt("conta_id");
-                    var status = result.getInt("status_id");
-                    var observacao = result.getString("observacao");
-
-                    var lanc = new Lancamento(date.toLocalDate(), descricao, valor, TipoLancamento.Select(tipo), Categoria.Select(categoria), ContaFinanceira.create(conta), StatusLancamento.Select(status), observacao);
-                    lanc.setId(id);
-
-                    return lanc;
-                }
-            }
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public List<Lancamento> findByCategoria(Categoria categoria) {
-        String sql = "SELECT * FROM Lancamento WHERE categoria_id = ?";
-
-        List<Lancamento> lista = new ArrayList<>();
-
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
-            stmt.setLong(1, categoria.getId());
-
-            try(ResultSet result = stmt.executeQuery(sql)){
-                while (result.next()) {
-                    var id = result.getInt("id");
-                    var date = result.getDate("dia");
-                    var descricao = result.getString("descricao");
-                    var valor = result.getBigDecimal("valor");
-                    var tipo = result.getInt("tipo");
-                    var conta = result.getInt("conta_id");
-                    var status = result.getInt("status_id");
-                    var observacao = result.getString("observacao");
-
-                    Lancamento lanc = new Lancamento(date.toLocalDate(), descricao, valor, TipoLancamento.Select(tipo), categoria, ContaFinanceira.create(conta), StatusLancamento.Select(status), observacao);
-                    lanc.setId(id);
-
-                    lista.add(lanc);
-                }
-            }
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return lista;
-    }
-
-    public List<Lancamento> findByCategoria(ContaFinanceira conta) throws Exception {
-        String sql = "SELECT * FROM Lancamento WHERE categoria_id = ?";
-
-        List<Lancamento> lista = new ArrayList<>();
-
-        try(Connection conn = DriverManager.getConnection(db);
-            PreparedStatement stmt = conn.prepareStatement(sql)
-        ){
-            stmt.setInt(1, conta.getId());
-
-            try(ResultSet result = stmt.executeQuery(sql)){
-                while (result.next()) {
-                    var id = result.getInt("id");
-                    var date = result.getDate("dia");
-                    var descricao = result.getString("descricao");
-                    var valor = result.getBigDecimal("valor");
-                    var tipo = result.getInt("tipo");
-                    var cat = result.getInt("categoria_id");
-                    var status = result.getInt("status_id");
-                    var observacao = result.getString("observacao");
-
-                    Lancamento lanc = new Lancamento(date.toLocalDate(), descricao, valor, TipoLancamento.Select(tipo), Categoria.Select(cat), conta, StatusLancamento.Select(status), observacao);
-                    lanc.setId(id);
-
-                    lista.add(lanc);
-                }
-            }
-
-        }catch (SQLException e) {
-            throw new Exception("Tá fudido");
-        }
-
-        return lista;
-    }
-*/
 }
