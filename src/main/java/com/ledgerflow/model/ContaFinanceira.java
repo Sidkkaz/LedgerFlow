@@ -8,8 +8,8 @@ public class ContaFinanceira {
 
     private long id;
     private final String nome;
-    private int agencia;
-    private int numero;
+    private String agencia;
+    private String numero;
     private final ContaTipo tipo;
     private BigDecimal saldoInicial;
     private BigDecimal saldo;
@@ -106,19 +106,19 @@ public class ContaFinanceira {
         return nome;
     }
 
-    public int getAgencia() {
+    public String getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(int agencia) {
+    public void setAgencia(String agencia) {
         this.agencia = agencia;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

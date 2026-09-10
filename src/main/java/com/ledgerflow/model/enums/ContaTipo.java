@@ -9,11 +9,12 @@ public enum ContaTipo{
     ContaTipo(int valor) {
         this.valor = valor;
     }
-    public static int getValue() {
+
+    public int getValue() {
         return valor;
     }
 
-    public static ContaTipo fromValue(int valor) {
+    public ContaTipo fromValue(int valor) {
         for (ContaTipo contaTipo : values()) {
             if(contaTipo.getValue() == valor){
                 return contaTipo;

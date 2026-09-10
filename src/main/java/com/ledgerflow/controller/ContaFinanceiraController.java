@@ -1,6 +1,7 @@
 package com.ledgerflow.controller;
 
 import com.ledgerflow.model.ContaFinanceira;
+import com.ledgerflow.model.PopupWarning;
 import com.ledgerflow.model.enums.ContaTipo;
 import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Platform;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class ContaFinanceiraController {
@@ -40,6 +42,7 @@ public class ContaFinanceiraController {
 
     private final ObservableList<ContaFinanceira> listaTabela = FXCollections.observableArrayList();
     private ContaFinanceira contaSelecionado;
+    private ContaFinanceiraService contaService = new ContaFinanceiraService();
 
 
     @FXML
@@ -67,7 +70,7 @@ public class ContaFinanceiraController {
                 new PropertyValueFactory<>("ativo")
         );
 
-        listaTabela.setAll(ContaFinanceiraService.ListarContas());
+        listaTabela.setAll(contaService.ListarContas());
 
         tabelaConta.setItems(listaTabela);
 
@@ -98,18 +101,24 @@ public class ContaFinanceiraController {
 
         if (contaSelecionado != null && checkBoxAtiva.isSelected()){
 
-            if(PopupStatusConta()) {
-                ContaFinanceiraService.AtivarConta(contaSelecionado.getId());
+            if(PopupWarning.confirmation(
+                    "Alterar a Conta",
+                    "Você realmente deseja ativar a conta?"
+            )) {
+                contaService.AtivarConta(contaSelecionado.getId());
                 tabelaConta.getSelectionModel().clearSelection();
-                listaTabela.setAll(ContaFinanceiraService.ListarContas());
+                listaTabela.setAll(contaService.ListarContas());
             }
 
         }else if (contaSelecionado != null && !checkBoxAtiva.isSelected()) {
 
-            if(PopupStatusConta()) {
-                ContaFinanceiraService.DesativarConta(contaSelecionado.getId());
+            if(PopupWarning.confirmation(
+                    "Alterar a Conta",
+                    "Você realmente deseja desativar a conta?"
+            )) {
+                contaService.DesativarConta(contaSelecionado.getId());
                 tabelaConta.getSelectionModel().clearSelection();
-                listaTabela.setAll(ContaFinanceiraService.ListarContas());
+                listaTabela.setAll(contaService.ListarContas());
             }
 
         }else{
@@ -135,7 +144,7 @@ public class ContaFinanceiraController {
         contaSelecionado = null;
 
         tabelaConta.getSelectionModel().clearSelection();
-        listaTabela.setAll(ContaFinanceiraService.ListarContas());
+        listaTabela.setAll(contaService.ListarContas());
     }
 
     public void CriarConta(){
@@ -147,39 +156,32 @@ public class ContaFinanceiraController {
         ContaTipo tipo = tipoConta.getValue();
         boolean ativo = checkBoxAtiva.isSelected();
 
-        if (nome.isBlank() ||
+        if (
+                nome.isBlank() ||
                 agencia.isBlank() ||
                 numero.isBlank() ||
                 valor.isBlank() ||
-                tipo == null) {
-
+                tipo == null
+        ){
+            PopupWarning.warning(
+                    "Dados Faltantes",
+                    "Para salvar a conta, deve-ser preencher corretamente o formulario"
+            );
             return;
         }
+        
+        BigDecimal valorConvertido =  new BigDecimal(valor);
 
-        int agenciaConvertida = Integer.parseInt(agencia);
-        int numeroConvertido = Integer.parseInt(numero);
-        //BigDecimal valorConvertido = (BigDecimal) valor;
-
-        //ContaFinanceiraService.CriarConta(nome, agenciaConvertida, numeroConvertido, tipo, valorConvertido, ativo);
+        contaService.CriarConta(
+                nome,
+                agencia,
+                numero,
+                tipo,
+                valorConvertido
+        );
     }
 
-    public boolean PopupStatusConta(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
-        alert.setTitle("Confirmar Alteração");
-        alert.setHeaderText("Alterar Status");
-        alert.setContentText("Você deseja alterar o status da conta?");
-
-        ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
-        ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
-        Optional<ButtonType> result = alert.showAndWait();
-
-        return result.isPresent() && result.get() == buttonTypeOk;
-
-    }
-
+    //region Close/Maximize
     public void Close(){
         Platform.exit();
     }
@@ -193,5 +195,7 @@ public class ContaFinanceiraController {
         Stage stage = (Stage) maximize.getScene().getWindow();
         stage.setMaximized(!stage.isMaximized());
     }
+    //endregion
 }
 //Aonde eu tava com a cabeça para começar essa palhaçada?
+//Siceramente? Ainda não sei.

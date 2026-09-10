@@ -1,6 +1,7 @@
 package com.ledgerflow.service;
 
 import com.ledgerflow.model.ContaFinanceira;
+import com.ledgerflow.model.PopupWarning;
 import com.ledgerflow.model.enums.ContaTipo;
 import com.ledgerflow.repository.ContaFinanceiraRepository;
 import com.ledgerflow.repository.Repository;
@@ -10,13 +11,13 @@ import java.util.List;
 
 public class ContaFinanceiraService {
 
-    private static final Repository<ContaFinanceira> repo = new ContaFinanceiraRepository();
+    private final Repository<ContaFinanceira> repo = new ContaFinanceiraRepository();
 
-    public static List<ContaFinanceira> ListarContas(){
+    public  List<ContaFinanceira> ListarContas(){
         return repo.list();
     }
 
-    public static ContaFinanceira BuscarConta(int id){
+    public  ContaFinanceira BuscarConta(long id){
         List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
@@ -27,43 +28,65 @@ public class ContaFinanceiraService {
         return null;
     }
 
-    public static void CriarConta(String n, int a, int num, ContaTipo tipo, BigDecimal saldo, boolean bool){
+    public  void CriarConta(
+            String n,
+            String agencia,
+            String num,
+            ContaTipo tipo,
+            BigDecimal saldoI
+    ){
         List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
             if(conta.getNome().equals(n)){
+                PopupWarning.warning(
+                        "Conta duplicada!",
+                        "Essa conta já existe no sistema"
+                );
                 return;
             }
         }
 
-        ContaFinanceira c = new ContaFinanceira(null, n, tipo,null, saldo);
+        ContaFinanceira c = new ContaFinanceira(null,
+                n,
+                tipo,
+                saldoI,
+                BigDecimal.ZERO
+        );
+
+        if(agencia != null && num != null){
+            c.setAgencia(agencia);
+            c.setNumero(num);
+        }
+        
+        c.ativar();
 
         repo.add(c);
     }
 
-    public static void DesativarConta(int id){
+    public  void DesativarConta(long id){
         List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
             if(conta.getId() == id){
-                conta.setAtivo(false);
+                conta.desativar();
                 repo.update(conta);
             }
         }
     }
 
-    public static void AtivarConta(int id){
+    public  void AtivarConta(long id){
         List<ContaFinanceira> list = ListarContas();
 
         for(ContaFinanceira conta : list){
             if(conta.getId() == id){
-                conta.setAtivo(true);
+                conta.ativar();
                 repo.update(conta);
             }
         }
     }
 
-    public static void AtualizarSaldo(BigDecimal valor, int id){
+    public  void AtualizarSaldo(BigDecimal valor, long id){
         List<ContaFinanceira> list = ListarContas();
 
         if(list.isEmpty()) return;

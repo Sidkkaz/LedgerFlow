@@ -78,6 +78,7 @@ public class LoginController {
 
     }
 
+    //region Close/Minimize
     public void Close(){
         Platform.exit();
     }
@@ -86,5 +87,6 @@ public class LoginController {
         Stage stage = (Stage) login.getScene().getWindow();
         stage.setIconified(true);
     }
+    //endregion
 
 }

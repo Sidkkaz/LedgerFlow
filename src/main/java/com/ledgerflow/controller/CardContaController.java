@@ -21,7 +21,9 @@ public class CardContaController {
     public void setConta(ContaFinanceira c){
         nomeConta.setText(c.getNome());
         saldoConta.setText(MoedaFormatador.Moeda(c.getSaldo()));
-        despesasConta.setText(MoedaFormatador.Moeda(new BigDecimal(0)));
-        receitasConta.setText(MoedaFormatador.Moeda(new BigDecimal(0)));
+
+        //provisorio, ainda não tenho historico de entrada e saidas
+        despesasConta.setText(MoedaFormatador.Moeda(BigDecimal.ZERO));
+        receitasConta.setText(MoedaFormatador.Moeda(BigDecimal.ZERO));
     }
 }

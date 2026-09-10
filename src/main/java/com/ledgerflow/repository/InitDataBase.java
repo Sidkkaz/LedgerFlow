@@ -1,9 +1,6 @@
 package com.ledgerflow.repository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class InitDataBase {
     String db ="JDBC:sqlite:app.db";
@@ -73,6 +70,16 @@ public class InitDataBase {
 
         stmt = conn.createStatement();
         stmt.execute(CriarTabelaUsuario);
+
+        String InserirCategoria = """
+                INSERT INTO Categoria (nome)
+                VALUES (?)
+        """;
+
+        PreparedStatement stmtinsert = conn.prepareStatement(InserirCategoria);
+        stmtinsert.setString(1, "Indefinido");
+
+        stmtinsert.executeUpdate(InserirCategoria);
 
     }
 }

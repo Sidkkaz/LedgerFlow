@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
+    ContaTipo ct;
     String db = "JDBC:sqlite:app.db";
 
     @Override
@@ -23,9 +24,9 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, c.getNome());
-            stmt.setInt(2, c.getAgencia());
-            stmt.setInt(3, c.getNumero());
-            stmt.setInt(4, ContaTipo.getValue());
+            stmt.setString(2, c.getAgencia());
+            stmt.setString(3, c.getNumero());
+            stmt.setInt(4, ct.getValue());
             stmt.setBigDecimal(5, c.getSaldoInicial());
             stmt.setBigDecimal(6, c.getSaldo());
             stmt.setBoolean(7, c.isAtivo());
@@ -78,8 +79,8 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
                 var id = result.getLong("id");
                 var nome = result.getString("nome");
-                var agencia = result.getInt("agencia");
-                var numero = result.getInt("numero");
+                var agencia = result.getString("agencia");
+                var numero = result.getString("numero");
                 var contaTipo = result.getInt("conta_tipo");
                 var saldoInicial = result.getBigDecimal("saldoInicial");
                 var saldo = result.getBigDecimal("saldo");
@@ -88,7 +89,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
                 ContaFinanceira u = new ContaFinanceira(
                         id,
                         nome,
-                        ContaTipo.fromValue(contaTipo),
+                        ct.fromValue(contaTipo),
                         saldoInicial,
                         saldo
                 );

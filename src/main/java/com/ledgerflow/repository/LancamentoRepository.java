@@ -14,6 +14,8 @@ import java.util.List;
 
 public class LancamentoRepository implements Repository<Lancamento> {
 
+    TipoLancamento tl;
+    ContaTipo ct;
     String db = "JDBC:sqlite:app.db";
 
     @Override
@@ -30,7 +32,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
             stmt.setDate(1, Date.valueOf(lancamento.getData()));
             stmt.setString(2, lancamento.getDescricao());
             stmt.setBigDecimal(3, lancamento.getValor());
-            stmt.setInt(4, TipoLancamento.getValue());
+            stmt.setInt(4, tl.getValue());
             stmt.setLong(5, lancamento.getCategoria().getId());
             stmt.setLong(6, lancamento.getConta().getId());
             stmt.setString(7, lancamento.getObservacao());
@@ -62,7 +64,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
             stmt.setDate(1, Date.valueOf(lancamento.getData()));
             stmt.setString(2, lancamento.getDescricao());
             stmt.setBigDecimal(3, lancamento.getValor());
-            stmt.setInt(4, TipoLancamento.getValue());
+            stmt.setInt(4, tl.getValue());
             stmt.setLong(5, lancamento.getCategoria().getId());
             stmt.setLong(6, lancamento.getConta().getId());
             stmt.setString(7, lancamento.getObservacao());
@@ -140,13 +142,13 @@ public class LancamentoRepository implements Repository<Lancamento> {
                 Categoria categoria = new Categoria(
                         result.getLong("categoria_id"),
                         result.getString("categoria_nome"),
-                        TipoLancamento.fromValue(tipo)
+                        tl.fromValue(tipo)
                 );
 
                 ContaFinanceira conta = new ContaFinanceira(
                         result.getLong("conta_id"),
                         result.getString("conta_nome"),
-                        ContaTipo.fromValue(result.getInt("conta_tipo")),
+                        ct.fromValue(result.getInt("conta_tipo")),
                         result.getBigDecimal("saldoInicial"),
                         result.getBigDecimal("saldo")
                 );
@@ -160,7 +162,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
                         data,
                         descricao,
                         valor,
-                        TipoLancamento.fromValue(tipo),
+                        tl.fromValue(tipo),
                         categoria,
                         conta
                 );

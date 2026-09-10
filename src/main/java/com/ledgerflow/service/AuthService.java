@@ -21,7 +21,10 @@ public class AuthService {
 
         var user = userService.findByEmail(email);
         if (user == null) {
-            PopupWarning.warning("Sem cadastro","Email não encontrado");
+            PopupWarning.warning(
+                    "Sem cadastro",
+                    "Email não encontrado"
+            );
             return false;
         }
 
@@ -29,6 +32,11 @@ public class AuthService {
             userAtual = user;
             return true;
         }
+
+        PopupWarning.warning(
+                "Senha incorreta",
+                "Senha incorreta, tente novamente"
+        );
 
         return false;
     }
@@ -38,13 +46,22 @@ public class AuthService {
 
         var user = userService.findByEmail(email);
         if (user != null) {
-            PopupWarning.warning("Cadastro Existente","O email informado já possui cadastrado no sistema");
+            PopupWarning.warning(
+                    "Cadastro Existente",
+                    "O email informado já possui cadastrado no sistema"
+            );
             return false;
         }
 
         var senhaHash = sha256Hex(senha);
 
-        return userService.Adicionar(new Usuario(nome, email, senhaHash));
+        return userService.Adicionar(
+                new Usuario(
+                        null,
+                        nome,
+                        email,
+                        senhaHash
+                ));
     }
 
     public Usuario getUserAtual() {

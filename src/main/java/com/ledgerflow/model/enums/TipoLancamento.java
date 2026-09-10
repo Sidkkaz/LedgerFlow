@@ -9,11 +9,12 @@ public enum TipoLancamento {
     TipoLancamento(int valor) {
         this.valor = valor;
     }
-    public static int getValue() {
+
+    public int getValue() {
         return valor;
     }
 
-    public static TipoLancamento fromValue(int valor) {
+    public TipoLancamento fromValue(int valor) {
         for (TipoLancamento tipo : values()) {
             if(tipo.getValue() == valor){
                 return tipo;

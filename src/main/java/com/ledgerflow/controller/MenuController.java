@@ -5,7 +5,6 @@ import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +22,8 @@ public class MenuController {
     private Button maximize;
     @FXML
     private HBox contaContainer;
+
+    private final ContaFinanceiraService contaService = new ContaFinanceiraService();
 
     public void ContasConteiner(List<ContaFinanceira> contas) throws IOException {
 
@@ -43,20 +44,22 @@ public class MenuController {
     }
 
     public void initialize() throws IOException {
-        ContasConteiner(ContaFinanceiraService.ListarContas());
+        ContasConteiner(contaService.ListarContas());
     }
 
-    public void Close() {
+    //region Close/Maximize
+    public void Close(){
         Platform.exit();
     }
 
-    public void Minimize() {
+    public void Minimize(){
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
     }
 
-    public void Maximize() {
+    public void Maximize(){
         Stage stage = (Stage) maximize.getScene().getWindow();
         stage.setMaximized(!stage.isMaximized());
     }
+    //endregion
 }

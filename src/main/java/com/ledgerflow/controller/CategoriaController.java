@@ -1,6 +1,7 @@
 package com.ledgerflow.controller;
 
 import com.ledgerflow.model.Categoria;
+import com.ledgerflow.model.PopupWarning;
 import com.ledgerflow.model.enums.TipoLancamento;
 import com.ledgerflow.service.CategoriaService;
 import javafx.application.Platform;
@@ -71,7 +72,10 @@ public class CategoriaController {
 
         if (categoriaSelecionado != null && tipoCategoria.valueProperty().getValue() != categoriaSelecionado.getTipo()){
 
-            if(PopupTipoCategoria()) {
+            if(PopupWarning.confirmation(
+                    "Alterar Categoria",
+                    "Alterando o tipo da categoria vai haver mudanças em dados já categorizados"
+            )) {
 
                 categoriaSelecionado.setTipo(tipoCategoria.getValue());
                 CategoriaService.AtualizarTipoCategoria(categoriaSelecionado);
@@ -104,29 +108,17 @@ public class CategoriaController {
         TipoLancamento tipo = tipoCategoria.getValue();
 
         if (nome.isBlank() || tipo == null) {
+            PopupWarning.warning(
+                    "Valor Invalido",
+                    "Valores incompletos ou invalidos para salvar a categoria"
+            );
             return;
         }
 
-        CategoriaService.CriarCategoria(new Categoria(nome, tipo));
+        CategoriaService.CriarCategoria(new Categoria(null, nome, tipo));
     }
 
-    public boolean PopupTipoCategoria(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
-        alert.setTitle("Confirmar Alteração");
-        alert.setHeaderText("Você deseja alterar o tipo da categoria?");
-        alert.setContentText("Alterando o tipo da categoria vai haver mudanças em dados já categorizados");
-
-        ButtonType buttonTypeOk = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
-        ButtonType buttonTypeNo = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeNo);
-        Optional<ButtonType> result = alert.showAndWait();
-
-        return result.isPresent() && result.get() == buttonTypeOk;
-
-    }
-
+    //region Close/Maximize
     public void Close(){
         Platform.exit();
     }
@@ -140,5 +132,5 @@ public class CategoriaController {
         Stage stage = (Stage) maximize.getScene().getWindow();
         stage.setMaximized(!stage.isMaximized());
     }
-
+    //endregion
 }

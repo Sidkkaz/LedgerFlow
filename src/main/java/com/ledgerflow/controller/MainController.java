@@ -55,7 +55,8 @@ public class MainController {
     }
 
     public void Sair(){
-        Platform.exit();
+        nav = new Navegador(content);
+        nav.AlterarView("Login");
     }
 
 
