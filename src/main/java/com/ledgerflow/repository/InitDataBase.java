@@ -83,13 +83,13 @@ public class InitDataBase {
 
             String InserirUsuario = """
                             INSERT INTO Usuario (nome, email, senha, ativo)
-                            VALUES (?)
+                            VALUES (?, ?, ?, ?)
                     """;
 
             PreparedStatement stmtUser = conn.prepareStatement(InserirUsuario);
             stmtUser.setString(1, "Heitor Lindão");
             stmtUser.setString(2, "adm@ledgerflow.com");
-            stmtUser.setString(3, "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8");
+            stmtUser.setString(3, "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8");
             stmtUser.setBoolean(4, true);
 
             stmtUser.executeUpdate();
