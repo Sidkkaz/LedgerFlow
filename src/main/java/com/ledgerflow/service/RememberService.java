@@ -7,9 +7,7 @@ import java.nio.file.Paths;
 
 public class RememberService {
 
-    private static String remember;
-
-    public static void CreateRemember() throws IOException {
+    public static void CreateRemember(String remember) throws IOException {
         Path path = Paths.get("./remember.txt");
 
         if(Files.notExists(path)){
@@ -23,8 +21,10 @@ public class RememberService {
     public static String Remember() throws IOException {
         Path path = Paths.get("./remember.txt");
 
+        String text;
+
         if(Files.exists(path)) {
-            return remember = Files.readString(path);
+            return text = Files.readString(path);
         }
 
         return null;

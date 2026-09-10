@@ -1,15 +1,15 @@
 package com.ledgerflow.controller;
 
-import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.Navegador;
-
-import java.io.IOException;
 
 public class MainController {
 
@@ -54,9 +54,20 @@ public class MainController {
         nav.AlterarView("Configuracoes");
     }
 
-    public void Sair(){
-        nav = new Navegador(content);
-        nav.AlterarView("Login");
+    public void Sair(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/view/Login.fxml")
+        );
+
+        Scene scene = new Scene(loader.load());
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setResizable(false);
+        scene.setFill(Color.TRANSPARENT);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
 

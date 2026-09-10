@@ -40,15 +40,14 @@ public class LoginController {
         }
 
         if(auth.login(email, password)){
-            AbrirSistema(event);
-        }else {
-            PopupWarning.warning("Login Incorreto", "Email ou Senha incorreto");
-            return;
-        }
 
-        if(checkBox.isSelected()){
-            remember = email;
-            RememberService.CreateRemember();
+            if(checkBox.isSelected()){
+                remember = email;
+                RememberService.CreateRemember(remember);
+            }
+
+            AbrirSistema(event);
+
         }
     }
 

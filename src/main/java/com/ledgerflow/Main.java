@@ -29,7 +29,7 @@ public class Main extends Application {
         stage.show();
     }
     public static void main(String[] args) throws Exception {
-        InitDataBase db = new InitDataBase();
+        InitDataBase inicializacaoDataBase = new InitDataBase();
         launch();
     }
 
