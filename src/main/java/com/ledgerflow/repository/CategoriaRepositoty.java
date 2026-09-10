@@ -9,8 +9,7 @@ import java.util.List;
 
 public class CategoriaRepositoty implements Repository<Categoria> {
 
-    TipoLancamento tl;
-    String db = "JDBC:sqlite:app.db";
+    String db = DbConfig.bancoConexao;
 
     @Override
     public void add(Categoria categoria) {
@@ -95,7 +94,7 @@ public class CategoriaRepositoty implements Repository<Categoria> {
                 Categoria categoria = new Categoria(
                         id,
                         nome,
-                        tl.fromValue(tipo)
+                        TipoLancamento.fromValue(tipo)
                 );
 
                 categoria.setAtivo(ativo);

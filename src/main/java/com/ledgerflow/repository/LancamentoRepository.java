@@ -15,8 +15,7 @@ import java.util.List;
 public class LancamentoRepository implements Repository<Lancamento> {
 
     TipoLancamento tl;
-    ContaTipo ct;
-    String db = "JDBC:sqlite:app.db";
+    String db = DbConfig.bancoConexao;
 
     @Override
     public void add(Lancamento lancamento) {
@@ -101,7 +100,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
         String sql = """
         SELECT
             l.id AS lancamento_id,
-            l.data,
+            l.dia,
             l.descricao,
             l.valor,
             l.tipo_id AS lancamento_tipo,
@@ -133,7 +132,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
             while (result.next()) {
 
                 long id = result.getLong("lancamento_id");
-                LocalDate data = result.getDate("data").toLocalDate();
+                LocalDate data = result.getDate("dia").toLocalDate();
                 String descricao = result.getString("descricao");
                 BigDecimal valor = result.getBigDecimal("valor");
                 int tipo = result.getInt("lancamento_tipo");
@@ -142,27 +141,33 @@ public class LancamentoRepository implements Repository<Lancamento> {
                 Categoria categoria = new Categoria(
                         result.getLong("categoria_id"),
                         result.getString("categoria_nome"),
-                        tl.fromValue(tipo)
+                        TipoLancamento.fromValue(tipo)
                 );
 
                 ContaFinanceira conta = new ContaFinanceira(
                         result.getLong("conta_id"),
                         result.getString("conta_nome"),
-                        ct.fromValue(result.getInt("conta_tipo")),
+                        ContaTipo.fromValue(result.getInt("conta_tipo")),
                         result.getBigDecimal("saldoInicial"),
                         result.getBigDecimal("saldo")
                 );
 
                 conta.setAgencia(result.getString("agencia"));
                 conta.setNumero(result.getString("numero"));
-                conta.setAtivo(result.getBoolean("ativo"));
+                var ativo = (result.getBoolean("ativo"));
+
+                if (ativo) {
+                    conta.ativar();
+                }else {
+                    conta.desativar();
+                }
 
                 Lancamento lancamentos = new Lancamento(
                         id,
                         data,
                         descricao,
                         valor,
-                        tl.fromValue(tipo),
+                        TipoLancamento.fromValue(tipo),
                         categoria,
                         conta
                 );

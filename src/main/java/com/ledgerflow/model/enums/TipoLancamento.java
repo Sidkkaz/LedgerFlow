@@ -14,7 +14,7 @@ public enum TipoLancamento {
         return valor;
     }
 
-    public TipoLancamento fromValue(int valor) {
+    public static TipoLancamento fromValue(int valor) {
         for (TipoLancamento tipo : values()) {
             if(tipo.getValue() == valor){
                 return tipo;

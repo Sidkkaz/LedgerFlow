@@ -15,7 +15,7 @@ public class Categoria {
         this.tipo = tipo;
     }
 
-    public static Categoria indefindo(){
+    public static Categoria indefinido(){
         return new Categoria(1L, "Indefinido", null);
     }
 

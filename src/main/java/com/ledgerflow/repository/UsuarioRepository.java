@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UsuarioRepository implements Repository<Usuario> {
 
-    String db = "JDBC:sqlite:app.db";
+    String db = DbConfig.bancoConexao;
 
     @Override
     public void add(Usuario usuario) {

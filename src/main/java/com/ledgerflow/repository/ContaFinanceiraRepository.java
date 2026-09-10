@@ -10,7 +10,7 @@ import java.util.List;
 public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
     ContaTipo ct;
-    String db = "JDBC:sqlite:app.db";
+    String db = DbConfig.bancoConexao;
 
     @Override
     public void add(ContaFinanceira c) {
@@ -89,14 +89,19 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
                 ContaFinanceira u = new ContaFinanceira(
                         id,
                         nome,
-                        ct.fromValue(contaTipo),
+                        ContaTipo.fromValue(contaTipo),
                         saldoInicial,
                         saldo
                 );
 
                 u.setAgencia(agencia);
                 u.setNumero(numero);
-                u.setAtivo(ativo);
+
+                if (ativo) {
+                    u.ativar();
+                }else {
+                    u.desativar();
+                }
 
                 lista.add(u);
             }

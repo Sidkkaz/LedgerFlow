@@ -8,17 +8,17 @@ import java.util.List;
 
 public class CategoriaService {
 
-    private static final Repository<Categoria> repo = new CategoriaRepositoty();
+    private final Repository<Categoria> repo = new CategoriaRepositoty();
 
-    public static void CriarCategoria(Categoria categoria) {
+    public void CriarCategoria(Categoria categoria) {
         repo.add(categoria);
     }
 
-    public static void AtualizarTipoCategoria(Categoria categoria) {
+    public void AtualizarTipoCategoria(Categoria categoria) {
         repo.update(categoria);
     }
 
-    public static List<Categoria> ListarCategorias() {
+    public List<Categoria> ListarCategorias() {
         return repo.list();
     }
 }

@@ -35,6 +35,7 @@ public class CategoriaController {
 
     private final ObservableList<Categoria> lista = FXCollections.observableArrayList();
     private Categoria categoriaSelecionado;
+    private CategoriaService categoriaService = new CategoriaService();
 
     public void initialize(){
 
@@ -48,7 +49,7 @@ public class CategoriaController {
                 new PropertyValueFactory<>("tipo")
         );
 
-        lista.setAll(CategoriaService.ListarCategorias());
+        lista.setAll(categoriaService.ListarCategorias());
 
         tabelaCategoria.setItems(lista);
 
@@ -78,9 +79,9 @@ public class CategoriaController {
             )) {
 
                 categoriaSelecionado.setTipo(tipoCategoria.getValue());
-                CategoriaService.AtualizarTipoCategoria(categoriaSelecionado);
+                categoriaService.AtualizarTipoCategoria(categoriaSelecionado);
                 tabelaCategoria.getSelectionModel().clearSelection();
-                lista.setAll(CategoriaService.ListarCategorias());
+                lista.setAll(categoriaService.ListarCategorias());
 
             }
 
@@ -100,7 +101,7 @@ public class CategoriaController {
         categoriaSelecionado = null;
 
         tabelaCategoria.getSelectionModel().clearSelection();
-        lista.setAll(CategoriaService.ListarCategorias());
+        lista.setAll(categoriaService.ListarCategorias());
     }
 
     public void criarCategoria(){
@@ -115,7 +116,7 @@ public class CategoriaController {
             return;
         }
 
-        CategoriaService.CriarCategoria(new Categoria(null, nome, tipo));
+        categoriaService.CriarCategoria(new Categoria(null, nome, tipo));
     }
 
     //region Close/Maximize

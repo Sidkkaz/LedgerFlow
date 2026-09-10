@@ -14,7 +14,7 @@ public enum ContaTipo{
         return valor;
     }
 
-    public ContaTipo fromValue(int valor) {
+    public static ContaTipo fromValue(int valor) {
         for (ContaTipo contaTipo : values()) {
             if(contaTipo.getValue() == valor){
                 return contaTipo;

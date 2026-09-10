@@ -37,7 +37,7 @@ public class Lancamento {
             this.descricao = descricao;
             this.valor = valor;
             this.tipo = tipo;
-            this.categoria = categoria == null ? Categoria.indefindo() : categoria;
+            this.categoria = categoria == null ? Categoria.indefinido() : categoria;
             this.conta = conta;
     }
 
@@ -61,9 +61,7 @@ public class Lancamento {
         }
 
         if (valor.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException(
-                    "Valor deve ser maior que zero"
-            );
+            throw new IllegalArgumentException("Valor deve ser maior que zero");
         }
 
         if (tipo == null) {
@@ -71,9 +69,7 @@ public class Lancamento {
         }
 
         if (conta == null) {
-            throw new IllegalArgumentException(
-                    "Conta financeira é obrigatória"
-            );
+            throw new IllegalArgumentException("Conta financeira é obrigatória");
         }
 
     }
@@ -135,7 +131,7 @@ public class Lancamento {
 
     public void setObservacao(String observacao) {
         if (observacao == null || observacao.isBlank()) {
-            throw new IllegalArgumentException("Descrição é obrigatória");
+            throw new IllegalArgumentException("Observação não pode ser nula");
         }
         this.observacao = observacao;
     }
