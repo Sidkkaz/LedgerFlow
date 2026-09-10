@@ -153,8 +153,8 @@ public class LancamentoRepository implements Repository<Lancamento> {
                         result.getBigDecimal("saldo")
                 );
 
-                conta.setAgencia(result.getInt("agencia"));
-                conta.setNumero(result.getInt("numero"));
+                conta.setAgencia(result.getString("agencia"));
+                conta.setNumero(result.getString("numero"));
                 conta.setAtivo(result.getBoolean("ativo"));
 
                 Lancamento lancamentos = new Lancamento(

@@ -146,10 +146,6 @@ public class ContaFinanceira {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
 //endregion
 }
 
