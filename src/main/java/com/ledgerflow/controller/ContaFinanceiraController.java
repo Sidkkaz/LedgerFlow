@@ -105,7 +105,7 @@ public class ContaFinanceiraController {
                     "Alterar a Conta",
                     "Você realmente deseja ativar a conta?"
             )) {
-                contaService.AtivarConta(contaSelecionado.getId());
+                contaService.AtivarConta(contaSelecionado);
                 tabelaConta.getSelectionModel().clearSelection();
                 listaTabela.setAll(contaService.ListarContas());
             }
@@ -116,7 +116,7 @@ public class ContaFinanceiraController {
                     "Alterar a Conta",
                     "Você realmente deseja desativar a conta?"
             )) {
-                contaService.DesativarConta(contaSelecionado.getId());
+                contaService.DesativarConta(contaSelecionado);
                 tabelaConta.getSelectionModel().clearSelection();
                 listaTabela.setAll(contaService.ListarContas());
             }

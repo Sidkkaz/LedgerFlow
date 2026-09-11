@@ -13,22 +13,16 @@ public class ContaFinanceiraService {
 
     private final Repository<ContaFinanceira> repo = new ContaFinanceiraRepository();
 
-    public  List<ContaFinanceira> ListarContas(){
+    public List<ContaFinanceira> ListarContas(){
         return repo.list();
     }
 
-    public  ContaFinanceira BuscarConta(long id){
-        List<ContaFinanceira> list = ListarContas();
-
-        for(ContaFinanceira conta : list){
-            if(conta.getId() == id){
-                return conta;
-            }
-        }
+    public ContaFinanceira BuscarPorId(long id){
         return null;
+        //Vou criar o metodo no repositorio dps
     }
 
-    public  void CriarConta(
+    public void CriarConta(
             String n,
             String agencia,
             String num,
@@ -64,39 +58,14 @@ public class ContaFinanceiraService {
         repo.add(c);
     }
 
-    public  void DesativarConta(long id){
-        List<ContaFinanceira> list = ListarContas();
-
-        for(ContaFinanceira conta : list){
-            if(conta.getId() == id){
-                conta.desativar();
-                repo.update(conta);
-            }
-        }
+    public void DesativarConta(ContaFinanceira conta){
+        conta.desativar();
+        repo.update(conta);
     }
 
-    public  void AtivarConta(long id){
-        List<ContaFinanceira> list = ListarContas();
-
-        for(ContaFinanceira conta : list){
-            if(conta.getId() == id){
-                conta.ativar();
-                repo.update(conta);
-            }
-        }
-    }
-
-    public  void AtualizarSaldo(BigDecimal valor, long id){
-        List<ContaFinanceira> list = ListarContas();
-
-        if(list.isEmpty()) return;
-
-        for(ContaFinanceira conta : list){
-            if(conta.getId() == id){
-                conta.depositar(valor);
-                repo.update(conta);
-            }
-        }
+    public void AtivarConta(ContaFinanceira conta){
+        conta.ativar();
+        repo.update(conta);
     }
 
 }
