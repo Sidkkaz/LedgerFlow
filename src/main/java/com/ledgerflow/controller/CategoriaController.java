@@ -27,11 +27,11 @@ public class CategoriaController {
     @FXML
     private TableColumn<Categoria, String> colunaNome;
     @FXML
+    private TableColumn<TipoLancamento, Integer> colunaTipo;
+    @FXML
     private Button minimize;
     @FXML
     private Button maximize;
-    @FXML
-    private TableColumn<TipoLancamento, Integer> colunaTipo;
 
     private final ObservableList<Categoria> lista = FXCollections.observableArrayList();
     private Categoria categoriaSelecionado;
@@ -39,7 +39,8 @@ public class CategoriaController {
 
     public void initialize(){
 
-        tipoCategoria.getItems().setAll(TipoLancamento.values());
+        tipoCategoria.getItems().add(TipoLancamento.Receita);
+        tipoCategoria.getItems().add(TipoLancamento.Despesa);
 
 
         colunaNome.setCellValueFactory(

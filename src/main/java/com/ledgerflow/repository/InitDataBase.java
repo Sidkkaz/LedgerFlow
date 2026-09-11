@@ -71,19 +71,32 @@ public class InitDataBase {
             stmt = conn.createStatement();
             stmt.execute(CriarTabelaUsuario);
 
-            String InserirCategoria = """
-                            INSERT INTO Categoria (nome)
-                            VALUES (?)
-                    """;
+            String inserirCategoria = """
+                INSERT INTO Categoria (nome, tipo_id)
+                SELECT ?, ?
+                WHERE NOT EXISTS (
+                    SELECT 1
+                    FROM Categoria
+                    WHERE nome = ?
+                )
+        """;
 
-            PreparedStatement stmtinsert = conn.prepareStatement(InserirCategoria);
-            stmtinsert.setString(1, "Indefinido");
+            PreparedStatement stmtInsert = conn.prepareStatement(inserirCategoria);
 
-            stmtinsert.executeUpdate();
+            stmtInsert.setString(1, "Indefinido");
+            stmtInsert.setInt(2, 4);
+            stmtInsert.setString(3, "Indefinido");
+
+            stmtInsert.executeUpdate();
 
             String InserirUsuario = """
                             INSERT INTO Usuario (nome, email, senha, ativo)
-                            VALUES (?, ?, ?, ?)
+                            SELECT ?, ?, ?, ?
+                            WHERE NOT EXISTS (
+                                SELECT 1
+                                FROM Usuario
+                                WHERE email = ?
+                            )
                     """;
 
             PreparedStatement stmtUser = conn.prepareStatement(InserirUsuario);
@@ -91,6 +104,7 @@ public class InitDataBase {
             stmtUser.setString(2, "adm@ledgerflow.com");
             stmtUser.setString(3, "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8");
             stmtUser.setBoolean(4, true);
+            stmtUser.setString(5, "adm@ledgerflow.com");
 
             stmtUser.executeUpdate();
             //não me enche o saco, tive de fazer input manual para teste

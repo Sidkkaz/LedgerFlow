@@ -54,7 +54,10 @@
                <Button layoutX="10.0" layoutY="67.0" mnemonicParsing="false" onAction="#AbrirLancamento" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="LANÇAMENTOS" />
                <Button layoutX="10.0" layoutY="104.0" mnemonicParsing="false" onAction="#AbrirRelatorio" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="RELATÓRIOS" />
                <Button layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#AbrirConfiguracoes" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="CONFIGURAÇÕES" />
-               <Button layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#Sair" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="SAIR" textFill="#a60000" />
+               <Button layoutX="10.0" layoutY="177.0" mnemonicParsing="false" onAction="#Sair" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: transparent;" text="SAIR" textFill="#a60000">
+                  <padding>
+                     <Insets top="95.0" />
+                  </padding></Button>
                <padding>
                   <Insets top="20.0" />
                </padding>

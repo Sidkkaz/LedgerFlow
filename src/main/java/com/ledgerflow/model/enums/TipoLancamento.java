@@ -2,7 +2,9 @@ package com.ledgerflow.model.enums;
 
 public enum TipoLancamento {
     Receita(1),
-    Despesa(2);
+    Despesa(2),
+    Transferencia(3),
+    Indefinido(4);
 
     private final int valor;
 

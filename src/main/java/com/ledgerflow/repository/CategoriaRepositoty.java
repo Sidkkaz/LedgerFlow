@@ -89,15 +89,12 @@ public class CategoriaRepositoty implements Repository<Categoria> {
                 long id = result.getLong("id");
                 String nome = result.getString("nome");
                 int tipo = result.getInt("tipo_id");
-                boolean ativo = result.getBoolean("ativo");
 
                 Categoria categoria = new Categoria(
                         id,
                         nome,
                         TipoLancamento.fromValue(tipo)
                 );
-
-                categoria.setAtivo(ativo);
 
                 lista.add(categoria);
             }
