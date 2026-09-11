@@ -44,7 +44,7 @@ public class MenuController {
     }
 
     public void initialize() throws IOException {
-        ContasConteiner(contaService.ListarContas());
+        ContasConteiner(contaService.listarContas());
     }
 
     //region Close/Maximize

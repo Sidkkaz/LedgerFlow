@@ -144,23 +144,16 @@ public class LancamentoRepository implements Repository<Lancamento> {
                         TipoLancamento.fromValue(tipo)
                 );
 
-                ContaFinanceira conta = new ContaFinanceira(
+                ContaFinanceira conta = ContaFinanceira.reconstruirConta(
                         result.getLong("conta_id"),
                         result.getString("conta_nome"),
+                        result.getString("agencia"),
+                        result.getString("numero"),
                         ContaTipo.fromValue(result.getInt("conta_tipo")),
                         result.getBigDecimal("saldoInicial"),
-                        result.getBigDecimal("saldo")
+                        result.getBigDecimal("saldo"),
+                        result.getBoolean("ativo")
                 );
-
-                conta.setAgencia(result.getString("agencia"));
-                conta.setNumero(result.getString("numero"));
-                var ativo = (result.getBoolean("ativo"));
-
-                if (ativo) {
-                    conta.ativar();
-                }else {
-                    conta.desativar();
-                }
 
                 Lancamento lancamentos = new Lancamento(
                         id,

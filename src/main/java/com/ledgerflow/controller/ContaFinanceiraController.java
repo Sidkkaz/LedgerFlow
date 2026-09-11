@@ -70,7 +70,7 @@ public class ContaFinanceiraController {
                 new PropertyValueFactory<>("ativo")
         );
 
-        listaTabela.setAll(contaService.ListarContas());
+        listaTabela.setAll(contaService.listarContas());
 
         tabelaConta.setItems(listaTabela);
 
@@ -105,9 +105,9 @@ public class ContaFinanceiraController {
                     "Alterar a Conta",
                     "Você realmente deseja ativar a conta?"
             )) {
-                contaService.AtivarConta(contaSelecionado);
+                contaService.ativarConta(contaSelecionado);
                 tabelaConta.getSelectionModel().clearSelection();
-                listaTabela.setAll(contaService.ListarContas());
+                listaTabela.setAll(contaService.listarContas());
             }
 
         }else if (contaSelecionado != null && !checkBoxAtiva.isSelected()) {
@@ -116,9 +116,9 @@ public class ContaFinanceiraController {
                     "Alterar a Conta",
                     "Você realmente deseja desativar a conta?"
             )) {
-                contaService.DesativarConta(contaSelecionado);
+                contaService.desativarConta(contaSelecionado);
                 tabelaConta.getSelectionModel().clearSelection();
-                listaTabela.setAll(contaService.ListarContas());
+                listaTabela.setAll(contaService.listarContas());
             }
 
         }else{
@@ -144,7 +144,7 @@ public class ContaFinanceiraController {
         contaSelecionado = null;
 
         tabelaConta.getSelectionModel().clearSelection();
-        listaTabela.setAll(contaService.ListarContas());
+        listaTabela.setAll(contaService.listarContas());
     }
 
     public void CriarConta(){
@@ -172,7 +172,7 @@ public class ContaFinanceiraController {
         
         BigDecimal valorConvertido =  new BigDecimal(valor);
 
-        contaService.CriarConta(
+        contaService.criarConta(
                 nome,
                 agencia,
                 numero,
@@ -197,5 +197,3 @@ public class ContaFinanceiraController {
     }
     //endregion
 }
-//Aonde eu tava com a cabeça para começar essa palhaçada?
-//Siceramente? Ainda não sei.

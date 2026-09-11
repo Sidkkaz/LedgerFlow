@@ -1,22 +1,29 @@
 # LedgerFlow
-Projeto de sistema financeiro em JAVA, feito para estudos mais aprofundados em JAVA, arquitetura e tomada de decisÃµes
 
-## DecisÃµes de Dominio
-Uma das decisÃµes de dominio que tive foi:
-- **`LanÃ§amento`** Ã© um **Fato**;
-- **`MovimentaÃ§Ã£o Financeira`** Ã© uma **ConsequÃªncia**;
-- **`Conta Financeira`** Ã© o **Estado** que vai ser afetado;
+Projeto de sistema financeiro em **Java**, desenvolvido para estudos mais aprofundados em Java, arquitetura de software e tomada de decisões de domínio.
+
+## Decisões de Domínio
+
+Uma das decisões de domínio do LedgerFlow é separar claramente **fatos**, **consequências** e **estado**:
+
+* **`Lançamento`** é um **Fato**;
+* **`MovimentaçãoFinanceira`** representa uma **Consequência**;
+* **`ContaFinanceira`** representa o **Estado** que é afetado pelas movimentações.
+
+Essa separação evita tratar o saldo da conta como se fosse uma movimentação financeira. O saldo representa o estado atual da conta, enquanto os lançamentos representam fatos ocorridos no domínio.
+
+---
 
 ## Regras de Saldo
 
-A entidade `ContaFinanceira` mantÃ©m dois valores diferentes relacionados ao saldo:
+A entidade `ContaFinanceira` mantém dois valores diferentes relacionados ao saldo:
 
-* **`saldoInicial`**: representa o saldo que a conta possuÃ­a no momento em que foi cadastrada no LedgerFlow. Esse valor pode ser positivo, zero ou negativo
-* **`saldo`**: representa o saldo atual da conta, considerando as movimentaÃ§Ãµes realizadas apÃ³s o cadastro
+* **`saldoInicial`**: representa o saldo que a conta possuía no momento em que foi cadastrada no LedgerFlow. Esse valor pode ser positivo, zero ou negativo.
+* **`saldo`**: representa o saldo atual da conta, considerando as movimentações realizadas após o cadastro.
 
-### CriaÃ§Ã£o da conta
+### Criação da conta
 
-Ao criar uma nova `ContaFinanceira`, o saldo atual inicia com o mesmo valor do saldo inicial:
+Ao criar uma nova `ContaFinanceira`, o saldo atual é inicializado com o mesmo valor do saldo inicial:
 
 ```java
 this.saldoInicial = saldoInicial;
@@ -30,29 +37,31 @@ saldoInicial = -10.000.000,00
 saldo        = -10.000.000,00
 ```
 
-O saldo negativo Ã© um estado vÃ¡lido, para representar a situaÃ§Ã£o financeira da conta antes de ser colocado no sistema
+O saldo negativo é um estado válido e representa a situação financeira da conta no momento em que ela foi cadastrada no sistema.
 
-### AlteraÃ§Ã£o do saldo
+### Alteração do saldo
 
-ApÃ³s a criaÃ§Ã£o, operaÃ§Ãµes financeiras alteram somente o `saldo` atual
+Após a criação da conta, as operações financeiras alteram somente o `saldo` atual.
 
 ```text
 Saldo inicial:  -10.000.000,00
 
-DepÃ³sito:        +2.000.000,00
+Depósito:        +2.000.000,00
 Saldo atual:     -8.000.000,00
 
-DepÃ³sito:        +5.000.000,00
+Depósito:        +5.000.000,00
 Saldo atual:     -3.000.000,00
 ```
 
-O `saldoInicial` permanece `-R$ 10.000.000,00`, pois representa o estado original da conta
+O `saldoInicial` permanece `-R$ 10.000.000,00`, pois representa o estado original da conta no momento do cadastro.
 
-### PersistÃªncia e reconstruÃ§Ã£o
+---
 
-Tanto `saldoInicial` quanto `saldo` sÃ£o persistidos no banco de dados
+## Persistência e Reidratação
 
-Ao reconstruir uma `ContaFinanceira`, os valores persistidos devem ser restaurados diretamente:
+Tanto `saldoInicial` quanto `saldo` são persistidos no banco de dados.
+
+Ao reidratar uma `ContaFinanceira`, os valores persistidos devem ser restaurados diretamente, sem realizar cálculos sobre eles:
 
 ```text
 Banco de dados:
@@ -60,7 +69,7 @@ Banco de dados:
 saldoInicial = -10.000.000,00
 saldo        = -3.000.000,00
 
-            â†“
+            ?
 
 ContaFinanceira:
 
@@ -68,7 +77,84 @@ saldoInicial = -10.000.000,00
 saldo        = -3.000.000,00
 ```
 
-**NÃ£o deve ser realizada a operaÃ§Ã£o `saldoInicial + saldo` durante a reconstruÃ§Ã£o. Pois pode haver uma duplicaÃ§Ã£o do valor**
+**Não deve ser realizada a operação `saldoInicial + saldo` durante a reidratação.**
 
-O `saldo` persistido jÃ¡ representa o estado atual da conta e, portanto, nÃ£o deve ser tratado como uma movimentaÃ§Ã£o ou como um valor incremental.
+O `saldo` persistido já representa o estado atual da conta. Portanto, ele não deve ser interpretado como uma movimentação ou como um valor incremental.
 
+A reidratação tem apenas a responsabilidade de **restaurar o estado persistido da entidade**.
+
+---
+
+## Padrão de Construção de `ContaFinanceira`
+
+A classe `ContaFinanceira` separa explicitamente dois contextos de instanciação:
+
+### Criação — novo cadastro
+
+Utilizada quando uma nova conta é cadastrada no sistema.
+
+Nesse contexto, o saldo ainda não existe como estado persistido. Portanto, o `saldo` é inicializado a partir do `saldoInicial`.
+
+```java
+new ContaFinanceira(nome, tipo, saldoInicial)
+```
+
+Internamente:
+
+```java
+this.saldoInicial = saldoInicial;
+this.saldo = saldoInicial;
+```
+
+O construtor de criação é responsável por validar as regras necessárias para a criação de uma nova conta.
+
+### Reidratação — reconstrução do banco
+
+Utilizada exclusivamente pelo repositório para reconstruir uma `ContaFinanceira` a partir dos dados persistidos.
+
+```java
+ContaFinanceira.rehydrate(
+    id,
+    nome,
+    agencia,
+    numero,
+    tipo,
+    saldoInicial,
+    saldo,
+    ativo
+)
+```
+
+Nesse contexto, `saldoInicial` e `saldo` são **estados já existentes** e devem ser restaurados diretamente.
+
+A reidratação não deve:
+
+* recalcular o saldo;
+* aplicar movimentações;
+* executar regras de negócio relacionadas à criação;
+* modificar os valores persistidos.
+
+Seu objetivo é apenas reconstruir a entidade com o estado que estava armazenado.
+
+> O construtor de criação valida os dados necessários para uma nova conta.
+> O método `rehydrate` assume que os dados foram previamente validados pelas regras de domínio e que o estado persistido está íntegro.
+
+Dessa forma, a criação e a reidratação possuem responsabilidades diferentes:
+
+```text
+Criação
+    ?
+Validação
+    ?
+Inicialização do estado
+    ?
+ContaFinanceira
+
+Reidratação
+    ?
+Dados persistidos
+    ?
+Restauração do estado
+    ?
+ContaFinanceira
+```

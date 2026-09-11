@@ -6,99 +6,98 @@ import java.math.BigDecimal;
 
 public class ContaFinanceira {
 
-    private long id;
+    private Long id;
     private final String nome;
     private String agencia;
     private String numero;
     private final ContaTipo tipo;
-    private BigDecimal saldoInicial;
+    private final BigDecimal saldoInicial;
     private BigDecimal saldo;
-    boolean ativo;
+    private boolean ativo;
 
+    // region Construtores
     public ContaFinanceira(
-            Long id,
             String nome,
             ContaTipo tipo,
-            BigDecimal saldoInicial,
-            BigDecimal saldo
-    ){
-        validarCriacao(
-             nome,
-             tipo,
-             saldoInicial,
-             saldo
+            BigDecimal saldoInicial
+    ) {
+        validar(
+            nome,
+            tipo,
+            saldoInicial
         );
 
-        this.id = id;
         this.nome = nome;
-        this.tipo =  tipo;
+        this.tipo = tipo;
         this.saldoInicial = saldoInicial;
         this.saldo = saldoInicial;
-        reconstruirSaldo(saldo);
     }
 
+    public static ContaFinanceira reconstruirConta(
+            Long id,
+            String nome,
+            String agencia,
+            String numero,
+            ContaTipo tipo,
+            BigDecimal saldoInicial,
+            BigDecimal saldo,
+            boolean ativo
+    ) {
+        ContaFinanceira c = new ContaFinanceira(nome, tipo, saldoInicial);
+        c.id = id;
+        c.agencia = agencia;
+        c.numero = numero;
+        c.saldo = saldo;
+        c.ativo = ativo;
+        return c;
+    }
+    // endregion
 
-    //region Metodos da Classe
-    public void depositar(BigDecimal valor){
-        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0)
+    // region Métodos
+    public void depositar(BigDecimal valor) {
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
             throw new IllegalArgumentException("Valor deve ser maior que zero");
 
         this.saldo = this.saldo.add(valor);
     }
 
-    public void sacar(BigDecimal valor){
+    public void sacar(BigDecimal valor) {
         if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0)
             throw new IllegalArgumentException("Valor deve ser maior que zero");
-        if(saldo.compareTo(valor) < 0)
+        if (saldo.compareTo(valor) < 0)
             throw new IllegalArgumentException("Saldo insuficiente");
 
         this.saldo = this.saldo.subtract(valor);
     }
 
-    public void desativar(){
+    public void desativar() {
         this.ativo = false;
     }
 
-    public void ativar(){
+    public void ativar() {
         this.ativo = true;
     }
 
-    private void reconstruirSaldo(BigDecimal valor){
-        this.saldo = this.saldo.add(valor);
+    private static void validar(String nome, ContaTipo tipo, BigDecimal saldoInicial) {
+
+        if (nome == null || nome.isBlank())
+            throw new IllegalArgumentException("Nome não pode ser vazio");
+
+        if (tipo == null)
+            throw new IllegalArgumentException("Tipo não pode ser nulo");
+
+        if (saldoInicial == null)
+            throw new IllegalArgumentException("Saldo inicial não pode ser nulo");
+
     }
+    // endregion
 
-    private void validarCriacao(
-            String nome,
-            ContaTipo tipo,
-            BigDecimal saldoInicial,
-            BigDecimal saldo
-    ){
-        if (nome == null || nome.isBlank()){
-            throw new RuntimeException("Nome vazio");
-        }
-
-        if (tipo == null){
-            throw new RuntimeException("Tipo vazio");
-        }
-
-        if(saldoInicial == null) {
-            throw new IllegalArgumentException("SaldoInicial não pode ser nulo");
-        }
-
-        if(saldo == null) {
-            throw new IllegalArgumentException("Saldo não pode ser nulo");
-        }
-    }
-
-    //endregion
-
-
-    //region Get/Set
-    public long getId() {
+    // region Get/Set
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -130,22 +129,12 @@ public class ContaFinanceira {
         return saldoInicial;
     }
 
-    private void setSaldoInicial(BigDecimal saldoInicial) {
-        this.saldoInicial = saldoInicial;
-    }
-
     public BigDecimal getSaldo() {
         return saldo;
-    }
-
-    private void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
     }
 
     public boolean isAtivo() {
         return ativo;
     }
-
-//endregion
+    // endregion
 }
-

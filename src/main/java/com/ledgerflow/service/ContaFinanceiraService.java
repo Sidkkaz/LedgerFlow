@@ -13,59 +13,48 @@ public class ContaFinanceiraService {
 
     private final Repository<ContaFinanceira> repo = new ContaFinanceiraRepository();
 
-    public List<ContaFinanceira> ListarContas(){
+    public List<ContaFinanceira> listarContas() {
         return repo.list();
     }
 
-    public ContaFinanceira BuscarPorId(long id){
-        return null;
-        //Vou criar o metodo no repositorio dps
-    }
-
-    public void CriarConta(
-            String n,
+    public void criarConta(
+            String nome,
             String agencia,
-            String num,
+            String numero,
             ContaTipo tipo,
-            BigDecimal saldoI
-    ){
-        List<ContaFinanceira> list = ListarContas();
+            BigDecimal saldoInicial
+    ) {
+        boolean nomeDuplicado = listarContas().stream()
+                .anyMatch(c -> c.getNome().equalsIgnoreCase(nome));
 
-        for(ContaFinanceira conta : list){
-            if(conta.getNome().equals(n)){
-                PopupWarning.warning(
-                        "Conta duplicada!",
-                        "Essa conta já existe no sistema"
-                );
-                return;
-            }
+        if (nomeDuplicado) {
+            PopupWarning.warning(
+                    "Conta duplicada!",
+                    "Essa conta já existe no sistema"
+            );
+            return;
         }
 
-        ContaFinanceira c = new ContaFinanceira(null,
-                n,
-                tipo,
-                saldoI,
-                BigDecimal.ZERO
-        );
+        ContaFinanceira conta = new ContaFinanceira(nome, tipo, saldoInicial);
 
-        if(agencia != null && num != null){
-            c.setAgencia(agencia);
-            c.setNumero(num);
-        }
-        
-        c.ativar();
+        if (agencia != null && !agencia.isBlank())
+            conta.setAgencia(agencia);
 
-        repo.add(c);
+        if (numero != null && !numero.isBlank())
+            conta.setNumero(numero);
+
+        conta.ativar();
+
+        repo.add(conta);
     }
 
-    public void DesativarConta(ContaFinanceira conta){
+    public void desativarConta(ContaFinanceira conta) {
         conta.desativar();
         repo.update(conta);
     }
 
-    public void AtivarConta(ContaFinanceira conta){
+    public void ativarConta(ContaFinanceira conta) {
         conta.ativar();
         repo.update(conta);
     }
-
 }

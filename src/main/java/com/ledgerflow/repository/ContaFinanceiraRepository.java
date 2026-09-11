@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
-    ContaTipo ct;
     String db = DbConfig.bancoConexao;
 
     @Override
@@ -26,7 +25,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getAgencia());
             stmt.setString(3, c.getNumero());
-            stmt.setInt(4, ct.getValue());
+            stmt.setInt(4, c.getTipo().getValue());
             stmt.setBigDecimal(5, c.getSaldoInicial());
             stmt.setBigDecimal(6, c.getSaldo());
             stmt.setBoolean(7, c.isAtivo());
@@ -34,7 +33,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -62,7 +61,7 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
 
     @Override
     public void delete(ContaFinanceira c) {
-        return;
+        throw new UnsupportedOperationException("Contas não são excluídas — use desativar()");
     }
 
     @Override
@@ -76,38 +75,22 @@ public class ContaFinanceiraRepository implements Repository<ContaFinanceira> {
              ResultSet result = stmt.executeQuery(sql)) {
 
             while (result.next()) {
-
-                var id = result.getLong("id");
-                var nome = result.getString("nome");
-                var agencia = result.getString("agencia");
-                var numero = result.getString("numero");
-                var contaTipo = result.getInt("conta_tipo");
-                var saldoInicial = result.getBigDecimal("saldoInicial");
-                var saldo = result.getBigDecimal("saldo");
-                var ativo = result.getBoolean("ativo");
-
-                ContaFinanceira u = new ContaFinanceira(
-                        id,
-                        nome,
-                        ContaTipo.fromValue(contaTipo),
-                        saldoInicial,
-                        saldo
+                ContaFinanceira c = ContaFinanceira.reconstruirConta(
+                        result.getLong("id"),
+                        result.getString("nome"),
+                        result.getString("agencia"),
+                        result.getString("numero"),
+                        ContaTipo.fromValue(result.getInt("conta_tipo")),
+                        result.getBigDecimal("saldoInicial"),
+                        result.getBigDecimal("saldo"),
+                        result.getBoolean("ativo")
                 );
 
-                u.setAgencia(agencia);
-                u.setNumero(numero);
-
-                if (ativo) {
-                    u.ativar();
-                }else {
-                    u.desativar();
-                }
-
-                lista.add(u);
+                lista.add(c);
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return lista;

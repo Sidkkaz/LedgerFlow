@@ -2,7 +2,8 @@ package com.ledgerflow.model.enums;
 
 public enum ContaTipo{
     Corrente(1),
-    Poupanca(2);
+    Poupanca(2),
+    Dinheiro(3);
 
     private final int valor;
 
