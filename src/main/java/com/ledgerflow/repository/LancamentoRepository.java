@@ -14,7 +14,6 @@ import java.util.List;
 
 public class LancamentoRepository implements Repository<Lancamento> {
 
-    TipoLancamento tl;
     String db = DbConfig.bancoConexao;
 
     @Override
@@ -31,7 +30,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
             stmt.setDate(1, Date.valueOf(lancamento.getData()));
             stmt.setString(2, lancamento.getDescricao());
             stmt.setBigDecimal(3, lancamento.getValor());
-            stmt.setInt(4, tl.getValue());
+            stmt.setInt(4, lancamento.getTipo().getValue());
             stmt.setLong(5, lancamento.getCategoria().getId());
             stmt.setLong(6, lancamento.getConta().getId());
             stmt.setString(7, lancamento.getObservacao());
@@ -63,7 +62,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
             stmt.setDate(1, Date.valueOf(lancamento.getData()));
             stmt.setString(2, lancamento.getDescricao());
             stmt.setBigDecimal(3, lancamento.getValor());
-            stmt.setInt(4, tl.getValue());
+            stmt.setInt(4, lancamento.getTipo().getValue());
             stmt.setLong(5, lancamento.getCategoria().getId());
             stmt.setLong(6, lancamento.getConta().getId());
             stmt.setString(7, lancamento.getObservacao());
