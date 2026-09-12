@@ -43,8 +43,9 @@
                   </ImageView>
                </graphic>
                 </Label>
+            <Separator layoutY="55.0" prefHeight="3.0" prefWidth="144.0" style="-fx-border-radius: transparent;" />
 
-                <VBox alignment="TOP_CENTER" layoutY="40.0" prefHeight="360.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
+                <VBox alignment="TOP_CENTER" layoutY="53.0" prefHeight="360.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
                     <Button layoutX="200.0" mnemonicParsing="false" onAction="#AbrirMenu" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="HOME" textAlignment="CENTER">
                   <font>
                      <Font name="Poppins Regular" size="12.0" />

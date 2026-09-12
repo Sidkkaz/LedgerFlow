@@ -55,7 +55,6 @@ Saldo atual:     -3.000.000,00
 
 O `saldoInicial` permanece `-R$ 10.000.000,00`, pois representa o estado original da conta no momento do cadastro.
 
----
 
 ## Persistência e Reidratação
 
@@ -83,7 +82,6 @@ O `saldo` persistido já representa o estado atual da conta. Portanto, ele não de
 
 A reidratação tem apenas a responsabilidade de **restaurar o estado persistido da entidade**.
 
----
 
 ## Padrão de Construção de `ContaFinanceira`
 
@@ -137,24 +135,24 @@ A reidratação não deve:
 Seu objetivo é apenas reconstruir a entidade com o estado que estava armazenado.
 
 > O construtor de criação valida os dados necessários para uma nova conta.
-> O método `rehydrate` assume que os dados foram previamente validados pelas regras de domínio e que o estado persistido está íntegro.
+> O método `reconstruirConta` assume que os dados foram previamente validados pelas regras de domínio e que o estado persistido está íntegro.
 
 Dessa forma, a criação e a reidratação possuem responsabilidades diferentes:
 
 ```text
 Criação
-    ?
+    |
 Validação
-    ?
+    |
 Inicialização do estado
-    ?
+    V
 ContaFinanceira
 
 Reidratação
-    ?
+    |
 Dados persistidos
-    ?
+    |
 Restauração do estado
-    ?
+    V
 ContaFinanceira
 ```
