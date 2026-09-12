@@ -148,21 +148,21 @@
    <top>
       <AnchorPane maxWidth="1920.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="744.0" style="-fx-background-color: #0001;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" maxWidth="1920.0" prefHeight="24.0" prefWidth="744.0">
+            <HBox alignment="CENTER_RIGHT" maxWidth="1920.0" prefHeight="30.0" prefWidth="744.0">
                <children>
                      <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="95.0">
                          <children>
-                             <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
+                             <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="windows-button" text="➖">
                                  <font>
                                      <Font name="Poppins Medium" size="8.0" />
                                  </font>
                              </Button>
-                             <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
+                             <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="windows-button" text="🔲">
                                  <font>
                                      <Font name="Poppins Medium" size="8.0" />
                                  </font>
                              </Button>
-                             <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
+                             <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="windows-button" text="❌">
                                  <font>
                                      <Font name="Poppins Medium" size="8.0" />
                                  </font>
@@ -170,7 +170,7 @@
                          </children>
                      </HBox>
                </children></HBox>
-            <Region layoutY="24.0" prefHeight="2.0" prefWidth="744.0" styleClass="divider-dark" />
+            <Region layoutY="30.0" prefHeight="2.0" prefWidth="744.0" styleClass="divider-dark" />
          </children></AnchorPane>
    </top>
 
