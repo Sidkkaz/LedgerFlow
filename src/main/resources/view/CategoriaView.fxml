@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -16,14 +17,20 @@
     <Label layoutX="28.0" layoutY="66.0" prefHeight="18.0" prefWidth="312.0" text="Configure as categorias que serão usadas no sistema" />
    <AnchorPane layoutX="14.0" layoutY="95.0" prefHeight="290.0" prefWidth="570.0" style="-fx-border-color: transparent; -fx-background-color: transparent;">
       <children>
-         <TableView fx:id="tabelaCategoria" layoutX="18.0" layoutY="52.0" prefHeight="219.0" prefWidth="537.0" style="-fx-background-color: transparent; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #FF702E;">
+         <TableView fx:id="tabelaCategoria" layoutX="18.0" layoutY="52.0" prefHeight="219.0" prefWidth="537.0" style="-fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #FF702E;" stylesheets="@style.css">
            <columns>
-             <TableColumn fx:id="colunaNome" prefWidth="374.6000003814697" text="Nome" />
-             <TableColumn fx:id="colunaTipo" minWidth="0.0" prefWidth="180.60000610351562" text="Tipo" />
+             <TableColumn fx:id="colunaNome" prefWidth="374.6000003814697" styleClass="column-header-background" text="Nome" />
+             <TableColumn fx:id="colunaTipo" minWidth="0.0" prefWidth="180.60000610351562" styleClass="column-header-background" text="Tipo" />
            </columns>
+            <styleClass>
+               <String fx:value="table-view" />
+               <String fx:value="table-cell" />
+               <String fx:value="table-row-cell" />
+               <String fx:value="thumb" />
+            </styleClass>
          </TableView>
          <TextField fx:id="nomeCategoria" layoutX="22.0" layoutY="16.0" prefHeight="26.0" prefWidth="296.0" promptText="Nome" style="-fx-border-color: #FF702E; -fx-background-color: transparent; -fx-border-radius: 5;" />
-         <ComboBox fx:id="tipoCategoria" layoutX="329.0" layoutY="16.0" prefHeight="26.0" prefWidth="142.0" promptText="Tipo " style="-fx-background-color: #FF702E; -fx-mark-color: white;" stylesheets="@style.css" />
+         <ComboBox fx:id="tipoCategoria" layoutX="329.0" layoutY="16.0" prefHeight="26.0" prefWidth="142.0" promptText="Tipo " styleClass="combo-box-list-cell" stylesheets="@style.css" />
          <Button layoutX="482.0" layoutY="16.0" mnemonicParsing="false" onAction="#salvar" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
       </children>
    </AnchorPane>
