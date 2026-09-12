@@ -4,7 +4,7 @@ import com.ledgerflow.model.enums.TipoLancamento;
 
 public class Categoria {
 
-    private final long id;
+    private final Long id;
     private final String nome;
     private TipoLancamento tipo;
     private boolean ativo;
@@ -28,7 +28,7 @@ public class Categoria {
         this.tipo = tipo;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

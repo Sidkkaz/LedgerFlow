@@ -7,14 +7,14 @@ import java.time.LocalDate;
 
 public class Lancamento {
 
-    long id;
-    LocalDate data;
-    String descricao;
-    BigDecimal valor;
-    TipoLancamento tipo;
-    Categoria categoria;
-    ContaFinanceira conta;
-    String observacao;
+    private final Long id;
+    private LocalDate data;
+    private String descricao;
+    private final BigDecimal valor;
+    private final TipoLancamento tipo;
+    private Categoria categoria;
+    private final ContaFinanceira conta;
+    private String observacao;
 
     public Lancamento(
             Long id,
@@ -76,7 +76,7 @@ public class Lancamento {
 
 
     //region Get/Set
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

@@ -2,10 +2,10 @@ package com.ledgerflow.model;
 
 public class Usuario {
 
-    long id;
-    String nome;
-    String email;
-    String senha;
+    private final Long id;
+    private final String nome;
+    private final String email;
+    private String senha;
 
     public Usuario(
             Long id,
@@ -55,12 +55,8 @@ public class Usuario {
 
     //region Get/Set
 
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNome() {
