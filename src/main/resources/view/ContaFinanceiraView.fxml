@@ -1,43 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.ContaFinanceiraController">
    <children>
-      <Label layoutX="27.0" layoutY="30.0" prefHeight="35.0" prefWidth="272.0" text="Contas Financeiras">
-         <font>
-            <Font name="Poppins Regular" size="24.0" />
-         </font></Label>
-      <Label layoutX="28.0" layoutY="65.0" prefHeight="18.0" prefWidth="312.0" text="Configure suas Contas Financeiras para utilizar o software">
-         <font>
-            <Font name="Poppins ExtraLight" size="10.0" />
-         </font></Label>
-      <TextField fx:id="nomeBanco" layoutX="31.0" layoutY="108.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
-      <TextField fx:id="agenciaBanco" layoutX="31.0" layoutY="148.0" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
-      <TextField fx:id="numeroBanco" layoutX="183.0" layoutY="148.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
-      <ComboBox fx:id="tipoConta" layoutX="31.0" layoutY="186.0" prefHeight="26.0" prefWidth="264.0" promptText="Tipo de Conta" stylesheets="@style.css">
-         <styleClass>
-            <String fx:value="combo-box" />
-            <String fx:value="combo-box-list-cell" />
-         </styleClass></ComboBox>
-      <TextField fx:id="valorInicial" layoutX="31.0" layoutY="223.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
-      <Button layoutX="224.0" layoutY="275.0" mnemonicParsing="false" onAction="#Salvar" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
-      <Button layoutX="148.0" layoutY="274.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Limpar" textFill="WHITE" />
-      <TableView fx:id="tabelaConta" layoutX="357.0" layoutY="32.0" prefHeight="342.0" prefWidth="204.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: #FF702E;" stylesheets="@style.css">
-         <columns>
-          <TableColumn fx:id="colunaConta" prefWidth="115.5999755859375" styleClass="column-header-background" text="Conta" />
-          <TableColumn fx:id="colunaAtiva" prefWidth="88.40005493164062" styleClass="column-header-background" text="Ativa?" />
-        </columns>
-         <styleClass>
-            <String fx:value="table-view" />
-            <String fx:value="table-row-cell" />
-            <String fx:value="table-cell" />
-            <String fx:value="thumb" />
-         </styleClass>
-      </TableView>
-      <CheckBox fx:id="checkBoxAtiva" layoutX="164.0" layoutY="227.0" mnemonicParsing="false" text="Ativa?" />
+      <HBox layoutX="7.0" layoutY="12.0" prefHeight="379.0" prefWidth="582.0" spacing="20.0">
+         <children>
+            <VBox prefHeight="365.0" prefWidth="332.0" spacing="15.0">
+               <children>
+                  <VBox prefHeight="66.0" prefWidth="312.0">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="287.0" text="CONTAS FINANCEIRAS">
+                           <font>
+                              <Font name="Calibri Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="18.0" prefWidth="312.0" text="Configure suas Contas Financeiras para utilizar o software">
+                           <font>
+                              <Font name="Calibri Light" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="261.0" prefWidth="332.0" spacing="15.0">
+                     <children>
+                        <VBox prefHeight="53.0" prefWidth="264.0">
+                           <children>
+                              <Label text="Nome da Conta" />
+                              <TextField fx:id="nomeBanco" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="53.0" prefWidth="264.0">
+                           <children>
+                              <Label text="Tipo de Conta" />
+                              <ComboBox fx:id="tipoConta" prefHeight="26.0" prefWidth="264.0" promptText="Selecione" stylesheets="@style.css">
+                                 <styleClass>
+                                    <String fx:value="combo-box" />
+                                    <String fx:value="combo-box-list-cell" />
+                                 </styleClass>
+                              </ComboBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="332.0" spacing="25.0">
+                           <children>
+                              <VBox prefHeight="45.0" prefWidth="112.0">
+                                 <children>
+                                    <Label text="Valor Inicial" />
+                                    <TextField fx:id="valorInicial" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+                                 </children>
+                              </VBox>
+                              <CheckBox fx:id="checkBoxAtiva" mnemonicParsing="false" text="Ativa?">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="35.0" prefWidth="264.0" spacing="10.0">
+                           <children>
+                              <VBox prefHeight="43.0" prefWidth="142.0">
+                                 <children>
+                                    <Label text="Agencia" />
+                                    <TextField fx:id="agenciaBanco" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="43.0" prefWidth="112.0">
+                                 <children>
+                                    <Label text="Numero" />
+                                    <TextField fx:id="numeroBanco" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: #FF702E; -fx-border-radius: 5;" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="148.0" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#limparCampos" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Limpar" textFill="WHITE" />
+                              <Button mnemonicParsing="false" onAction="#Salvar" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF702E;" text="Salvar" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <TableView fx:id="tabelaConta" prefHeight="342.0" prefWidth="204.0" style="-fx-border-radius: 15; -fx-background-radius: 15; -fx-border-color: #FF702E;" stylesheets="@style.css">
+               <columns>
+                <TableColumn fx:id="colunaConta" prefWidth="115.5999755859375" styleClass="column-header-background" text="Conta" />
+                <TableColumn fx:id="colunaAtiva" prefWidth="88.40005493164062" styleClass="column-header-background" text="Ativa?" />
+              </columns>
+               <styleClass>
+                  <String fx:value="table-view" />
+                  <String fx:value="table-row-cell" />
+                  <String fx:value="table-cell" />
+                  <String fx:value="thumb" />
+               </styleClass>
+            </TableView>
+         </children></HBox>
    </children>
 </AnchorPane>

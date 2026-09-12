@@ -136,6 +136,7 @@ public class InitDataBase {
             stmtConta.setBigDecimal(5, BigDecimal.ZERO);
             stmtConta.setBigDecimal(6, BigDecimal.ZERO);
             stmtConta.setBoolean(7, true);
+            stmtConta.setString(8, "DINHEIRO");
 
             stmtConta.executeUpdate();
 

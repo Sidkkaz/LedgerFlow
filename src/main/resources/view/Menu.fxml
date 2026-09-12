@@ -6,7 +6,19 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.MenuController">
    <children>
-      <Label layoutX="11.0" layoutY="33.0" text="Olá, pessoa macaco aranha" />
-      <HBox fx:id="contaContainer" layoutX="14.0" layoutY="65.0" prefHeight="100.0" prefWidth="570.0" spacing="10.0" />
+      <VBox layoutX="21.0" layoutY="13.0" prefHeight="373.0" prefWidth="563.0" spacing="10.0">
+         <children>
+            <VBox prefHeight="58.0" prefWidth="563.0">
+               <children>
+                  <Label text="MENU INICIAL">
+                     <font>
+                        <Font name="Calibri Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label text="Olá (user), Bem-vindo ao LedgerFlow" />
+               </children>
+            </VBox>
+            <HBox fx:id="contaContainer" prefHeight="100.0" prefWidth="563.0" spacing="10.0" />
+         </children></VBox>
    </children>
 </AnchorPane>

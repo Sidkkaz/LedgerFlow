@@ -1,61 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LancamentoController">
-   <children>
-      <Label layoutX="11.0" layoutY="7.0" prefHeight="45.0" prefWidth="156.0" text="LANÇAMENTOS">
-         <font>
-            <Font name="Calibri Bold" size="22.0" />
-         </font></Label>
-      <Label layoutX="11.0" layoutY="42.0" prefHeight="18.0" prefWidth="192.0" text="registre seus lançamentos aqui">
-         <font>
-            <Font name="Poppins Regular" size="10.0" />
-         </font></Label>
-      <TabPane layoutY="69.0" prefHeight="330.0" prefWidth="603.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab style="-fx-background-color: white;" text="Criar">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
-                     <children>
-                        <DatePicker layoutX="24.0" layoutY="42.0" prefHeight="26.0" prefWidth="156.0" />
-                        <TextField layoutX="186.0" layoutY="42.0" prefHeight="26.0" prefWidth="399.0" promptText="Descrição" />
-                        <TextField layoutX="24.0" layoutY="82.0" prefHeight="26.0" prefWidth="149.0" promptText="Valor" />
-                        <ComboBox layoutX="180.0" layoutY="82.0" prefHeight="26.0" prefWidth="128.0" promptText="Tipo" styleClass="combo-box-list-cell" />
-                        <ComboBox layoutX="460.0" layoutY="82.0" prefHeight="26.0" prefWidth="127.0" promptText="Categoria" styleClass="combo-box-list-cell" />
-                        <ComboBox layoutX="316.0" layoutY="82.0" prefHeight="26.0" prefWidth="132.0" promptText="Conta" styleClass="combo-box-list-cell" />
-                        <TextField layoutX="21.0" layoutY="123.0" prefHeight="95.0" prefWidth="564.0" promptText="observação (opcional)" />
-                        <Button layoutX="496.0" layoutY="256.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="89.0" text="Salvar" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab style="-fx-background-color: white;" text="Extrato">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView layoutY="1.0" prefHeight="302.0" prefWidth="603.0" stylesheets="@style.css">
-                          <columns>
+<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.LancamentoController">
+    <VBox alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <VBox prefHeight="70.0" prefWidth="588.0">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <Label prefHeight="35.0" prefWidth="203.0" text="LANÇAMENTOS">
+                <font>
+                    <Font name="Calibri Bold" size="30.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="5.0" />
+                </VBox.margin>
+            </Label>
+            <Label prefHeight="21.0" prefWidth="192.0" text="registre seus lançamentos aqui">
+                <font>
+                    <Font name="Calibri Light" size="12.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="15.0" />
+                </VBox.margin>
+            </Label>
+        </VBox>
+        <TabPane prefHeight="330.0" prefWidth="603.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <Tab text="Criar">
+                <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
+                    <VBox alignment="CENTER_RIGHT" prefHeight="277.0" prefWidth="580.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="11.0">
+                        <HBox prefHeight="57.0" prefWidth="579.0" spacing="5.0">
+                            <VBox prefHeight="57.0" prefWidth="164.0" spacing="5.0">
+                                <Label text="Data">
+                                    <font>
+                                        <Font name="Poppins Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <DatePicker prefHeight="26.0" prefWidth="156.0" />
+                            </VBox>
+                            <VBox prefHeight="52.0" prefWidth="404.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                <Label text="Descrição">
+                                    <font>
+                                        <Font name="Poppins Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <TextField maxWidth="Infinity" prefHeight="26.0" promptText="Descrição" />
+                            </VBox>
+                        </HBox>
+                        <HBox prefHeight="70.0" prefWidth="580.0" spacing="10.0">
+                            <VBox prefHeight="59.0" prefWidth="156.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                <Label text="Valor">
+                                    <font>
+                                        <Font name="Poppins Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <TextField maxWidth="Infinity" prefHeight="26.0" promptText="Valor" />
+                            </VBox>
+                            <VBox prefHeight="70.0" prefWidth="130.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                <Label text="Tipo">
+                                    <font>
+                                        <Font name="Poppins Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox maxWidth="Infinity" prefHeight="26.0" prefWidth="128.0" promptText="Tipo" styleClass="combo-box-list-cell" />
+                            </VBox>
+                            <VBox prefHeight="70.0" prefWidth="132.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                <Label text="Conta">
+                                    <font>
+                                        <Font name="Poppins Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox maxWidth="Infinity" prefHeight="26.0" prefWidth="132.0" promptText="Conta" styleClass="combo-box-list-cell" />
+                            </VBox>
+                            <VBox prefHeight="70.0" prefWidth="129.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                <Label text="Categoria">
+                                    <font>
+                                        <Font name="Poppins Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox maxWidth="Infinity" prefHeight="26.0" prefWidth="127.0" promptText="Categoria" styleClass="combo-box-list-cell" />
+                            </VBox>
+                        </HBox>
+                        <VBox prefHeight="128.0" prefWidth="578.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                            <Label text="Observações">
+                                <font>
+                                    <Font name="Poppins Medium" size="12.0" />
+                                </font>
+                            </Label>
+                            <TextArea maxHeight="Infinity" maxWidth="Infinity" prefHeight="95.0" prefWidth="564.0" promptText="observação (opcional)" VBox.vgrow="ALWAYS" />
+                        </VBox>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="89.0" text="Salvar" />
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+            <Tab text="Extrato">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <TableView prefHeight="300.0" prefWidth="600.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <columns>
                             <TableColumn prefWidth="84.0" styleClass="column-header-background" text="Data" />
                             <TableColumn prefWidth="133.0" styleClass="column-header-background" text="Descrição" />
-                              <TableColumn prefWidth="99.0" styleClass="column-header-background" text="Valor" />
-                              <TableColumn prefWidth="92.0" styleClass="column-header-background" text="Tipo" />
-                              <TableColumn prefWidth="108.0" styleClass="column-header-background" text="Categoria" />
-                              <TableColumn prefWidth="108.0" styleClass="column-header-background" text="Observação" />
-                          </columns>
-                           <styleClass>
-                              <String fx:value="table-cell" />
-                              <String fx:value="table-row-cell" />
-                              <String fx:value="thumb" />
-                              <String fx:value="table-view" />
-                           </styleClass>
-                        </TableView>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+                            <TableColumn prefWidth="99.0" styleClass="column-header-background" text="Valor" />
+                            <TableColumn prefWidth="92.0" styleClass="column-header-background" text="Tipo" />
+                            <TableColumn prefWidth="108.0" styleClass="column-header-background" text="Categoria" />
+                            <TableColumn prefWidth="108.0" styleClass="column-header-background" text="Observação" />
+                        </columns>
+                        <styleClass>
+                            <String fx:value="table-cell" />
+                            <String fx:value="table-row-cell" />
+                            <String fx:value="thumb" />
+                            <String fx:value="table-view" />
+                        </styleClass>
+                    </TableView>
+                </AnchorPane>
+            </Tab>
+        </TabPane>
+    </VBox>
 </AnchorPane>
