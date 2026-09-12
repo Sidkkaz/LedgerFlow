@@ -5,8 +5,11 @@ import com.ledgerflow.model.PopupWarning;
 import com.ledgerflow.model.enums.ContaTipo;
 import com.ledgerflow.service.ContaFinanceiraService;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.SimpleStyleableStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,7 +37,7 @@ public class ContaFinanceiraController {
     @FXML
     private TableColumn<ContaFinanceira, String> colunaConta;
     @FXML
-    private TableColumn<ContaFinanceira, Boolean> colunaAtiva;
+    private TableColumn<ContaFinanceira, String> colunaAtiva;
 
     private final ObservableList<ContaFinanceira> listaTabela = FXCollections.observableArrayList();
     private ContaFinanceira contaSelecionado;
@@ -48,6 +51,7 @@ public class ContaFinanceiraController {
         agenciaBanco.setPromptText("Agencia");
         numeroBanco.setPromptText("Numero do conta");
         valorInicial.setPromptText("Valor Inicial");
+        checkBoxAtiva.setSelected(true);
 
         tipoConta.getItems().setAll(ContaTipo.values());
 
@@ -63,7 +67,10 @@ public class ContaFinanceiraController {
                 new PropertyValueFactory<>("nome")
         );
         colunaAtiva.setCellValueFactory(
-                new PropertyValueFactory<>("ativo")
+                cellData -> {
+                boolean ativo = cellData.getValue().isAtivo();
+                return new SimpleStringProperty(ativo ? "Sim" : "Não");
+            }
         );
 
         listaTabela.setAll(contaService.listarContas());
@@ -79,7 +86,7 @@ public class ContaFinanceiraController {
                         nomeBanco.setText(contaSelecionado.getNome());
                         agenciaBanco.setText(String.valueOf(contaSelecionado.getAgencia()));
                         numeroBanco.setText(String.valueOf(contaSelecionado.getNumero()));
-                        valorInicial.setText(String.valueOf(contaSelecionado.getSaldo()));
+                        valorInicial.setText(String.valueOf(contaSelecionado.getSaldoInicial()));
                         tipoConta.setValue(contaSelecionado.getTipo());
                         checkBoxAtiva.setSelected(contaSelecionado.isAtivo());
 
@@ -124,25 +131,6 @@ public class ContaFinanceiraController {
 
     }
 
-    public void limparCampos() {
-        nomeBanco.clear();
-        agenciaBanco.clear();
-        numeroBanco.clear();
-        valorInicial.clear();
-
-        checkBoxAtiva.setSelected(false);
-        nomeBanco.setDisable(false);
-        agenciaBanco.setDisable(false);
-        numeroBanco.setDisable(false);
-        valorInicial.setDisable(false);
-        tipoConta.setDisable(false);
-
-        contaSelecionado = null;
-
-        tabelaConta.getSelectionModel().clearSelection();
-        listaTabela.setAll(contaService.listarContas());
-    }
-
     public void CriarConta(){
         String nome = nomeBanco.getText().toUpperCase();
         String agencia = agenciaBanco.getText();
@@ -175,6 +163,25 @@ public class ContaFinanceiraController {
                 tipo,
                 valorConvertido
         );
+    }
+
+    public void limparCampos() {
+        nomeBanco.clear();
+        agenciaBanco.clear();
+        numeroBanco.clear();
+        valorInicial.clear();
+
+        checkBoxAtiva.setSelected(false);
+        nomeBanco.setDisable(false);
+        agenciaBanco.setDisable(false);
+        numeroBanco.setDisable(false);
+        valorInicial.setDisable(false);
+        tipoConta.setDisable(false);
+
+        contaSelecionado = null;
+
+        tabelaConta.getSelectionModel().clearSelection();
+        listaTabela.setAll(contaService.listarContas());
     }
 
 }

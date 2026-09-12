@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaRepositoty implements Repository<Categoria> {
+public class CategoriaRepository implements Repository<Categoria> {
 
     String db = DbConfig.bancoConexao;
 

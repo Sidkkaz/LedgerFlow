@@ -102,7 +102,7 @@ public class LancamentoRepository implements Repository<Lancamento> {
             l.dia,
             l.descricao,
             l.valor,
-            l.tipo_id AS lancamento_tipo,
+            l.tipo AS lancamento_tipo,
             l.observacao,
 
             c.id AS categoria_id,

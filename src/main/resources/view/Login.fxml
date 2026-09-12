@@ -11,7 +11,7 @@
    <clip>
       <Rectangle arcHeight="30.0" arcWidth="30.0" height="400.0" width="600.0" />
    </clip>
-   <Pane layoutX="-100.0" layoutY="39.0" opacity="0.67" prefHeight="360.0" prefWidth="715.0" rotate="180.0" style="-fx-background-color: radial-gradient(center 35% 30%, radius 75%, #234B73 0%, #173858 20%, #0F2A43 45%, #091D31 65%, #091D3166 82%, transparent 100%);" />
+   <Pane layoutX="-100.0" layoutY="45.0" opacity="0.67" prefHeight="360.0" prefWidth="715.0" rotate="180.0" style="-fx-background-color: radial-gradient(center 35% 30%, radius 75%, #234B73 0%, #173858 20%, #0F2A43 45%, #091D31 65%, #091D3166 82%, transparent 100%);" />
    <Pane opacity="0.22" prefHeight="360.0" prefWidth="426.0" style="-fx-background-color: radial-gradient(center 35% 30%, radius 75%, #FF8A24 0%, #F06A12 20%, #C44A08 45%, #7A2800 65%, #7A280066 82%, transparent 100%);" />
    <ImageView blendMode="OVERLAY" fitHeight="408.0" fitWidth="625.0" layoutX="17.0" opacity="0.39" pickOnBounds="true" preserveRatio="true" scaleX="1.2">
       <effect>

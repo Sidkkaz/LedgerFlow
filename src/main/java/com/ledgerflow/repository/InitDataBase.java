@@ -1,5 +1,6 @@
 package com.ledgerflow.repository;
 
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class InitDataBase {
@@ -108,6 +109,35 @@ public class InitDataBase {
 
             stmtUser.executeUpdate();
             //não me enche o saco, tive de fazer input manual para teste
+
+            String InserirDinheiro = """
+                            INSERT INTO ContaFinanceira (
+                            nome,
+                            agencia,
+                            numero,
+                            conta_tipo,
+                            saldoInicial,
+                            saldo,
+                            ativo
+                        )
+                            SELECT ?, ?, ?, ?, ?, ?, ?
+                            WHERE NOT EXISTS (
+                                SELECT 1
+                                FROM ContaFinanceira
+                                WHERE nome = ?
+                            )
+                    """;
+
+            PreparedStatement stmtConta = conn.prepareStatement(InserirDinheiro);
+            stmtConta.setString(1, "DINHEIRO");
+            stmtConta.setString(2, "0");
+            stmtConta.setString(3, "0");
+            stmtConta.setInt(4, 3);
+            stmtConta.setBigDecimal(5, BigDecimal.ZERO);
+            stmtConta.setBigDecimal(6, BigDecimal.ZERO);
+            stmtConta.setBoolean(7, true);
+
+            stmtConta.executeUpdate();
 
         }catch(SQLException erro){
             throw new SQLException(erro);
