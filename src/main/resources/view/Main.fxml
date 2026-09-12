@@ -11,7 +11,7 @@
 
     <left>
         <AnchorPane maxHeight="1080.0" maxWidth="432.0" minHeight="400.0" minWidth="144.0" prefHeight="400.0" prefWidth="144.0" style="-fx-background-color: #0001;">
-            <HBox prefHeight="63.0" prefWidth="144.0">
+            <HBox prefHeight="65.0" prefWidth="144.0">
                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets left="5.0" top="15.0" />
@@ -53,10 +53,9 @@
                     </Label>
                 </VBox>
             </HBox>
-            <Region layoutY="59.0" prefHeight="3.0" prefWidth="145.0" styleClass="divider-dark" stylesheets="@style.css" />
             <Separator layoutX="143.0" orientation="VERTICAL" prefHeight="400.0" />
 
-            <VBox layoutY="53.0" prefHeight="349.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <VBox layoutY="52.0" prefHeight="350.0" prefWidth="144.0" spacing="10.0" BorderPane.alignment="CENTER">
                 <Label text="Principais" textFill="#616161">
                     <font>
                         <Font name="Poppins Regular" size="10.0" />
@@ -129,7 +128,7 @@
                             <Font name="Bodoni MT" size="15.0" />
                         </font>
                     </Button>
-                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Sair" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;" styleClass="confg-button" text="⬅️" textAlignment="CENTER" textFill="RED">
+                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logout" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;" styleClass="confg-button" text="⬅️" textAlignment="CENTER" textFill="RED">
                         <font>
                             <Font name="Calibri" size="12.0" />
                         </font>
@@ -146,5 +145,33 @@
     <center>
         <StackPane fx:id="content" />
     </center>
+   <top>
+      <AnchorPane maxWidth="1920.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="744.0" style="-fx-background-color: #0001;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" maxWidth="1920.0" prefHeight="24.0" prefWidth="744.0">
+               <children>
+                     <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="95.0">
+                         <children>
+                             <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
+                                 <font>
+                                     <Font name="Poppins Medium" size="8.0" />
+                                 </font>
+                             </Button>
+                             <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
+                                 <font>
+                                     <Font name="Poppins Medium" size="8.0" />
+                                 </font>
+                             </Button>
+                             <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
+                                 <font>
+                                     <Font name="Poppins Medium" size="8.0" />
+                                 </font>
+                             </Button>
+                         </children>
+                     </HBox>
+               </children></HBox>
+            <Region layoutY="24.0" prefHeight="2.0" prefWidth="744.0" styleClass="divider-dark" />
+         </children></AnchorPane>
+   </top>
 
 </BorderPane>

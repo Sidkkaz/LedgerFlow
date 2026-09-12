@@ -1,20 +1,25 @@
 package com.ledgerflow.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import main.Navegador;
 
 public class MainController {
 
     @FXML
     private StackPane content;
+    @FXML
+    private Button minimize;
+    @FXML
+    private Button maximize;
 
     private Navegador nav;
 
@@ -54,7 +59,7 @@ public class MainController {
         nav.AlterarView("Configuracoes");
     }
 
-    public void Sair(ActionEvent event) throws Exception {
+    public void logout(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/view/Login.fxml")
         );
@@ -70,5 +75,20 @@ public class MainController {
         stage.show();
     }
 
+    //region Close/Maximize
+    public void Close(){
+        Platform.exit();
+    }
+
+    public void Minimize(){
+        Stage stage = (Stage) minimize.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    public void Maximize(){
+        Stage stage = (Stage) maximize.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
+    }
+    //endregion
 
 }

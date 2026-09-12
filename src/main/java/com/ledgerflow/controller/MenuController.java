@@ -17,10 +17,6 @@ import java.util.List;
 public class MenuController {
 
     @FXML
-    private Button minimize;
-    @FXML
-    private Button maximize;
-    @FXML
     private HBox contaContainer;
 
     private final ContaFinanceiraService contaService = new ContaFinanceiraService();
@@ -47,19 +43,4 @@ public class MenuController {
         ContasConteiner(contaService.listarContas());
     }
 
-    //region Close/Maximize
-    public void Close(){
-        Platform.exit();
-    }
-
-    public void Minimize(){
-        Stage stage = (Stage) minimize.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    public void Maximize(){
-        Stage stage = (Stage) maximize.getScene().getWindow();
-        stage.setMaximized(!stage.isMaximized());
-    }
-    //endregion
 }

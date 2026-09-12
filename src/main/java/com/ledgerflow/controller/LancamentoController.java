@@ -7,28 +7,10 @@ import javafx.stage.Stage;
 
 public class LancamentoController {
 
-    @FXML
-    private Button minimize;
-    @FXML
-    private Button maximize;
+
 
     public void initialize(){
 
     }
 
-    //region Close/Maximize
-    public void Close(){
-        Platform.exit();
-    }
-
-    public void Minimize(){
-        Stage stage = (Stage) minimize.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    public void Maximize(){
-        Stage stage = (Stage) maximize.getScene().getWindow();
-        stage.setMaximized(!stage.isMaximized());
-    }
-    //endregion
 }

@@ -6,25 +6,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ledgerflow.controller.MenuController">
    <children>
-      <HBox layoutX="497.0" layoutY="10.0" prefHeight="31.0" prefWidth="96.0">
-         <children>
-            <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
-               <font>
-                  <Font name="Poppins Medium" size="8.0" />
-               </font>
-            </Button>
-            <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
-               <font>
-                  <Font name="Poppins Medium" size="8.0" />
-               </font>
-            </Button>
-            <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
-               <font>
-                  <Font name="Poppins Medium" size="8.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
       <Label layoutX="11.0" layoutY="33.0" text="Olá, pessoa macaco aranha" />
       <HBox fx:id="contaContainer" layoutX="14.0" layoutY="65.0" prefHeight="100.0" prefWidth="570.0" spacing="10.0" />
    </children>

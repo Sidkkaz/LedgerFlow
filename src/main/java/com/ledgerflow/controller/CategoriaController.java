@@ -28,10 +28,6 @@ public class CategoriaController {
     private TableColumn<Categoria, String> colunaNome;
     @FXML
     private TableColumn<TipoLancamento, Integer> colunaTipo;
-    @FXML
-    private Button minimize;
-    @FXML
-    private Button maximize;
 
     private final ObservableList<Categoria> lista = FXCollections.observableArrayList();
     private Categoria categoriaSelecionado;
@@ -120,19 +116,4 @@ public class CategoriaController {
         categoriaService.CriarCategoria(new Categoria(null, nome, tipo));
     }
 
-    //region Close/Maximize
-    public void Close(){
-        Platform.exit();
-    }
-
-    public void Minimize(){
-        Stage stage = (Stage) minimize.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    public void Maximize(){
-        Stage stage = (Stage) maximize.getScene().getWindow();
-        stage.setMaximized(!stage.isMaximized());
-    }
-    //endregion
 }

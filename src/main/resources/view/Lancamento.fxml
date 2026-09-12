@@ -14,25 +14,6 @@
          <font>
             <Font name="Poppins Regular" size="10.0" />
          </font></Label>
-       <HBox layoutX="507.0" prefHeight="31.0" prefWidth="96.0">
-           <children>
-               <Button fx:id="minimize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Minimize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="➖">
-                   <font>
-                       <Font name="Poppins Medium" size="8.0" />
-                   </font>
-               </Button>
-               <Button fx:id="maximize" mnemonicParsing="false" onAction="#Maximize" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="🔲">
-                   <font>
-                       <Font name="Poppins Medium" size="8.0" />
-                   </font>
-               </Button>
-               <Button layoutX="46.0" layoutY="10.0" mnemonicParsing="false" onAction="#Close" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="❌">
-                   <font>
-                       <Font name="Poppins Medium" size="8.0" />
-                   </font>
-               </Button>
-           </children>
-       </HBox>
       <TabPane layoutY="69.0" prefHeight="330.0" prefWidth="603.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab style="-fx-background-color: white;" text="Criar">

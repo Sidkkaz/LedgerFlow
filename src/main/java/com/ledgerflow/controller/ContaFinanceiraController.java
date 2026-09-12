@@ -30,10 +30,6 @@ public class ContaFinanceiraController {
     @FXML
     private CheckBox checkBoxAtiva;
     @FXML
-    private Button minimize;
-    @FXML
-    private Button maximize;
-    @FXML
     private TableView<ContaFinanceira> tabelaConta;
     @FXML
     private TableColumn<ContaFinanceira, String> colunaConta;
@@ -181,19 +177,4 @@ public class ContaFinanceiraController {
         );
     }
 
-    //region Close/Maximize
-    public void Close(){
-        Platform.exit();
-    }
-
-    public void Minimize(){
-        Stage stage = (Stage) minimize.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    public void Maximize(){
-        Stage stage = (Stage) maximize.getScene().getWindow();
-        stage.setMaximized(!stage.isMaximized());
-    }
-    //endregion
 }
